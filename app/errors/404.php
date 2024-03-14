@@ -1,14 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang lỗi</title>
+</head>
 <?php
-    include "header.php";
+    require_once __DIR__ROOT . '/app/views/blocks/header.php';
 ?>
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
     <h1 class="text-center text-white display-6">404 Error</h1>
-    <ol class="breadcrumb justify-content-center mb-0">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Pages</a></li>
-        <li class="breadcrumb-item active text-white">404</li>
-    </ol>
 </div>
 <!-- Single Page Header End -->
 
@@ -23,12 +25,11 @@
                 <h1 class="mb-4">Page Not Found</h1>
                 <p class="mb-4">Rất tiếc, trang bạn tìm kiếm không tồn tại trên trang web của chúng tôi! Có thể truy cập
                     trang chủ của chúng tôi hoặc thử sử dụng tìm kiếm?</p>
-                <a class="btn border-secondary rounded-pill py-3 px-5" href="index.php">Quay lại trang chủ</a>
+                <a class="btn border-secondary rounded-pill py-3 px-5" href="<?php echo _WEB_ROOT ?>/home">Quay lại trang chủ</a>
             </div>
         </div>
     </div>
 </div>
-<!-- 404 End -->
 <?php
-    include "footer.php";
+    require_once __DIR__ROOT . '/app/views/blocks/footer.php';
 ?>
