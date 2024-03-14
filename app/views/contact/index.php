@@ -1,14 +1,6 @@
-<?php
-    include "header.php";
-?>
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
-    <h1 class="text-center text-white display-6">Contact</h1>
-    <ol class="breadcrumb justify-content-center mb-0">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Pages</a></li>
-        <li class="breadcrumb-item active text-white">Contact</li>
-    </ol>
+    <h1 class="text-center text-white display-6">Liên Hệ</h1>
 </div>
 <!-- Single Page Header End -->
 
@@ -63,6 +55,3 @@
     </div>
 </div>
 <!-- Contact End -->
-<?php
-    include "footer.php";
-?>

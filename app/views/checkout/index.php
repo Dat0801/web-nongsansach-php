@@ -1,17 +1,8 @@
-<?php
-    include "header.php";
-?>
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
-    <h1 class="text-center text-white display-6">Checkout</h1>
-    <ol class="breadcrumb justify-content-center mb-0">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Pages</a></li>
-        <li class="breadcrumb-item active text-white">Checkout</li>
-    </ol>
+    <h1 class="text-center text-white display-6">Thanh Toán</h1>
 </div>
 <!-- Single Page Header End -->
-
 
 <!-- Checkout Page Start -->
 <div class="container-fluid py-5">
@@ -57,7 +48,7 @@
                                 <tr>
                                     <th scope="row">
                                         <div class="d-flex align-items-center mt-2">
-                                            <img src="img/vegetable-item-2.jpg" class="img-fluid rounded-circle"
+                                            <img src="<?php echo _WEB_ROOT ?>/public/assets/client/img/vegetable-item-2.jpg" class="img-fluid rounded-circle"
                                                 style="width: 90px; height: 90px;" alt="">
                                         </div>
                                     </th>
@@ -69,7 +60,7 @@
                                 <tr>
                                     <th scope="row">
                                         <div class="d-flex align-items-center mt-2">
-                                            <img src="img/vegetable-item-5.jpg" class="img-fluid rounded-circle"
+                                            <img src="<?php echo _WEB_ROOT ?>/public/assets/client/img/vegetable-item-5.jpg" class="img-fluid rounded-circle"
                                                 style="width: 90px; height: 90px;" alt="">
                                         </div>
                                     </th>
@@ -81,7 +72,7 @@
                                 <tr>
                                     <th scope="row">
                                         <div class="d-flex align-items-center mt-2">
-                                            <img src="img/vegetable-item-3.png" class="img-fluid rounded-circle"
+                                            <img src="<?php echo _WEB_ROOT ?>/public/assets/client/img/vegetable-item-3.png" class="img-fluid rounded-circle"
                                                 style="width: 90px; height: 90px;" alt="">
                                         </div>
                                     </th>
@@ -161,7 +152,3 @@
         </form>
     </div>
 </div>
-<!-- Checkout Page End -->
-<?php
-    include "footer.php";
-?>

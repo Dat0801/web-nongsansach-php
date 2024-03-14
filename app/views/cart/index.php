@@ -1,14 +1,6 @@
-<?php
-include "header.php";
-?>
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
-    <h1 class="text-center text-white display-6">Cart</h1>
-    <ol class="breadcrumb justify-content-center mb-0">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Pages</a></li>
-        <li class="breadcrumb-item active text-white">Cart</li>
-    </ol>
+    <h1 class="text-center text-white display-6">Giỏ Hàng</h1>
 </div>
 <!-- Single Page Header End -->
 
@@ -171,13 +163,9 @@ include "header.php";
                         <p class="mb-0 pe-4">$99.00</p>
                     </div>
                     <a class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"
-                        type="button" href="checkout.php">Tiến hành thanh toán</a>
+                        type="button" href="<?php echo _WEB_ROOT ?>/checkout">Tiến hành thanh toán</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- Cart Page End -->
-<?php
-include "footer.php";
-?>

@@ -1,14 +1,6 @@
-<?php
-include "header.php";
-?>
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
-    <h1 class="text-center text-white display-6">Shop Detail</h1>
-    <ol class="breadcrumb justify-content-center mb-0">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Pages</a></li>
-        <li class="breadcrumb-item active text-white">Shop Detail</li>
-    </ol>
+    <h1 class="text-center text-white display-6">Chi tiết sản phẩm</h1>
 </div>
 <!-- Single Page Header End -->
 <div class="container-fluid mt-5" style="padding: 0;">
@@ -19,7 +11,7 @@ include "header.php";
                     <div class="col-lg-6">
                         <div class="border rounded">
                             <a href="#">
-                                <img src="img/single-item.jpg" class="img-fluid rounded" alt="Image">
+                                <img src="<?php echo _WEB_ROOT ?>/public/assets/client/img/single-item.jpg" class="img-fluid rounded" alt="Image">
                             </a>
                         </div>
                     </div>
@@ -109,7 +101,7 @@ include "header.php";
                             </div>
                             <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
                                 <div class="d-flex">
-                                    <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3"
+                                    <img src="<?php echo _WEB_ROOT ?>/public/assets/client/img/avatar.jpg" class="img-fluid rounded-circle p-3"
                                         style="width: 100px; height: 100px;" alt="">
                                     <div class="">
                                         <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
@@ -129,7 +121,7 @@ include "header.php";
                                     </div>
                                 </div>
                                 <div class="d-flex">
-                                    <img src="img/avatar.jpg" class="img-fluid rounded-circle p-3"
+                                    <img src="<?php echo _WEB_ROOT ?>/public/assets/client/img/avatar.jpg" class="img-fluid rounded-circle p-3"
                                         style="width: 100px; height: 100px;" alt="">
                                     <div class="">
                                         <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
@@ -204,7 +196,7 @@ include "header.php";
                 <div class="owl-carousel vegetable-carousel justify-content-center">
                     <div class="border border-primary rounded position-relative vesitable-item">
                         <div class="vesitable-img">
-                            <img src="img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
+                            <img src="<?php echo _WEB_ROOT ?>/public/assets/client/img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
                         </div>
                         <div class="text-white bg-primary px-3 py-1 rounded position-absolute"
                             style="top: 10px; right: 10px;">Vegetable</div>
@@ -221,7 +213,7 @@ include "header.php";
                     </div>
                     <div class="border border-primary rounded position-relative vesitable-item">
                         <div class="vesitable-img">
-                            <img src="img/vegetable-item-1.jpg" class="img-fluid w-100 rounded-top" alt="">
+                            <img src="<?php echo _WEB_ROOT ?>/public/assets/client/img/vegetable-item-1.jpg" class="img-fluid w-100 rounded-top" alt="">
                         </div>
                         <div class="text-white bg-primary px-3 py-1 rounded position-absolute"
                             style="top: 10px; right: 10px;">Vegetable</div>
@@ -238,7 +230,7 @@ include "header.php";
                     </div>
                     <div class="border border-primary rounded position-relative vesitable-item">
                         <div class="vesitable-img">
-                            <img src="img/vegetable-item-3.png" class="img-fluid w-100 rounded-top bg-light" alt="">
+                            <img src="<?php echo _WEB_ROOT ?>/public/assets/client/img/vegetable-item-3.png" class="img-fluid w-100 rounded-top bg-light" alt="">
                         </div>
                         <div class="text-white bg-primary px-3 py-1 rounded position-absolute"
                             style="top: 10px; right: 10px;">Vegetable</div>
@@ -255,7 +247,7 @@ include "header.php";
                     </div>
                     <div class="border border-primary rounded position-relative vesitable-item">
                         <div class="vesitable-img">
-                            <img src="img/vegetable-item-4.jpg" class="img-fluid w-100 rounded-top" alt="">
+                            <img src="<?php echo _WEB_ROOT ?>/public/assets/client/img/vegetable-item-4.jpg" class="img-fluid w-100 rounded-top" alt="">
                         </div>
                         <div class="text-white bg-primary px-3 py-1 rounded position-absolute"
                             style="top: 10px; right: 10px;">Vegetable</div>
@@ -272,7 +264,7 @@ include "header.php";
                     </div>
                     <div class="border border-primary rounded position-relative vesitable-item">
                         <div class="vesitable-img">
-                            <img src="img/vegetable-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
+                            <img src="<?php echo _WEB_ROOT ?>/public/assets/client/img/vegetable-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
                         </div>
                         <div class="text-white bg-primary px-3 py-1 rounded position-absolute"
                             style="top: 10px; right: 10px;">Vegetable</div>
@@ -289,7 +281,7 @@ include "header.php";
                     </div>
                     <div class="border border-primary rounded position-relative vesitable-item">
                         <div class="vesitable-img">
-                            <img src="img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
+                            <img src="<?php echo _WEB_ROOT ?>/public/assets/client/img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
                         </div>
                         <div class="text-white bg-primary px-3 py-1 rounded position-absolute"
                             style="top: 10px; right: 10px;">Vegetable</div>
@@ -306,7 +298,7 @@ include "header.php";
                     </div>
                     <div class="border border-primary rounded position-relative vesitable-item">
                         <div class="vesitable-img">
-                            <img src="img/vegetable-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
+                            <img src="<?php echo _WEB_ROOT ?>/public/assets/client/img/vegetable-item-5.jpg" class="img-fluid w-100 rounded-top" alt="">
                         </div>
                         <div class="text-white bg-primary px-3 py-1 rounded position-absolute"
                             style="top: 10px; right: 10px;">Vegetable</div>
@@ -323,7 +315,7 @@ include "header.php";
                     </div>
                     <div class="border border-primary rounded position-relative vesitable-item">
                         <div class="vesitable-img">
-                            <img src="img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
+                            <img src="<?php echo _WEB_ROOT ?>/public/assets/client/img/vegetable-item-6.jpg" class="img-fluid w-100 rounded-top" alt="">
                         </div>
                         <div class="text-white bg-primary px-3 py-1 rounded position-absolute"
                             style="top: 10px; right: 10px;">Vegetable</div>
@@ -343,6 +335,3 @@ include "header.php";
         </div>
     </div>
     <!-- Single Product End -->
-    <?php
-    include "footer.php";
-    ?>
