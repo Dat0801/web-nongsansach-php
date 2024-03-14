@@ -1,6 +1,6 @@
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
-    <h1 class="text-center text-white display-6">Sản Phẩm</h1>
+    <h1 class="text-center text-white display-6"><?php echo $name?></h1>
 </div>
 <!-- Single Page Header End -->
 

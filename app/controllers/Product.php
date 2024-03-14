@@ -6,6 +6,7 @@ class Product extends Controller{
     public function index() {
         $this->data['content'] = 'products/index';
         $this->data['title'] = 'Trang sản phẩm';
+        $this->data['sub_content']['name'] = 'dat';
         $this->render('layouts/client_layout', $this->data);
     }
 
@@ -19,7 +20,7 @@ class Product extends Controller{
 
     public function detail($id=0) {
         $product = $this->model('ProductModel');
-        $this->data['sub-content']['info'] = $product->getDetail($id);
+        //$this->data['sub-content']['info'] = $product->getDetail($id);
         $this->data['content'] = 'products/detail';
         $this->data['title'] = 'Trang chi tiết sản phẩm';
         $this->render('layouts/client_layout', $this->data);
