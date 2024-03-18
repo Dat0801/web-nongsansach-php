@@ -5,7 +5,7 @@ class App {
 
     function __construct() {
 
-        global $routes;
+        global $routes, $config;
 
         if(!empty($routes['default_controller'])) {
             $this->__controller = $routes['default_controller'];
@@ -27,6 +27,7 @@ class App {
 
     public function handleUrl() {
         $url = $this->getUrl(); 
+
         $urlArr = array_filter(explode('/', $url)) ;
         $urlArr = array_values($urlArr);
 
@@ -56,6 +57,12 @@ class App {
         } else {
             $this->__controller = ucfirst($this->__controller);
         }
+
+        // Xử lý khi $urlCheck rỗng
+        if(empty($urlCheck)) {
+            $urlCheck = $this->__controller;
+        }
+
         if(file_exists('app/controllers/'.$urlCheck.'.php')) {
             require_once 'controllers/'.$urlCheck.'.php';
 

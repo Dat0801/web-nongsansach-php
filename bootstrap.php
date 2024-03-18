@@ -14,6 +14,26 @@ $web_root = $web_root.$folder;
 
 define('_WEB_ROOT', $web_root);
 
-require_once 'configs/routes.php';
+// Tự động load configs
+$configs_dir = scandir('configs');
+if(!empty($configs_dir)) {
+    foreach($configs_dir as $item) {
+        if($item != '.' && $item != '..' && file_exists('configs/'.$item)) {
+            require_once 'configs/'.$item;
+        }
+    }
+}
 require_once 'app/App.php';// Load app
+
+// Kiểm tra config và load Database
+if(!empty($config['database'])) {
+    $db_config = array_filter($config['database']);
+
+    if(!empty($db_config)) {
+        require_once 'core/Connection.php';
+        require_once 'core/Database.php';
+    }
+
+}
+require_once 'core/Model.php';// Load app
 require_once 'core/Controller.php'; //Load base controller

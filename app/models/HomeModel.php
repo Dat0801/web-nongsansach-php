@@ -1,6 +1,6 @@
 <?php 
 // Kế thừa từ class Model
-class HomeModel {
+class HomeModel extends Model{
     protected $_table = 'products';
     public function getList() {
         $data = [
