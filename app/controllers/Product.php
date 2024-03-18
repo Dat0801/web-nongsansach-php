@@ -6,7 +6,7 @@ class Product extends Controller{
     public function index() {
         $this->data['content'] = 'products/index';
         $this->data['title'] = 'Trang sản phẩm';
-        $this->data['sub_content']['name'] = 'dat';
+        $this->data['sub_content']['name'] = 'Sản Phẩm';
         $this->render('layouts/client_layout', $this->data);
     }
 
