@@ -1,8 +1,21 @@
 <?php
 class ProductModel extends Model{
-    protected $_table = 'khachhang';
+    
+    function tableFill() {
+        return 'hanghoa';
+    }
+
+    function fieldFill() {
+        return '*';
+    }
+
+    function primaryKey(){
+        return 'MaHH';
+    }
+
     public function getProductList() {
-        $data = $this->db->query("SELECT * FROM $this->_table")->fetchAll(PDO::FETCH_ASSOC);
+        //$data = $this->db->query("SELECT * FROM $this->_table")->fetchAll(PDO::FETCH_ASSOC);
+        $data = $this->db->table('hanghoa')->where('SoLuongTon', '>', 20)->select('MaHH,TenHH')->get();
         return $data;
     }
 
