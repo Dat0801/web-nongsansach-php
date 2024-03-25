@@ -2,6 +2,11 @@
 class Product extends Controller{
 
     public $data = [];
+    public $product;
+
+    public function __construct(){
+        $this->product = $this->model('ProductModel');
+    }
 
     public function index() {
         $this->data['content'] = 'products/index';
@@ -11,8 +16,9 @@ class Product extends Controller{
     }
 
     public function list_product() {
-        $product = $this->model('ProductModel');
-        $dataProduct = $product->getProductList();
+       // $dataProduct = $this->product->getProductList();
+        //$dataProduct = $this->product->get();
+        $dataProduct = $this->db->table('hanghoa')->get();
         $this->data['product_list'] = $dataProduct;
         //Render View
         $this->render('products/list', $this->data);
@@ -26,4 +32,13 @@ class Product extends Controller{
         $this->render('layouts/client_layout', $this->data);
     }
 
+    public function get_category() {
+        $request = new Request();
+        $request->getMethod();
+    }
+
+    public function post_category() {
+        $request = new Request();
+        $request->getFields();
+    }
 }

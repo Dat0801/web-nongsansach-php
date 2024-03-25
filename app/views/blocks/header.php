@@ -53,8 +53,8 @@
                             <a href="<?php echo _WEB_ROOT ?>/home" class="nav-item nav-link active text-uppercase">Trang chủ</a>
                             <a href="<?php echo _WEB_ROOT ?>/product" class="nav-item nav-link text-uppercase">Sản phẩm</a>
                             <a href="<?php echo _WEB_ROOT ?>/contact" class="nav-item nav-link text-uppercase">Liên hệ</a>
-                            <a href="<?php echo _WEB_ROOT ?>/contact" class="nav-item nav-link text-uppercase">Đăng nhập</a>
-                            <a href="<?php echo _WEB_ROOT ?>/contact" class="nav-item nav-link text-uppercase">Đăng ký</a>
+                            <a href="<?php echo _WEB_ROOT ?>/account/login" class="nav-item nav-link text-uppercase">Đăng nhập</a>
+                            <a href="<?php echo _WEB_ROOT ?>/account/register" class="nav-item nav-link text-uppercase">Đăng ký</a>
                         </div>
                         <div class="d-flex m-3 me-0">
                             <button class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search text-primary"></i></button>
