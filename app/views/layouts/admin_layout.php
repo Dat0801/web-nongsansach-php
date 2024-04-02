@@ -8,7 +8,11 @@
 <body>
     <?php 
         $this->render('blocks/admin_header');
-        $this->render($content);
+        if(!empty($sub_content)) {
+            $this->render($content, $sub_content);
+        } else {
+            $this->render($content);
+        }
         $this->render('blocks/admin_footer');
     ?>
 </body>

@@ -14,17 +14,29 @@ class ProductModel extends Model{
     }
 
     public function getProductList() {
-        //$data = $this->db->query("SELECT * FROM $this->_table")->fetchAll(PDO::FETCH_ASSOC);
-        $data = $this->db->table('hanghoa')->where('SoLuongTon', '>', 20)->select('MaHH,TenHH')->get();
+        $data = $this->db->table('hanghoa')->get();
         return $data;
     }
 
-    public function getDetail($id) {
-        $data = [
-            'Sản phẩm 1',
-            'Sản phẩm 2',
-            'Sản phẩm 3'
-        ];
-        return $data[$id];
+    public function getDetail($mahh) {
+        $data = $this->db->table('hanghoa')->where('mahh', '=', $mahh)->first();
+        return $data;
+    }
+    
+    public function searchProduct($searchStr) {
+        $data = $this->db->table('hanghoa')->where('tenhh', 'like', '%'.$searchStr.'%')->get();
+        return $data;
+    }
+
+    public function addProduct($data) {
+        $this->db->table('hanghoa')->insert($data);
+    }
+
+    public function deleteProduct($id) {
+        $this->db->table('hanghoa')->where('mahh', '=', $id)->delete();
+    }
+
+    public function updateProduct($data, $id) {
+        $this->db->table('hanghoa')->where('mahh', '=', $id)->update($data);
     }
 }
