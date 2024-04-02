@@ -2,6 +2,6 @@
 $config['database'] = [
     'host' => 'localhost',
     'user' => 'root',
-    'pass' => 'mysql',
+    'pass' => '',
     'db' => 'ql_nongsan'
 ];
