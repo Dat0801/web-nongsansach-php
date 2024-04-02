@@ -43,7 +43,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="../Admin/index.html">
+                <a class="nav-link" href="<?php echo _WEB_ROOT ?>/admin/DashBoard">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Bảng điều khiển</span>
                 </a>
@@ -85,7 +85,7 @@
                 <div id="collapseQLSanPham" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-gradient-success py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="Product/XemSP">Xem sản phẩm</a>
+                        <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/product">Xem sản phẩm</a>
                         <a class="collapse-item" href="Product/ThemSP">Thêm sản phẩm</a>
                     </div>
                 </div>
