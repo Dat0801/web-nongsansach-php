@@ -17,7 +17,7 @@ class Suppliers extends Controller{
     }
 
     public function editSuppliers() {
-        $this->data['content'] = '/admin/supplierss/EditSuppliers';
+        $this->data['content'] = '/admin/suppliers/EditSuppliers';
         $this->data['title'] = 'Trang chỉnh sửa thông tin nhà cung cấp';
         $request = new Request();
         $mancc = $request->getFields();
@@ -33,7 +33,5 @@ class Suppliers extends Controller{
         $this->suppliers->updatesuppliers($data, $id);
         header('Location: '._WEB_ROOT.'/admin/suppliers');
     }
-    public function deleteSuppliers(){
-        
-    }
+    
 }

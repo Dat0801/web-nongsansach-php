@@ -12,30 +12,36 @@
 <table class="table table-dark table-bordered">
     <thead>
         <tr>
-            <th scope="col">MaHH</th>
-            <th scope="col">MaNHH</th>
-            <th scope="col">TenHH</th>
+            <th scope="col">MaHang</th>
+            <th scope="col">MaNhomHang</th>
+            <th scope="col">MaNCC</th>
+            <th scope="col">TenHang</th>
             <th scope="col">DVT</th>
             <th scope="col">GiaBan</th>
+            <th scope="col">HeSo</th>
             <th scope="col">GiaNhap</th>
             <th scope="col">HinhAnh</th>
             <th scope="col">SoLuongTon</th>
+            <th scope="col">TrangThai</th>
         </tr>
     </thead>
     <tbody>
         <?php 
             foreach($product_list as $product) {
                 echo '<tr>';
-                echo "<td>".$product['MaHH']."</td>";
-                echo "<td>".$product['MANHH']."</td>";
-                echo "<td>".$product['TenHH']."</td>";
+                echo "<td>".$product['MaHang']."</td>";
+                echo "<td>".$product['MaNhomHang']."</td>";
+                echo "<td>".$product['MaNCC']."</td>";
+                echo "<td>".$product['TenHang']."</td>";
                 echo "<td>".$product['DVT']."</td>";
                 echo "<td>".$product['GiaBan']."</td>";
+                echo "<td>".$product['HeSo']."</td>";
                 echo "<td>".$product['GiaNhap']."</td>";
                 echo "<td> <img src=\"".$product['HinhAnh']."\"></td>";
                 echo "<td> ".$product['SoLuongTon']."</td>";
+                echo "<td> ".$product['TrangThai']."</td>";
                 echo "<td>
-                <a href=\""._WEB_ROOT."/admin/product/EditProduct?mahh=".$product["MaHH"]."\" style=\"color:greenyellow\">Edit</a>
+                <a href=\""._WEB_ROOT."/admin/product/EditProduct?MaHang=".$product["MaHang"]."\" style=\"color:greenyellow\">Edit</a>
                 <a class=\"btn-delete\" style=\"color:greenyellow\">Delete</a>
                 </td>";
                 echo '</tr>';

@@ -18,8 +18,8 @@ class OrderModel extends Model{
         return $data;
     }
 
-    public function getDetail($mahd) {
-        $data = $this->db->table('hoadon')->where('mahd', '=', $mahd)->first();
+    public function getDetail($MaHD) {
+        $data = $this->db->table('hoadon')->where('MaHD', '=', $MaHD)->first();
         return $data;
     }
 
@@ -28,10 +28,10 @@ class OrderModel extends Model{
     }
 
     public function deleteOrder($id) {
-        $this->db->table('hoadon')->where('mahd', '=', $id)->delete();
+        $this->db->table('hoadon')->where('MaHD', '=', $id)->delete();
     }
 
     public function updateOrder($data, $id) {
-        $this->db->table('hoadon')->where('mahd', '=', $id)->update($data);
+        $this->db->table('hoadon')->where('MaHD', '=', $id)->update($data);
     }
 }

@@ -12,18 +12,18 @@
 <table class="table table-dark table-bordered">
     <thead>
         <tr>
-            <th scope="col">MaNHH</th>
-            <th scope="col">TenNHH</th>
+            <th scope="col">MaNhomHang</th>
+            <th scope="col">TenNhomHang</th>
         </tr>
     </thead>
     <tbody>
         <?php 
             foreach($category_list as $category) {
                 echo '<tr>';
-                echo "<td>".$category['MaNHH']."</td>";
-                echo "<td>".$category['TenNHH']."</td>";
+                echo "<td>".$category['MaNhomHang']."</td>";
+                echo "<td>".$category['TenNhomHang']."</td>";
                 echo "<td>
-                <a href=\""._WEB_ROOT."/admin/category/EditCategory?manhh=".$category["MaNHH"]."\" style=\"color:greenyellow\">Edit</a>
+                <a href=\""._WEB_ROOT."/admin/category/EditCategory?MaNhomHang=".$category["MaNhomHang"]."\" style=\"color:greenyellow\">Edit</a>
                 <a class=\"btn-delete\" style=\"color:greenyellow\">Delete</a>
                 </td>";
                 echo '</tr>';

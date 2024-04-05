@@ -17,8 +17,8 @@
         </div>
         <br />
         <div>
-            NgayDat
-            <input type="text" name="NgayDat" class="form-control" value="<?php echo $order['NgayDat']?>" />
+            NgayTao
+            <input type="text" name="NgayTao" class="form-control" value="<?php echo $order['NgayTao']?>" />
         </div>
         <br />
         <div style="width:25%;">
@@ -30,8 +30,8 @@
             <input type="number" name="TongTien" class="form-control" value="<?php echo $order['TongTien']?>" />
         </div><br />
         <div style="width:25%;">
-            TinhTrang
-            <input type="text" name="TinhTrang" class="form-control" value="<?php echo $order['TinhTrang']?>" />
+            TrangThai
+            <input type="text" name="TrangThai" class="form-control" value="<?php echo $order['TrangThai']?>" />
         </div><br />
         <div>
             <center><button type="submit" class="btn btn-success">Sửa</button></center>

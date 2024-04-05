@@ -3,22 +3,22 @@
     <div style="width: 70%; margin-left: 50px">
         <div>
             MaNCC
-            <input type="text" name="MaNCC" class="form-control" value="{{suppliers.MaNCC}}"/>
+            <input type="text" name="MaNCC" class="form-control" value="<?php echo $suppliers['MaNCC']?>"/>
         </div>
         <br />
         <div>
             TenNCC
-            <input type="text" name="TenNCC" class="form-control" value="{{suppliers.TenNCC}}" />
+            <input type="text" name="TenNCC" class="form-control" value="<?php echo $suppliers['TenNCC']?>" />
         </div>
         <br />
         <div>
-            SDTNCC
-            <input type="text" name="SDTNCC" class="form-control" value="{{suppliers.SDTNCC}}" />
+            SDT
+            <input type="text" name="SDT" class="form-control" value="<?php echo $suppliers['SDT']?>" />
         </div>
         <br />
         <div>
-            DiaChiNCC
-            <input type="text" name="DiaChiNCC" class="form-control" value="{{suppliers.DiaChiNCC}}" />
+            DiaChi
+            <input type="text" name="DiaChi" class="form-control" value="<?php echo $suppliers['DiaChi']?>" />
         </div>
         
         <div>
@@ -26,4 +26,4 @@
         </div>
     </div>
 </form>
-<h5><a href="{{_WEB_ROOT}}/admin/suppliers" style="margin-left: 50px;">Trở lại trang sản phẩm</a></h5>
+<h5><a href="<?php echo _WEB_ROOT ?>/admin/suppliers" style="margin-left: 50px;">Trở lại trang sản phẩm</a></h5>
