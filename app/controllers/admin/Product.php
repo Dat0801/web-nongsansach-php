@@ -26,6 +26,19 @@ class Product extends Controller{
         $this->render('layouts/admin_layout', $this->data); 
     }
 
+    public function viewAddProduct() {
+        $this->data['content'] = '/admin/products/AddProduct';
+        $this->data['title'] = 'Trang thêm sản phẩm';
+        $this->render('layouts/admin_layout', $this->data);
+    }
+
+    public function addProduct() {
+        $request = new Request();
+        $data = $request->getFields();
+        $this->product->addProduct($data);
+        header('Location: '._WEB_ROOT.'/admin/product');
+    }
+
     public function updateProduct() {
         $request = new Request();
         $id = $_GET["MaHang"];
@@ -34,4 +47,12 @@ class Product extends Controller{
         header('Location: '._WEB_ROOT.'/admin/product');
     }
     
+    public function deleteProduct() {
+        $request = new Request();
+        $id = $_GET["MaHang"];
+        $this->product->deleteProduct($id);
+        header('Location: '._WEB_ROOT.'/admin/product');
+    }
+
+   
 }
