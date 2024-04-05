@@ -20,15 +20,15 @@ class Product extends Controller{
         $this->data['content'] = '/admin/products/EditProduct';
         $this->data['title'] = 'Trang sửa sản phẩm';
         $request = new Request();
-        $mahh = $request->getFields();
-        $dataProduct = $this->product->getDetail($mahh["mahh"]);
+        $MaHang = $request->getFields();
+        $dataProduct = $this->product->getDetail($MaHang["MaHang"]);
         $this->data['sub_content']['product'] = $dataProduct;
         $this->render('layouts/admin_layout', $this->data); 
     }
 
     public function updateProduct() {
         $request = new Request();
-        $id = $_GET["mahh"];
+        $id = $_GET["MaHang"];
         $data = $request->getFields();
         $this->product->updateProduct($data, $id);
         header('Location: '._WEB_ROOT.'/admin/product');

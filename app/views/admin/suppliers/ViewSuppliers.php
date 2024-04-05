@@ -14,8 +14,9 @@
         <tr>
             <th scope="col">MaNCC</th>
             <th scope="col">TenNCC</th>
-            <th scope="col">SDTNCC</th>
-            <th scope="col">DiaChiNCC</th>
+            <th scope="col">SDT</th>
+            <th scope="col">DiaChi</th>
+            <th scope="col">TrangThai</th>
         </tr>
     </thead>
     <tbody>
@@ -24,10 +25,11 @@
                 echo '<tr>';
                 echo "<td>".$suppliers['MaNCC']."</td>";
                 echo "<td>".$suppliers['TenNCC']."</td>";
-                echo "<td>".$suppliers['SDTNCC']."</td>";
-                echo "<td>".$suppliers['DiaChiNCC']."</td>";
+                echo "<td>".$suppliers['SDT']."</td>";
+                echo "<td>".$suppliers['DiaChi']."</td>";
+                echo "<td>".$suppliers['TrangThai']."</td>";
                 echo "<td>
-                <a href=\""._WEB_ROOT."/admin/suppliers/EditSuppliers?mancc=".$suppliers["MaNCC"]."\" style=\"color:greenyellow\">Edit</a>
+                <a href=\""._WEB_ROOT."/admin/suppliers/editsuppliers?mancc=".$suppliers["MaNCC"]."\" style=\"color:greenyellow\">Edit</a>
                 <a class=\"btn-delete\" style=\"color:greenyellow\">Delete</a>
                 </td>";
                 echo '</tr>';

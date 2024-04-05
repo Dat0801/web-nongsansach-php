@@ -2,7 +2,7 @@
 class CategoryModel extends Model{
     
     function tableFill() {
-        return 'nhomhanghoa';
+        return 'NhomHang';
     }
 
     function fieldFill() {
@@ -10,33 +10,33 @@ class CategoryModel extends Model{
     }
 
     function primaryKey(){
-        return 'MaNHH';
+        return 'MaNhomHang';
     }
 
     public function getCategoryList() {
-        $data = $this->db->table('nhomhanghoa')->get();
+        $data = $this->db->table('NhomHang')->get();
         return $data;
     }
 
-    public function getDetail($manhh) {
-        $data = $this->db->table('nhomhanghoa')->where('manhh', '=', $manhh)->first();
+    public function getDetail($MaNhomHang) {
+        $data = $this->db->table('NhomHang')->where('MaNhomHang', '=', $MaNhomHang)->first();
         return $data;
     }
     
     public function searchCategory($searchStr) {
-        $data = $this->db->table('nhomhanghoa')->where('tennhh', 'like', '%'.$searchStr.'%')->get();
+        $data = $this->db->table('NhomHang')->where('TenNhomHang', 'like', '%'.$searchStr.'%')->get();
         return $data;
     }
 
     public function addCategory($data) {
-        $this->db->table('nhomhanghoa')->insert($data);
+        $this->db->table('NhomHang')->insert($data);
     }
 
     public function deleteCategory($id) {
-        $this->db->table('nhomhanghoa')->where('manhh', '=', $id)->delete();
+        $this->db->table('NhomHang')->where('MaNhomHang', '=', $id)->delete();
     }
 
     public function updateCategory($data, $id) {
-        $this->db->table('nhomhanghoa')->where('manhh', '=', $id)->update($data);
+        $this->db->table('NhomHang')->where('MaNhomHang', '=', $id)->update($data);
     }
 }

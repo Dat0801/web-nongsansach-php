@@ -15,10 +15,10 @@
             <th scope="col">MaHD</th>
             <th scope="col">MaNV</th>
             <th scope="col">MaKH</th>
-            <th scope="col">NgayDat</th>
+            <th scope="col">NgayTao</th>
             <th scope="col">NgayGiao</th>
             <th scope="col">TongTien</th>
-            <th scope="col">TinhTrang</th>
+            <th scope="col">TrangThai</th>
         </tr>
     </thead>
     <tbody>
@@ -28,12 +28,12 @@
                 echo "<td>".$order['MaHD']."</td>";
                 echo "<td>".$order['MaNV']."</td>";
                 echo "<td>".$order['MaKH']."</td>";
-                echo "<td>".$order['NgayDat']."</td>";
+                echo "<td>".$order['NgayTao']."</td>";
                 echo "<td>".$order['NgayGiao']."</td>";
                 echo "<td>".$order['TongTien']."</td>";
-                echo "<td> ".$order['TinhTrang']."</td>";
+                echo "<td> ".$order['TrangThai']."</td>";
                 echo "<td>
-                <a href=\""._WEB_ROOT."/admin/order/Editorder?mahh=".$order["MaHD"]."\" style=\"color:greenyellow\">Edit</a>
+                <a href=\""._WEB_ROOT."/admin/order/Editorder?MaHD=".$order["MaHD"]."\" style=\"color:greenyellow\">Edit</a>
                 <a class=\"btn-delete\" style=\"color:greenyellow\">Delete</a>
                 </td>";
                 echo '</tr>';

@@ -10,7 +10,7 @@ class ProductModel extends Model{
     }
 
     function primaryKey(){
-        return 'MaHH';
+        return 'MaHang';
     }
 
     public function getProductList() {
@@ -18,13 +18,13 @@ class ProductModel extends Model{
         return $data;
     }
 
-    public function getDetail($mahh) {
-        $data = $this->db->table('hanghoa')->where('mahh', '=', $mahh)->first();
+    public function getDetail($MaHang) {
+        $data = $this->db->table('hanghoa')->where('MaHang', '=', $MaHang)->first();
         return $data;
     }
     
     public function searchProduct($searchStr) {
-        $data = $this->db->table('hanghoa')->where('tenhh', 'like', '%'.$searchStr.'%')->get();
+        $data = $this->db->table('hanghoa')->where('TenHang', 'like', '%'.$searchStr.'%')->get();
         return $data;
     }
 
@@ -33,10 +33,10 @@ class ProductModel extends Model{
     }
 
     public function deleteProduct($id) {
-        $this->db->table('hanghoa')->where('mahh', '=', $id)->delete();
+        $this->db->table('hanghoa')->where('MaHang', '=', $id)->delete();
     }
 
     public function updateProduct($data, $id) {
-        $this->db->table('hanghoa')->where('mahh', '=', $id)->update($data);
+        $this->db->table('hanghoa')->where('MaHang', '=', $id)->update($data);
     }
 }

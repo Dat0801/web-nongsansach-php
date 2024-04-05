@@ -20,15 +20,15 @@ class Order extends Controller{
         $this->data['content'] = '/admin/orders/EditOrder';
         $this->data['title'] = 'Trang sửa sản phẩm';
         $request = new Request();
-        $mahh = $request->getFields();
-        $dataorder = $this->order->getDetail($mahh["mahh"]);
+        $MaHD = $request->getFields();
+        $dataorder = $this->order->getDetail($MaHD["MaHD"]);
         $this->data['sub_content']['order'] = $dataorder;
         $this->render('layouts/admin_layout', $this->data); 
     }
 
     public function updateorder() {
         $request = new Request();
-        $id = $_GET["mahh"];
+        $id = $_GET["MaHD"];
         $data = $request->getFields();
         $this->order->updateorder($data, $id);
         header('Location: '._WEB_ROOT.'/admin/order');

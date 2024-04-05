@@ -1,25 +1,30 @@
 <center><h2>Sửa Sản Phẩm</h2></center>
-<form action="<?php echo _WEB_ROOT ?>/admin/product/updateProduct?mahh=<?php echo $product["MaHH"] ?>" method="post">
+<form action="<?php echo _WEB_ROOT ?>/admin/product/updateProduct?MaHang=<?php echo $product["MaHang"] ?>" method="post">
     <div style="width: 70%; margin-left: 50px">
         <div>
-            MaHH
-            <input type="text" name="MaHH" class="form-control" value="<?php echo $product["MaHH"] ?>" disabled />
+            MaHang
+            <input type="text" name="MaHang" class="form-control" value="<?php echo $product["MaHang"] ?>" disabled />
         </div>
         <br />
         <div>
-            MaNHH
-            <input type="text" name="MANHH" class="form-control" value="<?php echo $product['MANHH']?>" />
+            MaNhomHang
+            <input type="text" name="MaNhomHang" class="form-control" value="<?php echo $product['MaNhomHang']?>" />
         </div>
         <br />
         <div>
-            TenHH
-            <input type="text" name="TenHH" class="form-control" value="<?php echo $product['TenHH']?>" />
+            MaNCC
+            <input type="text" name="MaNCC" class="form-control" value="<?php echo $product['MaNCC']?>" />
         </div>
         <br />
+        <div>
+            TenHang
+            <input type="text" name="TenHang" class="form-control" value="<?php echo $product['TenHang']?>" />
+        </div>
+        <!-- <br />
         <div>
             MoTa
             <input type="text" name="MoTa" class="form-control" value="<?php echo $product['MoTa']?>" />
-        </div>
+        </div> -->
         <br />
         <div>
             Hình ảnh sản phẩm
@@ -38,6 +43,10 @@
         <div style="width:25%;">
             SoLuongTon
             <input type="number" name="SoLuongTon" class="form-control" value="<?php echo $product['SoLuongTon']?>" />
+        </div><br />
+        <div style="width:25%;">
+            TrangThai
+            <input type="number" name="TrangThai" class="form-control" value="<?php echo $product['TrangThai']?>" />
         </div><br />
         <div>
             <center><button type="submit" class="btn btn-success">Sửa</button></center>
