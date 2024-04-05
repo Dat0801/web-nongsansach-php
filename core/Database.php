@@ -58,9 +58,9 @@ class Database
     function deleteData($table, $condition = '')
     {
         if (!empty ($condition)) {
-            $sql = 'DELETE FROM' . $table . 'WHERE' . $condition;
+            $sql = 'UPDATE ' . $table . ' SET TRANGTHAI = 0 WHERE ' . $condition;
         } else {
-            $sql = 'DELETE FROM' . $table;
+            $sql = 'UPDATE ' . $table . ' SET TRANGTHAI = 0';
         }
 
         $status = $this->query($sql);

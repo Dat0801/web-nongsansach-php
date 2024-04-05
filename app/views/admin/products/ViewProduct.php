@@ -42,10 +42,40 @@
                 echo "<td> ".$product['TrangThai']."</td>";
                 echo "<td>
                 <a href=\""._WEB_ROOT."/admin/product/EditProduct?MaHang=".$product["MaHang"]."\" style=\"color:greenyellow\">Edit</a>
-                <a class=\"btn-delete\" style=\"color:greenyellow\">Delete</a>
+                <a class=\"btn-delete\" style=\"color:greenyellow\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-productid=".$product['MaHang'].">Delete</a>
                 </td>";
                 echo '</tr>';
             }
             
         ?>
 </table>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color:black">Xóa sản phẩm</h5>
+            </div>
+            <div class="modal-body">
+                <p style="color: red">Bạn có chắc muốn xóa sản phẩm?</p>
+                <table class="table table-product">
+                    <tr>
+                        <td>MaHang</td>
+                        <td><span id="DeleteProductIDSpan"></span></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <a href="/Admin/Product/XoaSP?ProductID" id="btn-xoa" class="btn btn-success">Xóa</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('.btn-delete').click((event) => {
+        const productid = $(event.target).attr('data-productid');
+        $('#DeleteProductIDSpan').html(productid);
+        $("#btn-xoa").attr("href", "<?php echo _WEB_ROOT?>/admin/product/deleteProduct?MaHang=" + productid);
+    })
+</script>
