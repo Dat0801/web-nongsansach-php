@@ -139,6 +139,7 @@ CREATE TABLE `hoadon` (
   `MaNV` int(11) NOT NULL,
   `MaKH` int(11) DEFAULT NULL,
   `NgayTao` datetime DEFAULT current_timestamp(),
+  `NgayGiao` datetime DEFAULT DATE_ADD(current_timestamp(), INTERVAL 1 DAY),
   `TongTien` float DEFAULT 0,
   `TrangThai` varchar(50) DEFAULT 'Đang xử lý'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -147,8 +148,8 @@ CREATE TABLE `hoadon` (
 -- Dumping data for table `hoadon`
 --
 
-INSERT INTO `hoadon` (`MaHD`, `MaNV`, `MaKH`, `NgayTao`, `TongTien`, `TrangThai`) VALUES
-(1, 1, 1, '2024-04-04 15:19:11', 0, 'Đang xử lý');
+INSERT INTO `hoadon` (`MaHD`, `MaNV`, `MaKH`, `NgayTao`, `NgayGiao`, `TongTien`, `TrangThai`) VALUES
+(1, 1, 1, '2024-04-04 15:19:11', '2024-04-05 15:19:11', 0, 'Đang xử lý');
 
 -- --------------------------------------------------------
 

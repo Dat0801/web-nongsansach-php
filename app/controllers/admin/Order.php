@@ -12,7 +12,8 @@ class Order extends Controller{
         $this->data['content'] = '/admin/orders/ViewOrder';
         $this->data['title'] = 'Trang hóa đơn';
         $dataOrder = $this->order->getorderList();
-        $this->data['sub_content']['order_list'] = $dataOrder;
+        $this->data['sub_content']['list'] = $dataOrder;
+        $this->data['sub_content']['order_model'] = $this->order;
         $this->render('layouts/admin_layout', $this->data);
     }
 

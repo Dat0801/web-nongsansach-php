@@ -1,6 +1,6 @@
 <?php
 include_once "app/views/admin/pagination/pagination.php";
-$list_product = $product_model->getProductListWithLimit($display, $position);
+$list_product = $product_model->getListWithLimit($display, $position);
 ?>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
     integrity="sha384-pzjw8s+ekmvplp5f/ZxXnDQbcz0S7bJr6W2kcoFVGLsRakET4Qc5I2tG4LDA2tB" crossorigin="anonymous">
@@ -46,7 +46,7 @@ $list_product = $product_model->getProductListWithLimit($display, $position);
             echo "<td> " . $product['TrangThai'] . "</td>";
             echo "<td>
                 <a href=\"" . _WEB_ROOT . "/admin/product/EditProduct?MaHang=" . $product["MaHang"] . "\" style=\"color:greenyellow\">Edit</a>
-                <a class=\"btn-delete\" style=\"color:greenyellow\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-productid=" . $product['MaHang'] . ">Delete</a>
+                <a class=\"btn-delete\" style=\"color:greenyellow\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-productid=\"" . $product['MaHang'] . "\" data-productname=\"" . $product['TenHang'] . "\">Delete</a>
                 </td>";
             echo '</tr>';
         }
@@ -102,11 +102,15 @@ $list_product = $product_model->getProductListWithLimit($display, $position);
                         <td>MaHang</td>
                         <td><span id="DeleteProductIDSpan"></span></td>
                     </tr>
+                    <tr>
+                        <td>TenHang</td>
+                        <td><span id="DeleteProductNameSpan"></span></td>
+                    </tr>
                 </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                <a href="/Admin/Product/XoaSP?ProductID" id="btn-xoa" class="btn btn-success">Xóa</a>
+                <a href="" id="btn-xoa" class="btn btn-success">Xóa</a>
             </div>
         </div>
     </div>
@@ -114,7 +118,9 @@ $list_product = $product_model->getProductListWithLimit($display, $position);
 <script>
     $('.btn-delete').click((event) => {
         const productid = $(event.target).attr('data-productid');
+        const productname = $(event.target).attr('data-productname');
         $('#DeleteProductIDSpan').html(productid);
+        $('#DeleteProductNameSpan').html(productname);
         $("#btn-xoa").attr("href", "<?php echo _WEB_ROOT ?>/admin/product/deleteProduct?MaHang=" + productid);
     })
 </script>

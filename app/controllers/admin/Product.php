@@ -12,7 +12,7 @@ class Product extends Controller{
         $this->data['content'] = '/admin/products/ViewProduct';
         $this->data['title'] = 'Trang sản phẩm';
         $dataProduct = $this->product->getProductList();
-        $this->data['sub_content']['product_list'] = $dataProduct;
+        $this->data['sub_content']['list'] = $dataProduct;
         $this->data['sub_content']['product_model'] = $this->product;
         $this->render('layouts/admin_layout', $this->data);
     }
@@ -46,7 +46,7 @@ class Product extends Controller{
         $data = $request->getFields();
         $this->product->updateProduct($data, $id);
         header('Location: '._WEB_ROOT.'/admin/product');
-    }
+    }   
     
     public function deleteProduct() {
         $id = $_GET["MaHang"];

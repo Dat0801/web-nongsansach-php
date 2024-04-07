@@ -123,7 +123,7 @@
                 <div id="collapseQLBrand" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-gradient-success py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="Brand/XemBrand">Xem đơn hàng</a>
+                        <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/order">Xem đơn hàng</a>
                     </div>
                 </div>
             </li>
@@ -162,7 +162,7 @@
                 <div id="collapseQLHoaDon" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-gradient-success py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="Orders/XemOrders">Xem nhà cung cấp</a>
+                        <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/suppliers">Xem nhà cung cấp</a>
                         <a class="collapse-item" href="Orders/ThemOrder">Thêm nhà cung cấp</a>
                     </div>
                 </div>
