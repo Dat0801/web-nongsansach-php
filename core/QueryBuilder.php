@@ -74,7 +74,7 @@ trait QueryBuilder
     //All line
     public function get()
     {
-        if (!($this->tableName == 'hoadon')) {
+        if (!($this->tableName == 'hoadon') && !($this->tableName == 'phieunhap')) {
             if (empty($this->where)) {
                 $this->where = "WHERE TrangThai = 1";
             } else {
