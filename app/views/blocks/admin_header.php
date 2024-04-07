@@ -86,7 +86,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-gradient-success py-2 collapse-inner rounded">
                         <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/product">Xem sản phẩm</a>
-                        <a class="collapse-item" href="Product/ThemSP">Thêm sản phẩm</a>
+                        <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/product/viewaddproduct">Thêm sản phẩm</a>
                     </div>
                 </div>
             </li>
@@ -104,7 +104,7 @@
                 <div id="collapseQLDanhMuc" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-gradient-success py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="Category/XemDanhMuc">Xem danh mục</a>
+                        <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/category">Xem danh mục</a>
                         <a class="collapse-item" href="Category/ThemDanhMuc">Thêm danh mục</a>
                     </div>
                 </div>
