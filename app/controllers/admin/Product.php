@@ -13,6 +13,7 @@ class Product extends Controller{
         $this->data['title'] = 'Trang sản phẩm';
         $dataProduct = $this->product->getProductList();
         $this->data['sub_content']['product_list'] = $dataProduct;
+        $this->data['sub_content']['product_model'] = $this->product;
         $this->render('layouts/admin_layout', $this->data);
     }
 
@@ -48,7 +49,6 @@ class Product extends Controller{
     }
     
     public function deleteProduct() {
-        $request = new Request();
         $id = $_GET["MaHang"];
         $this->product->deleteProduct($id);
         header('Location: '._WEB_ROOT.'/admin/product');

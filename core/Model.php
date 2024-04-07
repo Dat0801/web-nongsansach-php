@@ -15,7 +15,7 @@ abstract class Model extends Database {
         if(empty($fieldSelect)) {
             $fieldSelect = '*';
         }
-        $sql = "SELECT $fieldSelect FROM $tableName";
+        $sql = "SELECT $fieldSelect FROM $tableName WHERE TrangThai=1";
         $query = $this->db->query($sql);
         if(!empty($query)) {
             return $query->fetchAll(PDO::FETCH_ASSOC);

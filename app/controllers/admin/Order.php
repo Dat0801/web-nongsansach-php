@@ -10,7 +10,7 @@ class Order extends Controller{
 
     public function index() {
         $this->data['content'] = '/admin/orders/ViewOrder';
-        $this->data['title'] = 'Trang sản phẩm';
+        $this->data['title'] = 'Trang hóa đơn';
         $dataOrder = $this->order->getorderList();
         $this->data['sub_content']['order_list'] = $dataOrder;
         $this->render('layouts/admin_layout', $this->data);
@@ -18,7 +18,7 @@ class Order extends Controller{
 
     public function editorder() {
         $this->data['content'] = '/admin/orders/EditOrder';
-        $this->data['title'] = 'Trang sửa sản phẩm';
+        $this->data['title'] = 'Trang sửa hóa đơn';
         $request = new Request();
         $MaHD = $request->getFields();
         $dataorder = $this->order->getDetail($MaHD["MaHD"]);
