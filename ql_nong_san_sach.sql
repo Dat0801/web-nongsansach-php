@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2024 at 10:40 AM
+-- Generation Time: Apr 07, 2024 at 07:27 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -139,7 +139,6 @@ CREATE TABLE `hoadon` (
   `MaNV` int(11) NOT NULL,
   `MaKH` int(11) DEFAULT NULL,
   `NgayTao` datetime DEFAULT current_timestamp(),
-  `NgayGiao` datetime DEFAULT current_timestamp(),
   `TongTien` float DEFAULT 0,
   `TrangThai` varchar(50) DEFAULT 'Đang xử lý'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -148,8 +147,8 @@ CREATE TABLE `hoadon` (
 -- Dumping data for table `hoadon`
 --
 
-INSERT INTO `hoadon` (`MaHD`, `MaNV`, `MaKH`, `NgayTao`, `NgayGiao` , `TongTien`, `TrangThai`) VALUES
-(1, 1, 1, '2024-04-04 15:19:11', '2024-04-05 15:19:11', 0, 'Đang xử lý');
+INSERT INTO `hoadon` (`MaHD`, `MaNV`, `MaKH`, `NgayTao`, `TongTien`, `TrangThai`) VALUES
+(1, 1, 1, '2024-04-04 15:19:11', 0, 'Đang xử lý');
 
 -- --------------------------------------------------------
 
@@ -160,6 +159,9 @@ INSERT INTO `hoadon` (`MaHD`, `MaNV`, `MaKH`, `NgayTao`, `NgayGiao` , `TongTien`
 CREATE TABLE `khachhang` (
   `MaKH` int(11) NOT NULL,
   `TenKH` varchar(50) NOT NULL,
+  `Username` varchar(100) NOT NULL,
+  `Password` varchar(100) NOT NULL,
+  `Email` varchar(100) NOT NULL,
   `SDT` varchar(30) DEFAULT 'Chưa xác định',
   `DiaChi` varchar(50) DEFAULT 'Chưa xác định',
   `TrangThai` bit(1) DEFAULT b'1'
@@ -169,12 +171,12 @@ CREATE TABLE `khachhang` (
 -- Dumping data for table `khachhang`
 --
 
-INSERT INTO `khachhang` (`MaKH`, `TenKH`, `SDT`, `DiaChi`, `TrangThai`) VALUES
-(1, 'Nguyễn Văn Phú', '0987654321', 'Lê Trọng Tấn', b'1'),
-(2, 'Trần Thị Dung', '0123456789', 'Bình Chánh', b'1'),
-(3, 'Lê Văn Sỹ', '0912345678', 'Lạc Long Quân', b'1'),
-(4, 'Phạm Thị Kim', '0876543210', 'Thành Thái', b'1'),
-(5, 'Hoàng Văn Cường', '0965432187', 'Điện Biên Phủ', b'1');
+INSERT INTO `khachhang` (`MaKH`, `TenKH`, `Username`, `Password`, `Email`, `SDT`, `DiaChi`, `TrangThai`) VALUES
+(1, 'Nguyễn Văn Phú', 'nguyenvanphu', '123', 'nvp@gmail.com', '0987654321', 'Lê Trọng Tấn', b'1'),
+(2, 'Trần Thị Dung', 'tranthidung', '123', 'ttd@gmail.com', '0123456789', 'Bình Chánh', b'1'),
+(3, 'Lê Văn Sỹ', 'levansy', '123', 'lvs@gmail.com', '0912345678', 'Lạc Long Quân', b'1'),
+(4, 'Phạm Thị Kim', 'phanthikim', '123', 'ptk@gmail.com', '0876543210', 'Thành Thái', b'1'),
+(5, 'Hoàng Văn Cường', 'hoangvancuong', '123', 'hvc@gmail.com', '0965432187', 'Điện Biên Phủ', b'1');
 
 -- --------------------------------------------------------
 
