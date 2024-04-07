@@ -17,7 +17,7 @@ class Order extends Controller{
         $this->render('layouts/admin_layout', $this->data);
     }
 
-    public function editorder() {
+    public function editOrder() {
         $this->data['content'] = '/admin/orders/EditOrder';
         $this->data['title'] = 'Trang sửa hóa đơn';
         $request = new Request();
@@ -27,7 +27,7 @@ class Order extends Controller{
         $this->render('layouts/admin_layout', $this->data); 
     }
 
-    public function updateorder() {
+    public function updateOrder() {
         $request = new Request();
         $id = $_GET["MaHD"];
         $data = $request->getFields();

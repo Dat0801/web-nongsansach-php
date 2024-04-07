@@ -13,6 +13,7 @@ class Suppliers extends Controller{
         $this->data['title'] = 'Danh mục các nhà cung cấp';
         $datasuppliers = $this->suppliers->getsuppliersList();
         $this->data['sub_content']['list'] = $datasuppliers;
+        $this->data['sub_content']['suppliers_model'] = $this->suppliers;
         $this->render('layouts/admin_layout', $this->data);
     }
 
@@ -30,10 +31,10 @@ class Suppliers extends Controller{
         $request = new Request();
         $id = $_GET["MaNCC"];
         $data = $request->getFields();
-        $this->suppliers->updatesuppliers($data, $id);
+        $this->suppliers->updateSuppliers($data, $id);
         header('Location: '._WEB_ROOT.'/admin/suppliers');
     }
-    //
+    
     public function viewAddSuppliers() {
         $this->data['content'] = '/admin/suppliers/AddSuppliers';
         $this->data['title'] = 'Trang thêm nhà cung cấp';
@@ -48,7 +49,6 @@ class Suppliers extends Controller{
     }
 
     public function deleteSuppliers() {
-        $request = new Request();
         $id = $_GET["MaNCC"];
         $this->suppliers->deleteSuppliers($id);
         header('Location: '._WEB_ROOT.'/admin/Suppliers');

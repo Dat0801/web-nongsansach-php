@@ -41,12 +41,12 @@ $list_product = $product_model->getListWithLimit($display, $position);
             echo "<td>" . $product['GiaBan'] . "</td>";
             echo "<td>" . $product['HeSo'] . "</td>";
             echo "<td>" . $product['GiaNhap'] . "</td>";
-            echo "<td> <img src=\"" . $product['HinhAnh'] . "\"></td>";
+            echo "<td> <img style=\"width:50px\" src=\""._WEB_ROOT."/public/assets/client/img/" . $product['HinhAnh'] . "\"></td>";
             echo "<td> " . $product['SoLuongTon'] . "</td>";
             echo "<td> " . $product['TrangThai'] . "</td>";
             echo "<td>
                 <a href=\"" . _WEB_ROOT . "/admin/product/EditProduct?MaHang=" . $product["MaHang"] . "\" style=\"color:greenyellow\">Edit</a>
-                <a class=\"btn-delete\" style=\"color:greenyellow\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-productid=\"" . $product['MaHang'] . "\" data-productname=\"" . $product['TenHang'] . "\">Delete</a>
+                <a class=\"btn-delete\" style=\"color:greenyellow\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-productid=\"" . $product['MaHang'] . "\" data-productname=\"" . $product['TenHang'] . "\" data-productimg=\"" . $product['HinhAnh'] . "\">Delete</a>
                 </td>";
             echo '</tr>';
         }
@@ -106,6 +106,10 @@ $list_product = $product_model->getListWithLimit($display, $position);
                         <td>TenHang</td>
                         <td><span id="DeleteProductNameSpan"></span></td>
                     </tr>
+                    <tr>
+                        <td>HinhAnh</td>
+                        <td><span id="DeleteProductImgSpan"></span></td>
+                    </tr>
                 </table>
             </div>
             <div class="modal-footer">
@@ -119,8 +123,10 @@ $list_product = $product_model->getListWithLimit($display, $position);
     $('.btn-delete').click((event) => {
         const productid = $(event.target).attr('data-productid');
         const productname = $(event.target).attr('data-productname');
+        const productimg = $(event.target).attr('data-productimg');
         $('#DeleteProductIDSpan').html(productid);
         $('#DeleteProductNameSpan').html(productname);
+        $('#DeleteProductImgSpan').html(`<img style="width:150px" src="<?php echo _WEB_ROOT ?>/public/assets/client/img/${productimg}">`);
         $("#btn-xoa").attr("href", "<?php echo _WEB_ROOT ?>/admin/product/deleteProduct?MaHang=" + productid);
     })
 </script>

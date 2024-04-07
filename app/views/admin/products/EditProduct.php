@@ -28,7 +28,7 @@
         <br />
         <div>
             Hình ảnh sản phẩm
-            <img src="~/Content/img/product/@Model.MetaKeywords/@Model.ProductImage" width="150" style="margin: 10px;"/>
+            <img src="<?php echo _WEB_ROOT ?>/public/assets/client/img/<?php echo $product['HinhAnh']?>" width="150" style="margin: 10px;"/>
             <input type="text" name="HinhAnh" class="form-control" value="<?php echo $product['HinhAnh']?>" />
         </div>
         <br />
