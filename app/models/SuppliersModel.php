@@ -39,4 +39,7 @@ class SuppliersModel extends Model{
     public function updateSuppliers($data, $id) {
         $this->db->table('nhacungcap')->where('mancc', '=', $id)->update($data);
     }
+    public function getListWithLimit($limit, $offset) {
+        return $this->db->table('nhacungcap')->limit($limit, $offset)->get();
+    }
 }

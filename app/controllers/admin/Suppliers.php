@@ -33,5 +33,25 @@ class Suppliers extends Controller{
         $this->suppliers->updatesuppliers($data, $id);
         header('Location: '._WEB_ROOT.'/admin/suppliers');
     }
-    
+    //
+    public function viewAddSuppliers() {
+        $this->data['content'] = '/admin/suppliers/AddSuppliers';
+        $this->data['title'] = 'Trang thêm nhà cung cấp';
+        $this->render('layouts/admin_layout', $this->data);
+    }
+
+    public function addSuppliers() {
+        $request = new Request();
+        $data = $request->getFields();
+        $this->suppliers->addSuppliers($data);
+        header('Location: '._WEB_ROOT.'/admin/Suppliers');
+    }
+
+    public function deleteSuppliers() {
+        $request = new Request();
+        $id = $_GET["mancc"];
+        $this->suppliers->deleteSuppliers($id);
+        header('Location: '._WEB_ROOT.'/admin/Suppliers');
+    }
+
 }
