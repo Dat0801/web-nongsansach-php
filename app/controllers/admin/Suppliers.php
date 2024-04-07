@@ -12,7 +12,7 @@ class Suppliers extends Controller{
         $this->data['content'] = '/admin/suppliers/ViewSuppliers'; //Nhìn theo đường đẫn 
         $this->data['title'] = 'Danh mục các nhà cung cấp';
         $datasuppliers = $this->suppliers->getsuppliersList();
-        $this->data['sub_content']['suppliers_list'] = $datasuppliers;
+        $this->data['sub_content']['list'] = $datasuppliers;
         $this->render('layouts/admin_layout', $this->data);
     }
 
@@ -21,14 +21,14 @@ class Suppliers extends Controller{
         $this->data['title'] = 'Trang chỉnh sửa thông tin nhà cung cấp';
         $request = new Request();
         $mancc = $request->getFields();
-        $datasuppliers = $this->suppliers->getDetail($mancc["mancc"]);
+        $datasuppliers = $this->suppliers->getDetail($mancc["MaNCC"]);
         $this->data['sub_content']['suppliers'] = $datasuppliers;
         $this->render('layouts/admin_layout', $this->data); 
     }
 
     public function updateSuppliers() {
         $request = new Request();
-        $id = $_GET["mancc"];
+        $id = $_GET["MaNCC"];
         $data = $request->getFields();
         $this->suppliers->updatesuppliers($data, $id);
         header('Location: '._WEB_ROOT.'/admin/suppliers');
@@ -49,9 +49,8 @@ class Suppliers extends Controller{
 
     public function deleteSuppliers() {
         $request = new Request();
-        $id = $_GET["mancc"];
+        $id = $_GET["MaNCC"];
         $this->suppliers->deleteSuppliers($id);
         header('Location: '._WEB_ROOT.'/admin/Suppliers');
     }
-
 }

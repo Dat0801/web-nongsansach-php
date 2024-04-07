@@ -37,7 +37,7 @@
         ?>
 </table>
 <!-- Xử lý nút delete -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+<<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     crossorigin="anonymous"></script>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -46,15 +46,15 @@
                 <h5 class="modal-title" id="exampleModalLabel" style="color:black">Huỷ hợp tác với nhà cung cấp</h5>
             </div>
             <div class="modal-body">
-                <p style="color: red">Bạn có chắc muốn xóa tên nhà cung cấp này không?</p>
+                <p style="color: red">Bạn có muốn xoá tên nhà cung cấp ra khỏi danh sách?</p>
                 <table class="table table-suppliers">
                     <tr>
-                        <td>MaNhaCungCap</td>
-                        <td><span id="DeleteSuppliersIDSpan"></span></td>
+                        <td>MaNCC</td>
+                        <td><span id="DeletesuppliersIDSpan"></span></td>
                     </tr>
                     <tr>
-                        <td>TenNhaCungCap</td>
-                        <td><span id="DeleteSuppliersNameSpan"></span></td>
+                        <td>TenNCC</td>
+                        <td><span id="DeletesuppliersNameSpan"></span></td>
                     </tr>
                 </table>
             </div>
@@ -69,8 +69,8 @@
     $('.btn-delete').click((event) => {
         const suppliersid = $(event.target).attr('data-suppliersid');
         const suppliersname = $(event.target).attr('data-suppliersname');
-        $('#DeleteSuppliersIDSpan').html(suppliersid);
-        $('#DeleteSuppliersNameSpan').html(suppliersname);
+        $('#DeletesuppliersIDSpan').html(suppliersid);
+        $('#DeletesuppliersNameSpan').html(suppliersname);
         $("#btn-xoa").attr("href", "<?php echo _WEB_ROOT ?>/admin/suppliers/deletesuppliers?MaNCC=" + suppliersid);
     })
 </script>
