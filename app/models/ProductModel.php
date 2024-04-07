@@ -39,7 +39,7 @@ class ProductModel extends Model{
     public function updateProduct($data, $id) {
         $this->db->table('hanghoa')->where('MaHang', '=', $id)->update($data);
     }
-    public function getProductListWithLimit($limit, $offset) {
+    public function getListWithLimit($limit, $offset) {
         return $this->db->table('hanghoa')->limit($limit, $offset)->get();
     }
 }

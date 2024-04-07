@@ -2,7 +2,7 @@
 $display = 10;
 $num_links = 1;
 
-$total_rows = count($product_list);
+$total_rows = count($list);
 
 $curr_page = (isset($_GET['page']) && is_numeric($_GET['page'])) ? $_GET['page'] : 1;
 
