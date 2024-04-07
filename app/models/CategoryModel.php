@@ -39,4 +39,7 @@ class CategoryModel extends Model{
     public function updateCategory($data, $id) {
         $this->db->table('NhomHang')->where('MaNhomHang', '=', $id)->update($data);
     }
+    public function getListWithLimit($limit, $offset) {
+        return $this->db->table('NhomHang')->limit($limit, $offset)->get();
+    }   
 }

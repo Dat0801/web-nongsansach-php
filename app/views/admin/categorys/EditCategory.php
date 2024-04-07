@@ -1,4 +1,4 @@
-<center><h2>Sửa Sản Phẩm</h2></center>
+<center><h2>Sửa Danh Mục sản phẩm</h2></center>
 <form action="<?php echo _WEB_ROOT ?>/admin/category/updatecategory?MaNhomHang=<?php echo $category["MaNhomHang"] ?>" method="post">
     <div style="width: 70%; margin-left: 50px">
        
