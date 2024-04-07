@@ -105,7 +105,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-gradient-success py-2 collapse-inner rounded">
                         <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/category">Xem danh mục</a>
-                        <a class="collapse-item" href="Category/ThemDanhMuc">Thêm danh mục</a>
+                        <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/category/viewaddcategory">Thêm danh mục</a>
                     </div>
                 </div>
             </li>
@@ -163,10 +163,11 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-gradient-success py-2 collapse-inner rounded">
                         <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/suppliers">Xem nhà cung cấp</a>
-                        <a class="collapse-item" href="Orders/ThemOrder">Thêm nhà cung cấp</a>
+                        <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/suppliers/viewaddsuppliers">Thêm nhà cung cấp</a>
                     </div>
                 </div>
             </li>
+            <hr class="sidebar-divider">
 
             <!-- Quản lý phiếu nhập -->
             <div class="sidebar-heading">
@@ -187,24 +188,6 @@
                 </div>
             </li>
 
-            <!-- Quản lý phiếu nhập -->
-            <div class="sidebar-heading">
-                Phiếu chi
-            </div>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQLPhieuChi"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Quản lý phiếu chi</span>
-                </a>
-                <div id="collapseQLPhieuChi" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-gradient-success py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="Orders/XemOrders">Xem phiếu chi</a>
-                        <a class="collapse-item" href="Orders/ThemOrder">Thêm phiếu chi</a>
-                    </div>
-                </div>
-            </li>
             <hr class="sidebar-divider d-none d-md-block">
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">

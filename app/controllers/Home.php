@@ -8,7 +8,7 @@ class Home extends Controller{
     }
 
     public function index() {
-        $this->data['title'] = 'Trang chủ';
+        $this->data['title'] = 'Nông Sản Sạch';
         $this->data['content'] = 'home/index';
         $this->render('layouts/client_layout', $this->data);
     }

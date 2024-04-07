@@ -1,3 +1,7 @@
+<?php
+    include_once "app/views/admin/pagination/pagination.php";
+    $category_list = $category_model->getListWithLimit($display, $position);
+?>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
     integrity="sha384-pzjw8s+ekmvplp5f/ZxXnDQbcz0S7bJr6W2kcoFVGLsRakET4Qc5I2tG4LDA2tB" crossorigin="anonymous">
 <form class="d-flex" action="" method="post">
@@ -31,10 +35,7 @@
             
         ?>
 </table>
-<?php
-    include_once "app/views/admin/pagination/pagination.php";
-    $category_list = $category_model->getListWithLimit($display, $position);
-?>
+
 <!-- Xử lý phân trang -->
 <nav aria-label="Page navigation example">
     <ul class="pagination" style="justify-content: center; padding: 20px;">
