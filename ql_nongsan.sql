@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 07, 2024 at 07:27 AM
+-- Generation Time: Apr 09, 2024 at 03:58 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -139,7 +139,6 @@ CREATE TABLE `hoadon` (
   `MaNV` int(11) NOT NULL,
   `MaKH` int(11) DEFAULT NULL,
   `NgayTao` datetime DEFAULT current_timestamp(),
-  `NgayGiao` datetime DEFAULT DATE_ADD(current_timestamp(), INTERVAL 1 DAY),
   `TongTien` float DEFAULT 0,
   `TrangThai` varchar(50) DEFAULT 'Đang xử lý'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -148,8 +147,8 @@ CREATE TABLE `hoadon` (
 -- Dumping data for table `hoadon`
 --
 
-INSERT INTO `hoadon` (`MaHD`, `MaNV`, `MaKH`, `NgayTao`, `NgayGiao`, `TongTien`, `TrangThai`) VALUES
-(1, 1, 1, '2024-04-04 15:19:11', '2024-04-05 15:19:11', 0, 'Đang xử lý');
+INSERT INTO `hoadon` (`MaHD`, `MaNV`, `MaKH`, `NgayTao`, `TongTien`, `TrangThai`) VALUES
+(1, 1, 1, '2024-04-04 15:19:11', 0, 'Đang xử lý');
 
 -- --------------------------------------------------------
 
@@ -265,7 +264,7 @@ CREATE TABLE `phieunhap` (
   `MaNCC` int(11) NOT NULL,
   `NgayNhap` datetime DEFAULT current_timestamp(),
   `TongTien` float NOT NULL,
-  `TrangThai` varchar(50) DEFAULT 'Đang xử lý'
+  `TrangThai` bit(1) DEFAULT b'1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -273,7 +272,8 @@ CREATE TABLE `phieunhap` (
 --
 
 INSERT INTO `phieunhap` (`MaPN`, `MaNV`, `MaNCC`, `NgayNhap`, `TongTien`, `TrangThai`) VALUES
-(1, 1, 1, '2024-04-04 15:33:29', 2000000, 'Đang xử lý');
+(1, 1, 1, '2024-04-04 15:33:29', 2500000, b'1'),
+(2, 2, 1, '2024-04-09 20:33:44', 1500000, b'1');
 
 --
 -- Indexes for dumped tables
@@ -389,7 +389,7 @@ ALTER TABLE `nhomhang`
 -- AUTO_INCREMENT for table `phieunhap`
 --
 ALTER TABLE `phieunhap`
-  MODIFY `MaPN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `MaPN` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
