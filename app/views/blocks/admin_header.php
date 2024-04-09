@@ -141,7 +141,7 @@
                 <div id="collapseQLNguoiDung" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-gradient-success py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="Users/XemUser">Xem khách hàng</a>
+                        <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/customer">Xem khách hàng</a>
                         <a class="collapse-item" href="Users/ThemUser">Thêm khách hàng</a>
                     </div>
                 </div>
@@ -181,7 +181,7 @@
                 <div id="collapseQLPhieuNhap" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-gradient-success py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="Orders/XemOrders">Xem phiếu nhập</a>
+                        <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/productReceipt">Xem phiếu nhập</a>
                         <a class="collapse-item" href="Orders/ThemOrder">Thêm phiếu nhập</a>
                     </div>
                 </div>

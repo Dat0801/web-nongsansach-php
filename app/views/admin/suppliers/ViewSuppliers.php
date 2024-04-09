@@ -29,10 +29,48 @@
                 echo "<td>".$suppliers['DiaChi']."</td>";
                 echo "<td>".$suppliers['TrangThai']."</td>";
                 echo "<td>
-                <a href=\""._WEB_ROOT."/admin/suppliers/editsuppliers?mancc=".$suppliers["MaNCC"]."\" style=\"color:greenyellow\">Edit</a>
-                <a class=\"btn-delete\" style=\"color:greenyellow\">Delete</a>
+                <a href=\"" . _WEB_ROOT . "/admin/suppliers/Editsuppliers?MaNCC=" . $suppliers["MaNCC"] . "\" style=\"color:greenyellow\">Edit</a>
+                <a class=\"btn-delete\" style=\"color:greenyellow\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-suppliersid=\"" . $suppliers['MaNCC'] . "\" data-suppliersname=\"" . $suppliers['TenNCC'] . "\">Delete</a>
                 </td>";
-                echo '</tr>';
+            echo '</tr>';
             }
         ?>
 </table>
+<!-- Xử lý nút delete -->
+<<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    crossorigin="anonymous"></script>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel" style="color:black">Huỷ hợp tác với nhà cung cấp</h5>
+            </div>
+            <div class="modal-body">
+                <p style="color: red">Bạn có muốn xoá tên nhà cung cấp ra khỏi danh sách?</p>
+                <table class="table table-suppliers">
+                    <tr>
+                        <td>MaNCC</td>
+                        <td><span id="DeletesuppliersIDSpan"></span></td>
+                    </tr>
+                    <tr>
+                        <td>TenNCC</td>
+                        <td><span id="DeletesuppliersNameSpan"></span></td>
+                    </tr>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <a href="" id="btn-xoa" class="btn btn-success">Xóa</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('.btn-delete').click((event) => {
+        const suppliersid = $(event.target).attr('data-suppliersid');
+        const suppliersname = $(event.target).attr('data-suppliersname');
+        $('#DeletesuppliersIDSpan').html(suppliersid);
+        $('#DeletesuppliersNameSpan').html(suppliersname);
+        $("#btn-xoa").attr("href", "<?php echo _WEB_ROOT ?>/admin/suppliers/deletesuppliers?MaNCC=" + suppliersid);
+    })
+</script>
