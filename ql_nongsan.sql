@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 09, 2024 at 03:58 PM
+-- Generation Time: Apr 11, 2024 at 02:55 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -60,7 +60,52 @@ CREATE TABLE `chitietphieunhap` (
 --
 
 INSERT INTO `chitietphieunhap` (`MaPN`, `MaHang`, `GiaNhap`, `SoLuong`, `ThanhTien`) VALUES
-(1, 1, 50000, 5, 0);
+(1, 1, 10000, 4, 40000),
+(1, 3, 12000, 5, 60000),
+(1, 6, 12000, 5, 60000),
+(1, 12, 8000, 5, 40000),
+(1, 15, 8000, 5, 40000);
+
+--
+-- Triggers `chitietphieunhap`
+--
+DELIMITER $$
+CREATE TRIGGER `tinh_thanh_tien_insert` BEFORE INSERT ON `chitietphieunhap` FOR EACH ROW BEGIN
+    SET NEW.ThanhTien = NEW.GiaNhap * NEW.SoLuong;
+    
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `tinh_tong_tien_insert` AFTER INSERT ON `chitietphieunhap` FOR EACH ROW BEGIN
+    UPDATE phieunhap
+    SET TongTien = TongTien + (NEW.GiaNhap * NEW.SoLuong)
+    WHERE MaPN = NEW.MaPN;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `update_gia_nhap_insert` AFTER INSERT ON `chitietphieunhap` FOR EACH ROW BEGIN
+    IF NEW.GiaNhap > (
+        SELECT GiaNhap 
+        FROM hanghoa 
+        WHERE MaHang = NEW.MaHang
+    ) THEN
+        UPDATE hanghoa
+        SET GiaNhap = NEW.GiaNhap
+        WHERE MaHang = NEW.MaHang;
+    END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `update_so_luong_insert` AFTER INSERT ON `chitietphieunhap` FOR EACH ROW BEGIN
+    UPDATE hanghoa
+    SET SoLuongTon = SoLuongTon + NEW.SoLuong
+    WHERE MaHang = NEW.MaHang;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -87,46 +132,46 @@ CREATE TABLE `hanghoa` (
 --
 
 INSERT INTO `hanghoa` (`MaHang`, `MaNhomHang`, `MaNCC`, `TenHang`, `DVT`, `GiaBan`, `HeSo`, `GiaNhap`, `HinhAnh`, `SoLuongTon`, `TrangThai`) VALUES
-(1, 4, 1, 'Chuối già Nam Mỹ', 'Kg', 20000, 1, 8000, 'chuoiGia.jpg', 16, b'1'),
-(2, 4, 2, 'Dưa hấu đỏ', 'Kg', 12000, 1, 7000, 'duaHauDo.jpg', 8, b'1'),
-(3, 4, 1, 'Dưa lưới', 'Kg', 70000, 1, 55000, 'duaLuoi.jpg', 12, b'1'),
-(4, 4, 2, 'Cam vàng nội địa Trung', 'Kg', 41000, 1, 20000, 'camVang.jpg', 20, b'1'),
-(5, 4, 3, 'Nho xanh Nam Phi', 'Kg', 140000, 1, 90000, 'nhoXanh.jpg', 8, b'1'),
-(6, 4, 4, 'Dừa xiêm', 'Trái', 9000, 1, 4000, 'duaXiem.jpg', 10, b'1'),
-(7, 4, 4, 'Quýt giống Úc', 'Kg', 45000, 1, 28000, 'quytUc.jpg', 12, b'1'),
-(8, 4, 3, 'Cam sành', 'Kg', 18000, 1, 10000, 'camSanh.jpg', 23, b'1'),
-(9, 4, 5, 'Táo Autumn Mỹ', 'Kg', 50500, 1, 27500, 'taoMy.jpg', 8, b'1'),
-(10, 4, 5, 'Ổi Đài Loan', 'Kg', 21000, 1, 14000, 'oiDaiLoan.jpg', 6, b'1'),
-(11, 1, 1, 'Cải bẹ xanh', 'Kg', 20000, 1, 7000, 'caiBeXanh.jpg', 9, b'1'),
-(12, 1, 1, 'Cải ngọt', 'Kg', 19000, 1, 7500, 'caiNgot.jpg', 6, b'1'),
-(13, 1, 2, 'Cải thìa', 'Kg', 18000, 1, 6000, 'caiThia.jpg', 11, b'1'),
-(14, 1, 3, 'Cải bẹ dún', 'Kg', 31000, 1, 16500, 'caiBeDun.jpg', 9, b'1'),
-(15, 1, 3, 'Rau dền', 'Kg', 20000, 1, 9000, 'rauDen.jpg', 12, b'1'),
-(16, 1, 2, 'Rau lang', 'Kg', 28000, 1, 12000, 'rauLang.jpg', 14, b'1'),
-(17, 1, 4, 'Rau mồng tơi', 'Kg', 20000, 1, 8500, 'rauMongToi.jpg', 6, b'1'),
-(18, 1, 5, 'Rau muống nước', 'Kg', 20000, 1, 9000, 'rauMuongNuoc.jpg', 13, b'1'),
-(19, 1, 5, 'Rau ngót', 'Kg', 48000, 1, 29500, 'rauNgot.jpg', 5, b'1'),
-(20, 1, 4, 'Rau tần ô', 'Kg', 36000, 1, 21000, 'rauTanO.jpg', 6, b'1'),
-(21, 2, 1, 'Khoai lang Nhật', 'Kg', 31500, 1, 23000, 'khoaiLangNhat.jpg', 7, b'1'),
-(22, 2, 2, 'Bí đỏ hồ lô', 'Kg', 19000, 1, 9500, 'biDoHoLo.jpg', 12, b'1'),
-(23, 2, 1, 'Bí xanh', 'Kg', 19500, 1, 11000, 'biXanh.jpg', 7, b'1'),
-(24, 2, 2, 'Cà chua', 'Kg', 16000, 1, 9000, 'caChua.jpg', 12, b'1'),
-(25, 2, 3, 'Cà rốt', 'Kg', 25000, 1, 12000, 'caRot.jpg', 9, b'1'),
-(26, 2, 3, 'Khoai tây', 'Kg', 25000, 1, 13000, 'khoaiTay.jpg', 15, b'1'),
-(27, 2, 4, 'Củ cải trắng', 'Kg', 22000, 1, 14000, 'cuCaiTrang.jpg', 6, b'1'),
-(28, 2, 5, 'Củ dền', 'Kg', 36000, 1, 19500, 'cuDen.jpg', 9, b'1'),
-(29, 2, 5, 'Khoai mỡ', 'Kg', 35000, 1, 26000, 'khoaiMo.jpg', 10, b'1'),
-(30, 2, 4, 'Ớt chuông', 'Kg', 23000, 0.25, 73000, 'otChuong.jpg', 8, b'1'),
-(31, 3, 5, 'Nấm hương', 'Kg', 28000, 0.15, 100000, 'namHuong.jpg', 6, b'1'),
-(32, 3, 4, 'Nấm bào ngư trắng', 'Kg', 20000, 0.3, 51000, 'namBaoNguTrang.jpg', 5, b'1'),
-(33, 3, 5, 'Nấm kim châm', 'Kg', 11000, 0.15, 55000, 'namKimCham.jpg', 7, b'1'),
-(34, 3, 4, 'Nấm mối đen', 'Kg', 57500, 0.15, 300000, 'namMoiDen.jpg', 4, b'1'),
-(35, 3, 5, 'Nấm linh chi', 'Kg', 33000, 0.15, 145000, 'namLinhChi.jpg', 6, b'1'),
-(36, 3, 4, 'Nấm đùi gà', 'Kg', 25500, 0.2, 97000, 'namDuiGa.jpg', 3, b'1'),
-(37, 3, 5, 'Nấm rơm', 'Kg', 30000, 0.18, 120000, 'namRom.jpg', 10, b'1'),
-(38, 3, 4, 'Nấm Notaly', 'Kg', 18000, 0.2, 70000, 'namNotaly.jpg', 4, b'1'),
-(39, 3, 5, 'Nấm tuyết', 'Kg', 30000, 0.05, 510000, 'namTuyet.jpg', 3, b'1'),
-(40, 3, 5, 'Nấm mỡ nâu', 'Kg', 54000, 0.15, 280000, 'namMoNau.jpg', 7, b'1');
+(1, 4, 1, 'Chuối già Nam Mỹ', 'Kg', 20000, 1.2, 10000, 'chuoiGia.jpg', 20, b'1'),
+(2, 4, 2, 'Dưa hấu đỏ', 'Kg', 12000, 1.2, 8000, 'duaHauDo.jpg', 8, b'1'),
+(3, 4, 1, 'Dưa lưới', 'Kg', 70000, 1.2, 60000, 'duaLuoi.jpg', 17, b'1'),
+(4, 4, 2, 'Cam vàng nội địa Trung', 'Kg', 41000, 1.2, 20000, 'camVang.jpg', 20, b'1'),
+(5, 4, 3, 'Nho xanh Nam Phi', 'Kg', 140000, 1.2, 90000, 'nhoXanh.jpg', 8, b'1'),
+(6, 4, 4, 'Dừa xiêm', 'Trái', 9000, 1.2, 12000, 'duaXiem.jpg', 25, b'1'),
+(7, 4, 4, 'Quýt giống Úc', 'Kg', 45000, 1.2, 28000, 'quytUc.jpg', 12, b'1'),
+(8, 4, 3, 'Cam sành', 'Kg', 18000, 1.2, 20000, 'camSanh.jpg', 23, b'1'),
+(9, 4, 5, 'Táo Autumn Mỹ', 'Kg', 50500, 1.2, 27500, 'taoMy.jpg', 8, b'1'),
+(10, 4, 5, 'Ổi Đài Loan', 'Kg', 21000, 1.2, 14000, 'oiDaiLoan.jpg', 6, b'1'),
+(11, 1, 1, 'Cải bẹ xanh', 'Kg', 20000, 1.2, 7000, 'caiBeXanh.jpg', 9, b'1'),
+(12, 1, 1, 'Cải ngọt', 'Kg', 19000, 1.2, 8000, 'caiNgot.jpg', 11, b'1'),
+(13, 1, 2, 'Cải thìa', 'Kg', 18000, 1.2, 6000, 'caiThia.jpg', 11, b'1'),
+(14, 1, 3, 'Cải bẹ dún', 'Kg', 31000, 1.2, 16500, 'caiBeDun.jpg', 9, b'1'),
+(15, 1, 3, 'Rau dền', 'Kg', 20000, 1.2, 9000, 'rauDen.jpg', 17, b'1'),
+(16, 1, 2, 'Rau lang', 'Kg', 28000, 1.2, 12000, 'rauLang.jpg', 14, b'1'),
+(17, 1, 4, 'Rau mồng tơi', 'Kg', 20000, 1.2, 8500, 'rauMongToi.jpg', 6, b'1'),
+(18, 1, 5, 'Rau muống nước', 'Kg', 20000, 1.2, 9000, 'rauMuongNuoc.jpg', 13, b'1'),
+(19, 1, 5, 'Rau ngót', 'Kg', 48000, 1.2, 29500, 'rauNgot.jpg', 5, b'1'),
+(20, 1, 4, 'Rau tần ô', 'Kg', 36000, 1.2, 21000, 'rauTanO.jpg', 6, b'1'),
+(21, 2, 1, 'Khoai lang Nhật', 'Kg', 31500, 1.2, 23000, 'khoaiLangNhat.jpg', 7, b'1'),
+(22, 2, 2, 'Bí đỏ hồ lô', 'Kg', 19000, 1.2, 9500, 'biDoHoLo.jpg', 12, b'1'),
+(23, 2, 1, 'Bí xanh', 'Kg', 19500, 1.2, 11000, 'biXanh.jpg', 7, b'1'),
+(24, 2, 2, 'Cà chua', 'Kg', 16000, 1.2, 9000, 'caChua.jpg', 12, b'1'),
+(25, 2, 3, 'Cà rốt', 'Kg', 25000, 1.2, 12000, 'caRot.jpg', 9, b'1'),
+(26, 2, 3, 'Khoai tây', 'Kg', 25000, 1.2, 13000, 'khoaiTay.jpg', 15, b'1'),
+(27, 2, 4, 'Củ cải trắng', 'Kg', 22000, 1.2, 14000, 'cuCaiTrang.jpg', 6, b'1'),
+(28, 2, 5, 'Củ dền', 'Kg', 36000, 1.2, 19500, 'cuDen.jpg', 9, b'1'),
+(29, 2, 5, 'Khoai mỡ', 'Kg', 35000, 1.2, 26000, 'khoaiMo.jpg', 10, b'1'),
+(30, 2, 4, 'Ớt chuông', 'Kg', 23000, 1.2, 73000, 'otChuong.jpg', 8, b'1'),
+(31, 3, 5, 'Nấm hương', 'Kg', 28000, 1.2, 100000, 'namHuong.jpg', 6, b'1'),
+(32, 3, 4, 'Nấm bào ngư trắng', 'Kg', 20000, 1.2, 51000, 'namBaoNguTrang.jpg', 5, b'1'),
+(33, 3, 5, 'Nấm kim châm', 'Kg', 11000, 1.2, 55000, 'namKimCham.jpg', 7, b'1'),
+(34, 3, 4, 'Nấm mối đen', 'Kg', 57500, 1.2, 300000, 'namMoiDen.jpg', 4, b'1'),
+(35, 3, 5, 'Nấm linh chi', 'Kg', 33000, 1.2, 145000, 'namLinhChi.jpg', 6, b'1'),
+(36, 3, 4, 'Nấm đùi gà', 'Kg', 25500, 1.2, 97000, 'namDuiGa.jpg', 3, b'1'),
+(37, 3, 5, 'Nấm rơm', 'Kg', 30000, 1.2, 120000, 'namRom.jpg', 10, b'1'),
+(38, 3, 4, 'Nấm Notaly', 'Kg', 18000, 1.2, 70000, 'namNotaly.jpg', 4, b'1'),
+(39, 3, 5, 'Nấm tuyết', 'Kg', 30000, 1.2, 510000, 'namTuyet.jpg', 3, b'1'),
+(40, 3, 5, 'Nấm mỡ nâu', 'Kg', 54000, 1.2, 280000, 'namMoNau.jpg', 7, b'1');
 
 -- --------------------------------------------------------
 
@@ -272,7 +317,7 @@ CREATE TABLE `phieunhap` (
 --
 
 INSERT INTO `phieunhap` (`MaPN`, `MaNV`, `MaNCC`, `NgayNhap`, `TongTien`, `TrangThai`) VALUES
-(1, 1, 1, '2024-04-04 15:33:29', 2500000, b'1'),
+(1, 1, 1, '2024-04-04 15:33:29', 490000, b'1'),
 (2, 2, 1, '2024-04-09 20:33:44', 1500000, b'1');
 
 --
