@@ -1,7 +1,3 @@
-<link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <center>
     <h2>CHI TIẾT HÓA ĐƠN</h2>
 </center>
@@ -50,7 +46,7 @@
     </div>
 </div>
 <div class="table-responsive container">
-    <table class="table table-dark table-bordered" style="text-align: center; border-radius: 10px; overflow: hidden;">
+    <table class="table table-secondary table-bordered" style="text-align: center; border-radius: 10px; overflow: hidden; color: black">
         <thead>
             <tr>
                 <th scope="col">MaHang</th>

@@ -83,6 +83,11 @@ class Order extends Controller
         $this->order->acceptOrder($id);
         header('Location: ' . _WEB_ROOT . '/admin/order');
     }
-
+    public function cancelOrder()
+    {
+        $id = $_GET["MaHD"];
+        $this->order->cancelOrder($id);
+        header('Location: ' . _WEB_ROOT . '/admin/order');
+    }
 
 }

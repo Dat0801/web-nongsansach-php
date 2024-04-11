@@ -42,4 +42,19 @@ class ProductModel extends Model{
     public function getListWithLimit($limit, $offset) {
         return $this->db->table('hanghoa')->limit($limit, $offset)->get();
     }
+    public function getListRecycleWithLimit($limit, $offset) {
+        return $this->db->table('hanghoa')->limit($limit, $offset)->get(0);
+    }
+    public function getRecycleProductList() {
+        $data = $this->db->table('hanghoa')->get(0);
+        return $data;
+    }
+
+    public function recoverProduct($id) {
+        $this->db->table('hanghoa')->where('MaHang', '=', $id)->update(['TrangThai' => 1]);
+    }
+
+    public function deletePermanentProduct($id) {
+        $this->db->table('hanghoa')->where('MaHang', '=', $id)->delete(true);
+    }
 }

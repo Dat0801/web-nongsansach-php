@@ -72,13 +72,13 @@ trait QueryBuilder
     }
 
     //All line
-    public function get()
+    public function get($trangThai = 1)
     {
-        if (!($this->tableName == 'hoadon') && !($this->tableName == 'phieunhap') && !($this->tableName == 'chitiethoadon') && !($this->tableName == 'chitietphieunhap') && !($this->tableName == 'nhanvien') && !($this->tableName == 'khachhang') && !($this->tableName == 'hanghoa') && !($this->tableName == 'nhacungcap') && !($this->tableName == 'loaihang')) {
+        if (!($this->tableName == 'hoadon') && !($this->tableName == 'phieunhap') && !($this->tableName == 'chitiethoadon') && !($this->tableName == 'chitietphieunhap')) {
             if (empty($this->where)) {
-                $this->where = "WHERE TrangThai = 1";
+                $this->where = "WHERE TrangThai = $trangThai";
             } else {
-                $this->where .= " AND TrangThai = 1";
+                $this->where .= " AND TrangThai = $trangThai";
             }
         }
 
@@ -121,12 +121,12 @@ trait QueryBuilder
     }
 
     //Delete
-    public function delete()
+    public function delete($parmanent = false)
     {
         $whereDelete = str_replace('WHERE', '', $this->where);
         $whereDelete = trim($whereDelete);
         $tableName = $this->tableName;
-        $deleteStatus = $this->deleteData($tableName, $whereDelete);
+        $deleteStatus = $this->deleteData($tableName, $whereDelete, $parmanent);
         return $deleteStatus;
     }
 

@@ -55,14 +55,22 @@ class Database
     }
 
     // Xóa dữ liệu
-    function deleteData($table, $condition = '')
+    function deleteData($table, $condition = '', $permanent = false)
     {
-        if (!empty ($condition)) {
-            $sql = 'UPDATE ' . $table . ' SET TRANGTHAI = 0 WHERE ' . $condition;
+        if ($permanent) {
+            if (!empty ($condition)) {
+                $sql = 'DELETE FROM ' . $table . ' WHERE ' . $condition;
+            } else {
+                $sql = 'DELETE FROM ' . $table;
+            }
         } else {
-            $sql = 'UPDATE ' . $table . ' SET TRANGTHAI = 0';
+            if (!empty ($condition)) {
+                $sql = 'UPDATE ' . $table . ' SET TRANGTHAI = 0 WHERE ' . $condition;
+            } else {
+                $sql = 'UPDATE ' . $table . ' SET TRANGTHAI = 0';
+            }
         }
-
+       
         $status = $this->query($sql);
 
         if ($status) {

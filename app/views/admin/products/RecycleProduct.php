@@ -1,6 +1,6 @@
 <?php
 include_once "app/views/admin/pagination/pagination.php";
-$list_product = $product_model->getListWithLimit($display, $position);
+$list_product = $product_model->getListRecycleWithLimit($display, $position);
 ?>
 <form class="d-flex" action="" method="post">
     <div style="margin: 0 auto">
@@ -13,16 +13,6 @@ $list_product = $product_model->getListWithLimit($display, $position);
         </center>
     </div>
 </form>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12 my-3">
-            <a href="<?php echo _WEB_ROOT ?>/admin/product/addproduct"
-                class="btn btn-primary material-symbols-outlined">
-                add_circle
-            </a>
-        </div>
-    </div>
-</div>
 <div class="table-responsive container-fluid ">
     <table class="table table-secondary table-bordered" style="text-align: center; border-radius: 10px; overflow: hidden; color: black;">
         <thead>
@@ -56,7 +46,7 @@ $list_product = $product_model->getListWithLimit($display, $position);
                 echo "<td> <img style=\"width:50px\" src=\"" . _WEB_ROOT . "/public/assets/client/img/" . $product['HinhAnh'] . "\"></td>";
                 echo "<td> " . $product['SoLuongTon'] . "</td>";
                 echo "<td> " . $product['TrangThai'] . "</td>";
-                echo "<td><a href=\"" . _WEB_ROOT . "/admin/product/EditProduct?MaHang=" . $product["MaHang"] . "\" class=\"btn btn-sm btn-success material-symbols-outlined\"\">edit</a></td>";
+                echo "<td><a href=\"" . _WEB_ROOT . "/admin/product/recoverProduct?MaHang=" . $product["MaHang"] . "\" class=\"btn btn-sm btn-success material-symbols-outlined\"\">cycle</a></td>";
                 echo "<td>
                 <a class=\"btn-delete btn btn-sm btn-danger material-symbols-outlined\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-productid=\"" . $product['MaHang'] . "\"
                 data-productname=\"" . $product['TenHang'] . "\" data-productimg=\"" . $product['HinhAnh'] . "\">delete</a>
@@ -66,7 +56,7 @@ $list_product = $product_model->getListWithLimit($display, $position);
             ?>
     </table>
 </div>
-
+<?php if($total_pages > 1): ?>
 <nav aria-label="Page navigation example">
     <ul class="pagination" style="justify-content: center; padding: 20px;">
         <?php if ($curr_page > 1):
@@ -140,6 +130,7 @@ $list_product = $product_model->getListWithLimit($display, $position);
         <?php endif; ?>
     </ul>
 </nav>
+<?php endif; ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
     crossorigin="anonymous"></script>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -149,7 +140,7 @@ $list_product = $product_model->getListWithLimit($display, $position);
                 <h5 class="modal-title" id="exampleModalLabel" style="color:black">Xóa sản phẩm</h5>
             </div>
             <div class="modal-body">
-                <p style="color: red">Bạn có chắc muốn xóa sản phẩm?</p>
+                <p style="color: red">Bạn có chắc muốn xóa vĩnh viễn sản phẩm?</p>
                 <table class="table table-product">
                     <tr>
                         <td>MaHang</td>
@@ -180,6 +171,6 @@ $list_product = $product_model->getListWithLimit($display, $position);
         $('#DeleteProductIDSpan').html(productid);
         $('#DeleteProductNameSpan').html(productname);
         $('#DeleteProductImgSpan').html(`<img style="width:150px" src="<?php echo _WEB_ROOT ?>/public/assets/client/img/${productimg}">`);
-        $("#btn-xoa").attr("href", "<?php echo _WEB_ROOT ?>/admin/product/deleteProduct?MaHang=" + productid);
+        $("#btn-xoa").attr("href", "<?php echo _WEB_ROOT ?>/admin/product/deletePermanentProduct?MaHang=" + productid);
     })
 </script>
