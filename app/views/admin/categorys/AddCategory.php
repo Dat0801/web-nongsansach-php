@@ -1,5 +1,5 @@
 <center><h2>Thêm Danh mục hàng hoá</h2></center>
-<form action="<?php echo _WEB_ROOT ?>/admin/categorys/addCategory" method="post">
+<form action="<?php echo _WEB_ROOT ?>/admin/category/addCategory" method="post">
     <div style="width: 70%; margin-left: 50px">
         <div>
             MaNhomHang
@@ -17,4 +17,4 @@
         </div>
     </div>
 </form>
-<h5><a href="<?php echo _WEB_ROOT ?>/admin/categorys" style="margin-left: 50px;">Trở lại trang sản phẩm</a></h5>
+<h5><a href="<?php echo _WEB_ROOT ?>/admin/category" style="margin-left: 50px;">Trở lại trang sản phẩm</a></h5>
