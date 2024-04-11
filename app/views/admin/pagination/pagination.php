@@ -1,5 +1,5 @@
 <?php
-$display = 7;
+$display = 1;
 $num_links = 1;
 
 $total_rows = count($list);

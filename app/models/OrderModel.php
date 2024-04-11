@@ -1,45 +1,61 @@
 <?php
-class OrderModel extends Model{
-    
-    function tableFill() {
+class OrderModel extends Model
+{
+
+    function tableFill()
+    {
         return 'hoadon';
     }
 
-    function fieldFill() {
+    function fieldFill()
+    {
         return '*';
     }
 
-    function primaryKey(){
+    function primaryKey()
+    {
         return 'MaHD';
     }
 
-    public function getOrderList() {
+    public function getOrderList()
+    {
         $data = $this->db->table('hoadon')->get();
         return $data;
     }
 
-    public function getDetail($MaHD) {
+    public function getDetail($MaHD)
+    {
         $data = $this->db->table('hoadon')->where('MaHD', '=', $MaHD)->first();
         return $data;
     }
 
-    public function addOrder($data) {
+    public function addOrder($data)
+    {
         $this->db->table('hoadon')->insert($data);
     }
 
-    public function deleteOrder($id) {
+    public function deleteOrder($id)
+    {
         $this->db->table('hoadon')->where('MaHD', '=', $id)->delete();
     }
 
-    public function updateOrder($data, $id) {
+    public function updateOrder($data, $id)
+    {
         $this->db->table('hoadon')->where('MaHD', '=', $id)->update($data);
     }
 
-    public function acceptOrder($id) {
+    public function acceptOrder($id)
+    {
         $this->db->table('hoadon')->where('MaHD', '=', $id)->update(['TrangThai' => 'Đang giao hàng']);
     }
-    
-    public function getListWithLimit($limit, $offset) {
+
+    public function cancelOrder($id)
+    {
+        $this->db->table('hoadon')->where('MaHD', '=', $id)->update(['TrangThai' => 'Đã hủy']);
+    }
+
+    public function getListWithLimit($limit, $offset)
+    {
         return $this->db->table('hoadon')->limit($limit, $offset)->get();
     }
 }
