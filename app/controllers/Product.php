@@ -34,11 +34,28 @@ class Product extends Controller{
 
     public function get_category() {
         $request = new Request();
-        $request->getMethod();
+        
     }
 
     public function post_category() {
         $request = new Request();
-        $request->getFields();
+        $data = $request->getFields();
+        print_r($data);
+
+        $request->rules([
+            'fullname' => 'required|min:5|max:30',
+            'email' => 'required|email|min:6',
+        ]);
+
+        $request->messages([
+            'fullname.required' => 'Họ tên không được để trống',
+            'fullname.min' => 'Họ tên phải lớn hơn 5 ký tự',
+            'fullname.max' => 'Họ tên phải nhỏ hơn 30 ký tự',
+            'email.required' => 'Email không được để trống',
+            'email.email' => 'Email không đúng định dạng',
+            'email.min' => 'Email phải lớn hơn 6 ký tự',
+        ]);
+
+        $validate = $request->validate();
     }
 }

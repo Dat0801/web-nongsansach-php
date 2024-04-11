@@ -1,5 +1,5 @@
 <center><h2>Sửa Thông Tin Nhà Cung Cấp</h2></center>
-<form action="<?php echo _WEB_ROOT ?>/admin/suppliers/updatesuppliers?mancc=<?php echo $suppliers["MaNCC"] ?>" method="post">
+<form action="<?php echo _WEB_ROOT ?>/admin/suppliers/updatesuppliers?MaNCC=<?php echo $suppliers["MaNCC"] ?>" method="post">
     <div style="width: 70%; margin-left: 50px">
         <div>
             MaNCC

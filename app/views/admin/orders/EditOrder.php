@@ -1,41 +1,58 @@
-<center><h2>Sửa Sản Phẩm</h2></center>
-<form action="<?php echo _WEB_ROOT ?>/admin/order/updateorder?MaHD=<?php echo $order["MaHD"] ?>" method="post">
-    <div style="width: 70%; margin-left: 50px">
-        <div>
-            MaHD
-            <input type="text" name="MaHD" class="form-control" value="<?php echo $order["MaHD"] ?>" disabled />
+<center>
+    <h2>Sửa Sản Phẩm</h2>
+</center>
+<form
+    action="<?php echo _WEB_ROOT ?>/admin/order/updateorder?MaHD=<?php echo $order["MaHD"] ?>&MaKH=<?php echo $order["MaKH"] ?>"
+    method="post">
+    <div class="row">
+        <div style="margin: 0px 50px" class="col">
+            <div>
+                <label for="">MaHD</label>
+                <input type="text" name="MaHD" class="form-control" value="<?php echo $order["MaHD"] ?>" disabled />
+            </div>
+            <br />
+            <div>
+                <label for="">NgayTao</label>
+                <input type="text" name="NgayTao" class="form-control" value="<?php echo $order['NgayTao'] ?>" />
+            </div>
+            <br />
+            <div>
+                <label for="">NgayGiao</label>
+                <input type="text" name="NgayGiao" class="form-control" value="<?php echo $order['NgayGiao'] ?>" />
+            </div><br />
         </div>
-        <br />
-        <div>
-            MaNV
-            <input type="text" name="MaNV" class="form-control" value="<?php echo $order['MaNV']?>" />
-        </div>
-        <br />
-        <div>
-            MaKH
-            <input type="text" name="MaKH" class="form-control" value="<?php echo $order['MaKH']?>" />
-        </div>
-        <br />
-        <div>
-            NgayTao
-            <input type="text" name="NgayTao" class="form-control" value="<?php echo $order['NgayTao']?>" />
-        </div>
-        <br />
-        <div style="width:25%;">
-            NgayGiao
-            <input type="text" name="NgayGiao" class="form-control" value="<?php echo $order['NgayGiao']?>" />
-        </div><br />
-        <div style="width:25%;">
-            TongTien
-            <input type="number" name="TongTien" class="form-control" value="<?php echo $order['TongTien']?>" />
-        </div><br />
-        <div style="width:25%;">
-            TrangThai
-            <input type="text" name="TrangThai" class="form-control" value="<?php echo $order['TrangThai']?>" />
-        </div><br />
-        <div>
-            <center><button type="submit" class="btn btn-success">Sửa</button></center>
+        <div style="margin: 0px 50px" class="col">
+            <div>
+                <label for="">MaKH</label>
+                <input type="text" name="MaKH" class="form-control" value="<?php echo $order['MaKH'] ?>" disabled />
+            </div>
+            <br />
+            <div>
+                <label for="">NhanVien</label>
+                <select name="MaNV" class="form-select">
+                    <?php
+                    foreach ($listEmployee as $nv) {
+                        if ($nv["MaNV"] == $order["MaNV"]) {
+                            echo '<option value="' . $nv["MaNV"] . '" selected>' . $nv["TenNV"] . '</option>';
+                        } else {
+                            echo '<option value="' . $nv["MaNV"] . '">' . $nv["TenNV"] . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+            <br />
+            <div style="">
+                <label for="">TrangThai</label>
+                <input type="text" name="TrangThai" class="form-control" value="<?php echo $order['TrangThai'] ?>" />
+            </div><br />
         </div>
     </div>
+    <div>
+        <center><button type="submit" class="btn  btn-lg btn-success material-symbols-outlined">edit</button></center>
+        <a href="<?php echo _WEB_ROOT ?>/admin/order" style="margin: 0px 50px;"
+            class="btn btn-primary material-symbols-outlined">
+            keyboard_return
+        </a>
+    </div>
 </form>
-<h5><a href="<?php echo _WEB_ROOT ?>/admin/order" style="margin-left: 50px;">Trở lại trang sản phẩm</a></h5>

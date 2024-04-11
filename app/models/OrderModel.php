@@ -34,6 +34,11 @@ class OrderModel extends Model{
     public function updateOrder($data, $id) {
         $this->db->table('hoadon')->where('MaHD', '=', $id)->update($data);
     }
+
+    public function acceptOrder($id) {
+        $this->db->table('hoadon')->where('MaHD', '=', $id)->update(['TrangThai' => 'Đang giao hàng']);
+    }
+    
     public function getListWithLimit($limit, $offset) {
         return $this->db->table('hoadon')->limit($limit, $offset)->get();
     }

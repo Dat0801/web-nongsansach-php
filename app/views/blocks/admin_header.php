@@ -6,13 +6,15 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Trang Admin</title>
-
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- Custom styles for this template-->
 
@@ -86,7 +88,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-gradient-success py-2 collapse-inner rounded">
                         <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/product">Xem sản phẩm</a>
-                        <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/product/viewaddproduct">Thêm sản phẩm</a>
+                        <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/product/addproduct">Thêm sản
+                            phẩm</a>
                     </div>
                 </div>
             </li>
@@ -105,7 +108,8 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-gradient-success py-2 collapse-inner rounded">
                         <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/category">Xem danh mục</a>
-                        <a class="collapse-item" href="Category/ThemDanhMuc">Thêm danh mục</a>
+                        <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/category/viewaddcategory">Thêm danh
+                            mục</a>
                     </div>
                 </div>
             </li>
@@ -141,7 +145,7 @@
                 <div id="collapseQLNguoiDung" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-gradient-success py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="Users/XemUser">Xem khách hàng</a>
+                        <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/customer">Xem khách hàng</a>
                         <a class="collapse-item" href="Users/ThemUser">Thêm khách hàng</a>
                     </div>
                 </div>
@@ -163,10 +167,12 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-gradient-success py-2 collapse-inner rounded">
                         <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/suppliers">Xem nhà cung cấp</a>
-                        <a class="collapse-item" href="Orders/ThemOrder">Thêm nhà cung cấp</a>
+                        <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/suppliers/viewaddsuppliers">Thêm
+                            nhà cung cấp</a>
                     </div>
                 </div>
             </li>
+            <hr class="sidebar-divider">
 
             <!-- Quản lý phiếu nhập -->
             <div class="sidebar-heading">
@@ -181,30 +187,12 @@
                 <div id="collapseQLPhieuNhap" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
                     <div class="bg-gradient-success py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="Orders/XemOrders">Xem phiếu nhập</a>
+                        <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/productReceipt">Xem phiếu nhập</a>
                         <a class="collapse-item" href="Orders/ThemOrder">Thêm phiếu nhập</a>
                     </div>
                 </div>
             </li>
 
-            <!-- Quản lý phiếu nhập -->
-            <div class="sidebar-heading">
-                Phiếu chi
-            </div>
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseQLPhieuChi"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Quản lý phiếu chi</span>
-                </a>
-                <div id="collapseQLPhieuChi" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-gradient-success py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="Orders/XemOrders">Xem phiếu chi</a>
-                        <a class="collapse-item" href="Orders/ThemOrder">Thêm phiếu chi</a>
-                    </div>
-                </div>
-            </li>
             <hr class="sidebar-divider d-none d-md-block">
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
@@ -252,7 +240,8 @@
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">Hồ sơ</span>
 
-                            <img class="img-profile rounded-circle" src="<?php echo _WEB_ROOT ?>/public/assets/admin/Content/img/th1.jpg" />
+                            <img class="img-profile rounded-circle"
+                                src="<?php echo _WEB_ROOT ?>/public/assets/admin/Content/img/th1.jpg" />
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
