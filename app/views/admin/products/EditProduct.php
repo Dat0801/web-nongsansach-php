@@ -1,5 +1,8 @@
-<?php echo (!empty($msg)) ? $msg : false; ?>
-
+<?php if(!empty($msg)): ?>
+<div class="alert alert-danger" role="alert">
+    <?php echo $msg; ?>
+</div>
+<?php endif; ?>
 <center>
     <h2>Sửa Sản Phẩm</h2>
 </center>
@@ -9,13 +12,13 @@
     <div class="row">
         <div style="margin: 0px 50px;" class="col">
             <div>
-                <label for="">MaHang</label>
+                <label for="">Mã hàng</label>
                 <input type="text" name="MaHang" class="form-control" value="<?php echo $product["MaHang"] ?>"
                     disabled />
             </div>
             <br />
             <div>
-                <label for="">MaNhomHang</label>
+                <label for="">Mã nhóm hàng</label>
                 <select name="MaNhomHang" class="form-select">
                     <?php
                     foreach ($category as $item) {
@@ -30,7 +33,7 @@
             </div>
             <br />
             <div>
-                <label for="">MaNCC</label>
+                <label for="">Mã nhà cung cấp</label>
                 <select name="MaNCC" class="form-select">
                     <?php
                     foreach ($suppliers as $item) {
@@ -45,7 +48,7 @@
             </div>
             <br />
             <div>
-                <label for="">TenHang</label>
+                <label for="">Tên hàng</label>
                 <input type="text" name="TenHang" class="form-control" value="<?php echo $product["TenHang"] ?>" />
                 <?php echo (!empty($errors) && array_key_exists('TenHang', $errors)) ? '<span>' . $errors["TenHang"] . '</span>' : false; ?>
             </div>
@@ -69,25 +72,25 @@
                 <input type="text" name="DVT" class="form-control" value="<?php echo $product['DVT'] ?>" />
             </div><br />
             <div>
-                <label for="">GiaNhap</label>
+                <label for="">Giá nhập</label>
                 <input type="text" name="GiaNhap" class="form-control" value="<?php echo $product['GiaNhap'] ?>" />
             </div><br />
             <div>
-                <label for="">HeSo</label>
+                <label for="">Hệ số</label>
                 <input type="text" name="HeSo" class="form-control" value="<?php echo $product['HeSo'] ?>" />
             </div><br />
             <div>
-                <label for="">GiaBan</label>
+                <label for="">Giá bán</label>
                 <input type="text" name="GiaBan" class="form-control" value="<?php echo $product['GiaBan'] ?>"
                     disabled />
             </div><br />
             <div>
-                <label for="">SoLuongTon</label>
+                <label for="">Số lượng tồn</label>
                 <input type="number" name="SoLuongTon" class="form-control"
                     value="<?php echo $product['SoLuongTon'] ?>" />
             </div><br />
             <div>
-                <label for="">TrangThai</label>
+                <label for="">Trạng thái</label>
                 <select name="TrangThai" class="form-select">
                     <option value="1" <?= $product['TrangThai'] == 1 ? 'selected' : '' ?>>1</option>
                     <option value="0" <?= $product['TrangThai'] == 0 ? 'selected' : '' ?>>0</option>

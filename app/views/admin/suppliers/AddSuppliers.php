@@ -5,24 +5,24 @@
     <div class="row">
         <div style="margin: 0px 50px;" class="col">
             <div>
-                MaNCC
-                <input type="text" name="MaNCC" class="form-control" />
+                <label for="">Mã nhà cung cấp</label>
+                <input type="text" name="MaNCC" class="form-control" disabled/>
             </div>
             <br />
             <div>
-                TenNCC
+                <label for="">Tên nhà cung cấp</label>
                 <input type="text" name="TenNCC" class="form-control" />
             </div>
             <br />
         </div>
         <div style="margin: 0px 50px;" class="col">
             <div>
-                SDT
+                <label for="">Số điện thoại</label>
                 <input type="text" name="SDT" class="form-control" />
             </div>
             <br />
             <div>
-                DiaChi
+                <label for="">Địa chỉ</label>
                 <input type="text" name="DiaChi" class="form-control" />
             </div>
         </div>

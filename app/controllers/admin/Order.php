@@ -39,7 +39,6 @@ class Order extends Controller
         $dataDetailOrder = $this->orderDetail->getDetail($Order["MaHD"]);
         $dataEmployee = $this->employee->getDetail($dataOrder["MaNV"]);
         $dataCustomer = $this->customer->getDetail($dataOrder["MaKH"]);
-        $dataListEmloyee = $this->employee->getList();
 
         $list_product = [];
         foreach ($dataDetailOrder as $detailOrder) {
@@ -53,7 +52,6 @@ class Order extends Controller
         $this->data['sub_content']['detailOrder'] = $dataDetailOrder;
         $this->data['sub_content']['listProduct'] = $list_product;
         $this->data['sub_content']['employee'] = $dataEmployee;
-        $this->data['sub_content']['listEmployee'] = $dataListEmloyee;
         $this->data['sub_content']['customer'] = $dataCustomer;
 
         $this->render('layouts/admin_layout', $this->data);

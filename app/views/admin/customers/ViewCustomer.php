@@ -23,7 +23,7 @@ $list_customer = $customer_model->getListWithLimit($display, $position);
                 <th scope="col">Tên đăng nhập</th>
                 <th scope="col">Mật khẩu</th>
                 <th scope="col">Email</th>
-                <th scope="col">SDT</th>
+                <th scope="col">Số điện thoại</th>
                 <th scope="col">Địa chỉ</th>
                 <th scope="col">Trạng thái</th>
                 <th scope="col" colspan="2">CRUD</th>

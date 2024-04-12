@@ -4,7 +4,7 @@
         <div style="margin: 0px 50px;" class="col">
             <div>
                 <label for="">MaNhomHang</label>
-                <input type="text" name="MaNhomHang" class="form-control" value="<?php echo $category['MaNhomHang']?>"/>
+                <input type="text" name="MaNhomHang" class="form-control" value="<?php echo $category['MaNhomHang']?>" disabled/>
             </div>
             <br />
         </div>

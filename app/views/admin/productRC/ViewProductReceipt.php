@@ -16,7 +16,7 @@ $list_productRC = $productRC_model->getListWithLimit($display, $position);
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12 my-3">
-            <a href="<?php echo _WEB_ROOT ?>/admin/suppliers/viewaddsuppliers"
+            <a href="<?php echo _WEB_ROOT ?>/admin/productReciept"
                 class="btn btn-primary material-symbols-outlined">
                 add_circle
             </a>
@@ -48,8 +48,7 @@ $list_productRC = $productRC_model->getListWithLimit($display, $position);
                 echo "<td>" . $productRC['TongTien'] . "</td>";
                 echo "<td>" . $productRC['TrangThai'] . "</td>";
                 echo "<td>
-                <a href=\"" . _WEB_ROOT . "/admin/productReceipt/editProductRC?MaPN=" . $productRC["MaPN"] . "\" style=\"color:greenyellow\">Edit</a>
-                <a class=\"btn-delete\" style=\"color:greenyellow\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-productRCid=\"" . $productRC['MaPN'] . "\" data-empID=\"" . $productRC['MaNV'] . "\" data-supID=\"" . $productRC['MaNCC'] . "\" data-date=\"" . $productRC['NgayNhap'] . "\">Delete</a>
+                <a href=\"" . _WEB_ROOT . "/admin/ProductReceipt/ReceiptDetail?MaPN=" . $productRC["MaPN"] . "\" class=\"btn btn-sm btn-primary material-symbols-outlined\"\">visibility</a>
                 </td>";
                 echo '</tr>';
             }

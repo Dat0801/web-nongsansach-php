@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 11, 2024 at 02:55 PM
+-- Generation Time: Apr 12, 2024 at 04:35 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ql_nong_san_sach`
+-- Database: `ql_nongsan`
 --
 
 -- --------------------------------------------------------
@@ -39,7 +39,14 @@ CREATE TABLE `chitiethoadon` (
 --
 
 INSERT INTO `chitiethoadon` (`MaHang`, `MaHD`, `SoLuong`, `ThanhTien`) VALUES
-(1, 1, 2, 0);
+(1, 1, 2, 0),
+(11, 2, 3, 0),
+(12, 2, 3, 0),
+(13, 3, 2, 0),
+(14, 3, 5, 0),
+(15, 4, 2, 0),
+(16, 4, 4, 0),
+(23, 1, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -171,7 +178,8 @@ INSERT INTO `hanghoa` (`MaHang`, `MaNhomHang`, `MaNCC`, `TenHang`, `DVT`, `GiaBa
 (37, 3, 5, 'Nấm rơm', 'Kg', 30000, 1.2, 120000, 'namRom.jpg', 10, b'1'),
 (38, 3, 4, 'Nấm Notaly', 'Kg', 18000, 1.2, 70000, 'namNotaly.jpg', 4, b'1'),
 (39, 3, 5, 'Nấm tuyết', 'Kg', 30000, 1.2, 510000, 'namTuyet.jpg', 3, b'1'),
-(40, 3, 5, 'Nấm mỡ nâu', 'Kg', 54000, 1.2, 280000, 'namMoNau.jpg', 7, b'1');
+(40, 3, 5, 'Nấm mỡ nâu', 'Kg', 54000, 1.2, 280000, 'namMoNau.jpg', 7, b'1'),
+(41, 1, 1, 'Chuối già Nam Mỹ 2', 'Chưa xác định', 0, 1.5, 20000, 'best-product-3.jpg', 12, b'0');
 
 -- --------------------------------------------------------
 
@@ -184,6 +192,7 @@ CREATE TABLE `hoadon` (
   `MaNV` int(11) NOT NULL,
   `MaKH` int(11) DEFAULT NULL,
   `NgayTao` datetime DEFAULT current_timestamp(),
+  `NgayGiao` datetime NOT NULL DEFAULT (current_timestamp() + interval 1 day),
   `TongTien` float DEFAULT 0,
   `TrangThai` varchar(50) DEFAULT 'Đang xử lý'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -192,8 +201,11 @@ CREATE TABLE `hoadon` (
 -- Dumping data for table `hoadon`
 --
 
-INSERT INTO `hoadon` (`MaHD`, `MaNV`, `MaKH`, `NgayTao`, `TongTien`, `TrangThai`) VALUES
-(1, 1, 1, '2024-04-04 15:19:11', 0, 'Đang xử lý');
+INSERT INTO `hoadon` (`MaHD`, `MaNV`, `MaKH`, `NgayTao`, `NgayGiao`, `TongTien`, `TrangThai`) VALUES
+(1, 1, 1, '2024-04-04 15:19:11', '2024-04-13 00:00:00', 0, 'Đang giao hàng'),
+(2, 2, 2, '2024-04-12 09:24:48', '2024-04-13 09:24:48', 0, 'Đang xử lý'),
+(3, 3, 3, '2024-04-12 09:26:45', '2024-04-13 09:26:45', 0, 'Đã hủy'),
+(4, 4, 4, '2024-04-12 09:27:11', '2024-04-13 09:27:11', 0, 'Đã giao hàng');
 
 -- --------------------------------------------------------
 
@@ -398,13 +410,13 @@ ALTER TABLE `phieunhap`
 -- AUTO_INCREMENT for table `hanghoa`
 --
 ALTER TABLE `hanghoa`
-  MODIFY `MaHang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `MaHang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT for table `hoadon`
 --
 ALTER TABLE `hoadon`
-  MODIFY `MaHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `MaHD` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `khachhang`
@@ -416,7 +428,7 @@ ALTER TABLE `khachhang`
 -- AUTO_INCREMENT for table `nhacungcap`
 --
 ALTER TABLE `nhacungcap`
-  MODIFY `MaNCC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `MaNCC` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `nhanvien`
@@ -428,7 +440,7 @@ ALTER TABLE `nhanvien`
 -- AUTO_INCREMENT for table `nhomhang`
 --
 ALTER TABLE `nhomhang`
-  MODIFY `MaNhomHang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `MaNhomHang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `phieunhap`

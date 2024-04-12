@@ -28,11 +28,11 @@ $suppliers_list = $suppliers_model->getListWithLimit($display, $position);
         style="text-align: center; border-radius: 10px; overflow: hidden; color: black;">
         <thead>
             <tr>
-                <th scope="col">MaNCC</th>
-                <th scope="col">TenNCC</th>
-                <th scope="col">SDT</th>
-                <th scope="col">DiaChi</th>
-                <th scope="col">TrangThai</th>
+                <th scope="col">Mã nhà cung cấp</th>
+                <th scope="col">Tên nhà cung cấp</th>
+                <th scope="col">Số điện thoại</th>
+                <th scope="col">Địa chỉ</th>
+                <th scope="col">Trạng thái</th>
                 <th scope="col" colspan="2" style="text-align: center;">CRUD</th>
             </tr>
         </thead>

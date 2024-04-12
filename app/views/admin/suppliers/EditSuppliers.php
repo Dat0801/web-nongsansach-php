@@ -1,27 +1,30 @@
-<center><h2>Sửa Thông Tin Nhà Cung Cấp</h2></center>
-<form action="<?php echo _WEB_ROOT ?>/admin/suppliers/updatesuppliers?MaNCC=<?php echo $suppliers["MaNCC"] ?>" method="post">
+<center>
+    <h2>Sửa Thông Tin Nhà Cung Cấp</h2>
+</center>
+<form action="<?php echo _WEB_ROOT ?>/admin/suppliers/updatesuppliers?MaNCC=<?php echo $suppliers["MaNCC"] ?>"
+    method="post">
     <div class="row">
         <div style="margin: 0px 50px;" class="col">
             <div>
-                MaNCC
-                <input type="text" name="MaNCC" class="form-control" value="<?php echo $suppliers['MaNCC']?>"/>
+                <label for="">Mã nhà cung cấp</label>
+                <input type="text" name="MaNCC" class="form-control" value="<?php echo $suppliers['MaNCC'] ?>" disabled/>
             </div>
             <br />
             <div>
-                TenNCC
-                <input type="text" name="TenNCC" class="form-control" value="<?php echo $suppliers['TenNCC']?>"/>
+                <label for="">Tên nhà cung cấp</label>
+                <input type="text" name="TenNCC" class="form-control" value="<?php echo $suppliers['TenNCC'] ?>" />
             </div>
             <br />
         </div>
         <div style="margin: 0px 50px;" class="col">
             <div>
-                SDT
-                <input type="text" name="SDT" class="form-control" value="<?php echo $suppliers['SDT']?>"/>
+                <label for="">Số điện thoại</label>
+                <input type="text" name="SDT" class="form-control" value="<?php echo $suppliers['SDT'] ?>" />
             </div>
             <br />
             <div>
-                DiaChi
-                <input type="text" name="DiaChi" class="form-control" value="<?php echo $suppliers['DiaChi']?>"/>
+                <label for="">Địa chỉ</label>
+                <input type="text" name="DiaChi" class="form-control" value="<?php echo $suppliers['DiaChi'] ?>" />
             </div>
         </div>
     </div>

@@ -4,58 +4,49 @@
 <div class="row">
     <div style="margin: 0px 50px" class="col">
         <div>
-            <label for="">MaHD</label>
+            <label for="">Mã hóa đơn</label>
             <input type="text" name="MaHD" class="form-control" value="<?php echo $order["MaHD"] ?>" disabled />
         </div>
         <br />
         <div>
-            <label for="">NgayTao</label>
-            <input type="text" name="NgayTao" class="form-control" value="<?php echo $order['NgayTao'] ?>" />
+            <label for="">Ngày tạo</label>
+            <input type="text" name="NgayTao" class="form-control" value="<?php echo $order['NgayTao'] ?>" disabled />
         </div>
         <br />
         <div>
-            <label for="">NgayGiao</label>
-            <input type="text" name="NgayGiao" class="form-control" value="<?php echo $order['NgayGiao'] ?>" />
+            <label for="">Ngày giao</label>
+            <input type="text" name="NgayGiao" class="form-control" value="<?php echo $order['NgayGiao'] ?>" disabled />
         </div><br />
     </div>
     <div style="margin: 0px 50px" class="col">
         <div>
-            <label for="">TenKH</label>
-            <input type="text" name="MaKH" class="form-control" value="<?php echo $customer['TenKH'] ?>" />
+            <label for="">Tên khách hàng</label>
+            <input type="text" name="MaKH" class="form-control" value="<?php echo $customer['TenKH'] ?>" disabled />
         </div>
         <br />
         <div>
-            <label for="">NhanVien</label>
-            <select name="MaNV" class="form-select">
-                <?php
-                foreach ($listEmployee as $nv) {
-                    if ($nv["MaNV"] == $order["MaNV"]) {
-                        echo '<option value="' . $nv["MaNV"] . '" selected>' . $nv["TenNV"] . '</option>';
-                    } else {
-                        echo '<option value="' . $nv["MaNV"] . '">' . $nv["TenNV"] . '</option>';
-                    }
-                }
-                ?>
-            </select>
+            <label for="">Tên nhân viên</label>
+            <input type="text" name="MaNV" class="form-control" value="<?php echo $employee['TenNV'] ?>" disabled />
         </div>
         <br />
         <div style="">
-            <label for="">TrangThai</label>
-            <input type="text" name="TrangThai" class="form-control" value="<?php echo $order['TrangThai'] ?>" />
+            <label for="">Trạng thái</label>
+            <input type="text" name="TrangThai" class="form-control" value="<?php echo $order['TrangThai'] ?>" disabled/>
         </div><br />
     </div>
 </div>
 <div class="table-responsive container">
-    <table class="table table-secondary table-bordered" style="text-align: center; border-radius: 10px; overflow: hidden; color: black">
+    <table class="table table-secondary table-bordered"
+        style="text-align: center; border-radius: 10px; overflow: hidden; color: black">
         <thead>
             <tr>
-                <th scope="col">MaHang</th>
-                <th scope="col">TenHang</th>
-                <th scope="col">HinhAnh</th>
-                <th scope="col">DVT</th>
-                <th scope="col">SoLuong</th>
-                <th scope="col">GiaBan</th>
-                <th scope="col">ThanhTien</th>
+                <th scope="col">Mã hàng</th>
+                <th scope="col">Tên hàng</th>
+                <th scope="col">Hình ảnh</th>
+                <th scope="col">Đơn vị tính</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Giá bán</th>
+                <th scope="col">Thành tiền</th>
             </tr>
         </thead>
         <tbody>
