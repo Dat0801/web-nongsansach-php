@@ -142,17 +142,35 @@ class Request
 
                         if (!empty($tableName) && !empty($fieldCheck)) {
                             if (count($ruleArr) == 3) {
-                                $checkExist = $this->db->query("SELECT $fieldCheck FROM $tableName WHERE $fieldCheck = '$dataFields[$fieldName]'")->rowCount();
+                                $checkExist = $this->db->query("SELECT $fieldCheck FROM $tableName WHERE $fieldCheck = '".trim($dataFields[$fieldName])."'")->rowCount();
                             } else if (count($ruleArr) == 4) {
                                 if (!empty($ruleArr[3]) && preg_match('~.+?\=.+?~is', $ruleArr[3])) {
                                     $conditionWhere = $ruleArr[3];
                                     $conditionWhere = str_replace('=', '<>', $conditionWhere);
-                                    $checkExist = $this->db->query("SELECT $fieldCheck FROM $tableName WHERE $fieldCheck = '$dataFields[$fieldName]' AND $conditionWhere")->rowCount();
+                                    $checkExist = $this->db->query("SELECT $fieldCheck FROM $tableName WHERE $fieldCheck = '".trim($dataFields[$fieldName])."' AND $conditionWhere")->rowCount();
+                                    var_dump($checkExist);
                                 }
                             }
                             if ($checkExist > 0) {
                                 $this->setErrors($fieldName, $ruleName);
                                 $checkValidate = false;
+                            }
+                        }
+                    }
+
+                    //Callback validate
+                    if (preg_match('~^callback_(.+)~is', $ruleName, $callbackArr)) {
+                        if (!empty($callbackArr[1])) {
+                            $callbackName = $callbackArr[1];
+                            $controller = App::$app->getCurrentController();
+
+                            if (method_exists($controller, $callbackName)) {
+                                $checkCallback = call_user_func_array([$controller, $callbackName], [trim($dataFields[$fieldName])]);
+
+                                if(!$checkCallback) {
+                                    $this->setErrors($fieldName, $ruleName);
+                                    $checkValidate = false;
+                                }
                             }
                         }
                     }

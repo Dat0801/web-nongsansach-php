@@ -16,7 +16,7 @@ $category_list = $category_model->getListWithLimit($display, $position);
 <div class="container">
     <div class="row">
         <div class="col-md-12 my-3">
-            <a href="<?php echo _WEB_ROOT ?>/admin/category/addcategory"
+            <a href="<?php echo _WEB_ROOT ?>/admin/category/viewaddcategory"
                 class="btn btn-primary material-symbols-outlined">
                 add_circle
             </a>
@@ -28,8 +28,8 @@ $category_list = $category_model->getListWithLimit($display, $position);
         style="text-align: center; border-radius: 10px; overflow: hidden;color:black">
         <thead>
             <tr>
-                <th scope="col">MaNhomHang</th>
-                <th scope="col">TenNhomHang</th>
+                <th scope="col">Mã nhóm hàng</th>
+                <th scope="col">Tên nhóm hàng</th>
                 <th scope="col" colspan="2">CRUD</th>
             </tr>
         </thead>
@@ -142,11 +142,11 @@ $category_list = $category_model->getListWithLimit($display, $position);
                 <p style="color: red">Bạn có chắc muốn xoá danh mục hàng này không?</p>
                 <table class="table table-category">
                     <tr>
-                        <td>MaNhaCungCap</td>
+                        <td>Mã nhóm hàng</td>
                         <td><span id="DeletecategoryIDSpan"></span></td>
                     </tr>
                     <tr>
-                        <td>TenNhaCungCap</td>
+                        <td>Tên nhóm hàng</td>
                         <td><span id="DeletecategoryNameSpan"></span></td>
                     </tr>
                 </table>

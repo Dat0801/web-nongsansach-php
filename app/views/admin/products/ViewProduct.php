@@ -2,6 +2,11 @@
 include_once "app/views/admin/pagination/pagination.php";
 $list_product = $product_model->getListWithLimit($display, $position);
 ?>
+<?php if(!empty($msg)): ?>
+<div class="alert alert-success" role="alert">
+    <?php echo $msg; ?>
+</div>
+<?php endif; ?>
 <form class="d-flex" action="" method="post">
     <div style="margin: 0 auto">
         <input class="form-control me-2" type="search" placeholder="Tìm kiếm hàng hóa" aria-label="Tìm kiếm hàng hóa..."
@@ -20,24 +25,29 @@ $list_product = $product_model->getListWithLimit($display, $position);
                 class="btn btn-primary material-symbols-outlined">
                 add_circle
             </a>
+            <a href="<?php echo _WEB_ROOT ?>/admin/product/recycleproduct"
+                class="btn btn-success material-symbols-outlined mx-3">
+                recycling
+            </a>
         </div>
+        
     </div>
 </div>
 <div class="table-responsive container-fluid ">
     <table class="table table-secondary table-bordered" style="text-align: center; border-radius: 10px; overflow: hidden; color: black;">
         <thead>
             <tr>
-                <th scope="col">MaHang</th>
-                <th scope="col">MaNHH</th>
-                <th scope="col">MaNCC</th>
-                <th scope="col">TenHang</th>
-                <th scope="col">DVT</th>
-                <th scope="col">GiaBan</th>
-                <th scope="col">HeSo</th>
-                <th scope="col">GiaNhap</th>
-                <th scope="col">HinhAnh</th>
-                <th scope="col">SoLuongTon</th>
-                <th scope="col">TrangThai</th>
+                <th scope="col">Mã hàng</th>
+                <th scope="col">Mã nhóm hàng</th>
+                <th scope="col">Mã nhà cung cấp</th>
+                <th scope="col">Tên hàng</th>
+                <th scope="col">Đơn vị tính</th>
+                <th scope="col">Giá bán</th>
+                <th scope="col">Hệ số</th>
+                <th scope="col">Giá nhập</th>
+                <th scope="col">Hình ảnh</th>
+                <th scope="col">Số lượng tồn</th>
+                <th scope="col">Trạng thái</th>
                 <th scope="col" colspan="2" style="text-align: center;">CRUD</th>
             </tr>
         </thead>

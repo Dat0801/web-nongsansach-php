@@ -12,7 +12,7 @@ class Category extends Controller{
         $this->data['content'] = '/admin/categorys/ViewCategory';
         $this->data['title'] = 'Danh mục hàng hoá';
         $datacategory = $this->category->getcategoryList();
-        $this->data['sub_content']['category_list'] = $datacategory;
+        $this->data['sub_content']['list'] = $datacategory;
         $this->data['sub_content']['category_model'] = $this->category;
         $this->render('layouts/admin_layout', $this->data);
     }

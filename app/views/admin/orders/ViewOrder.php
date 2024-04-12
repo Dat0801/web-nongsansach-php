@@ -17,13 +17,13 @@ $list_order = $order_model->getListWithLimit($display, $position);
         style="text-align: center; border-radius: 10px; overflow: hidden; color: black">
         <thead>
             <tr>
-                <th scope="col">MaHD</th>
-                <th scope="col">MaNV</th>
-                <th scope="col">MaKH</th>
-                <th scope="col">NgayTao</th>
-                <th scope="col">NgayGiao</th>
-                <th scope="col">TongTien</th>
-                <th scope="col">TrangThai</th>
+                <th scope="col">Mã hóa đơn</th>
+                <th scope="col">Mã nhân viên</th>
+                <th scope="col">Mã khách hàng</th>
+                <th scope="col">Ngày tạo</th>
+                <th scope="col">Ngày giao</th>
+                <th scope="col">Tổng tiền</th>
+                <th scope="col">Trạng thái</th>
                 <th scope="col" colspan="2">CRUD</th>
             </tr>
         </thead>
@@ -46,15 +46,15 @@ $list_order = $order_model->getListWithLimit($display, $position);
                     $color = "#cc0000";
                 }
                 echo "<td style='color:$color;'> " . $order['TrangThai'] . "</td>";
+                echo "<td>
+                <a href=\"" . _WEB_ROOT . "/admin/order/OrderDetail?MaHD=" . $order["MaHD"] . "\" class=\"btn btn-sm btn-primary material-symbols-outlined\"\">visibility</a>
+                </td>";
                 if ($order['TrangThai'] == "Đang xử lý") {
                     echo "<td>
                     <a href=\"" . _WEB_ROOT . "/admin/order/acceptOrder?MaHD=" . $order["MaHD"] . "\" class=\"btn btn-sm btn-success material-symbols-outlined\"\">check_circle</a>
                     <a class=\"btn-delete btn btn-sm btn-danger material-symbols-outlined\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-orderid=\"" . $order['MaHD'] . "\">cancel</a>
                     </td>";
                 }   
-                echo "<td>
-                <a href=\"" . _WEB_ROOT . "/admin/order/OrderDetail?MaHD=" . $order["MaHD"] . "\" class=\"btn btn-sm btn-primary material-symbols-outlined\"\">visibility</a>
-                </td>";
             }
 
             ?>

@@ -1,12 +1,12 @@
 <center>
     <h2>THÊM DANH MỤC HÀNG HÓA</h2>
 </center>
-<form action="<?php echo _WEB_ROOT ?>/admin/categorys/addCategory" method="post">
+<form action="<?php echo _WEB_ROOT ?>/admin/category/addCategory" method="post">
     <div class="row">
         <div style="margin: 0px 50px;" class="col">
             <div>
                 <label for="">MaNhomHang</label>
-                <input type="text" name="MaNhomHang" class="form-control" />
+                <input type="text" name="MaNhomHang" class="form-control" disabled/>
             </div>
             <br />
         </div>
