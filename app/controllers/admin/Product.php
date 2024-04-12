@@ -19,7 +19,7 @@ class Product extends Controller
 
         $dataProduct = $this->product->getProductList();
 
-        if(!empty($_GET['msg'])) {
+        if (!empty($_GET['msg'])) {
             $this->data['sub_content']['msg'] = $_GET['msg'];
         }
 
@@ -42,9 +42,9 @@ class Product extends Controller
             $request->rules([
                 'TenHang' => 'required|min:5|max:30|unique:HangHoa:TenHang',
                 'DVT' => 'required',
-                'GiaNhap' => 'required',
-                'HeSo' => 'required',
-                'SoLuongTon' => 'required',
+                'GiaNhap' => 'required|callback_checkGreaterThanZero',
+                'HeSo' => 'required|callback_checkGreaterThanZero',
+                'SoLuongTon' => 'required|callback_checkGreaterThanZero',
             ]);
 
             $request->messages([
@@ -54,8 +54,11 @@ class Product extends Controller
                 'TenHang.unique' => 'Tên hàng đã tồn tại. Vui lòng chọn tên khác!',
                 'DVT.required' => 'Đơn vị tính không được để trống',
                 'GiaNhap.required' => 'Giá nhập không được để trống',
+                'GiaNhap.callback_checkGreaterThanZero' => 'Giá nhập phải lớn hơn 0',
                 'HeSo.required' => 'Hệ số không được để trống',
+                'HeSo.callback_checkGreaterThanZero' => 'Hệ số phải lớn hơn 0',
                 'SoLuongTon.required' => 'Số lượng tồn không được để trống',
+                'SoLuongTon.callback_checkGreaterThanZero' => 'Số lượng tồn phải lớn hơn 0',
             ]);
 
             $validate = $request->validate();
@@ -71,6 +74,13 @@ class Product extends Controller
         }
         $this->render('layouts/admin_layout', $this->data);
 
+    }
+
+    public function checkGreaterThanZero($value)
+    {
+        if ($value <= 0)
+            return false;
+        return true;
     }
 
     public function editProduct()
@@ -143,12 +153,12 @@ class Product extends Controller
 
         $dataProduct = $this->product->getRecycleProductList();
 
-        if(!empty($_GET['msg'])) {
+        if (!empty($_GET['msg'])) {
             $this->data['sub_content']['msg'] = $_GET['msg'];
         }
         $this->data['sub_content']['list'] = $dataProduct;
         $this->data['sub_content']['product_model'] = $this->product;
-        
+
         $this->render('layouts/admin_layout', $this->data);
     }
 
