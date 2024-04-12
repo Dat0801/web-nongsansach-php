@@ -151,7 +151,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-gradient-success py-2 collapse-inner rounded">
                         <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/customer">Xem khách hàng</a>
-                        <a class="collapse-item" href="Users/ThemUser">Thêm khách hàng</a>
+                        <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/customer/viewAddCustomer">Thêm khách hàng</a>
                     </div>
                 </div>
             </li>
@@ -193,7 +193,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-gradient-success py-2 collapse-inner rounded">
                         <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/productReceipt">Xem phiếu nhập</a>
-                        <a class="collapse-item" href="Orders/ThemOrder">Thêm phiếu nhập</a>
+                        <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/productReceipt/viewAddReceipt">Thêm phiếu nhập</a>
                     </div>
                 </div>
             </li>
