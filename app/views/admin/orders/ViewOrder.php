@@ -2,6 +2,11 @@
 include_once "app/views/admin/pagination/pagination.php";
 $list_order = $order_model->getListWithLimit($display, $position);
 ?>
+<?php if(!empty($msg)): ?>
+<div class="alert alert-success" role="alert">
+    <?php echo $msg; ?>
+</div>
+<?php endif; ?>
 <form class="d-flex" action="" method="post">
     <div style="margin: 0 auto">
         <input class="form-control me-2" type="search" placeholder="Tìm kiếm sản phẩm" aria-label="Tìm kiếm sản phẩm..."
@@ -49,14 +54,17 @@ $list_order = $order_model->getListWithLimit($display, $position);
                 echo "<td>
                 <a href=\"" . _WEB_ROOT . "/admin/order/OrderDetail?MaHD=" . $order["MaHD"] . "\" class=\"btn btn-sm btn-primary material-symbols-outlined\"\">visibility</a>
                 </td>";
-                if ($order['TrangThai'] == "Đang xử lý") {
-                    echo "<td>
-                    <a href=\"" . _WEB_ROOT . "/admin/order/acceptOrder?MaHD=" . $order["MaHD"] . "\" class=\"btn btn-sm btn-success material-symbols-outlined\"\">check_circle</a>
-                    <a class=\"btn-delete btn btn-sm btn-danger material-symbols-outlined\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-orderid=\"" . $order['MaHD'] . "\">cancel</a>
-                    </td>";
+                echo "<td>";
+                if ($order['TrangThai'] == "Đang xử lý" || $order['TrangThai'] == "Đang giao hàng") {
+                    if ($order['TrangThai'] == "Đang xử lý") {
+                        echo "<a href=\"" . _WEB_ROOT . "/admin/order/acceptOrder?MaHD=" . $order["MaHD"] . "\" class=\"btn btn-sm btn-success material-symbols-outlined\"\">check_circle</a>";
+                    } else {
+                        echo "<a href=\"" . _WEB_ROOT . "/admin/order/completeOrder?MaHD=" . $order["MaHD"] . "\" class=\"btn btn-sm btn-success material-symbols-outlined\"\">check_circle</a>";
+                    }
+                    echo "<a class=\"btn-delete btn btn-sm btn-danger material-symbols-outlined\" style='margin-left:10px;' data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-orderid=\"" . $order['MaHD'] . "\">cancel</a>";
                 }   
+                echo "</td>";
             }
-
             ?>
     </table>
     <?php

@@ -68,7 +68,7 @@
             </div><br />
             <div>
                 <label for="">Hệ số</label>
-                <input type="number" name="HeSo" class="form-control"
+                <input type="number" step="any" name="HeSo" class="form-control"
                     value="<?php echo !empty($old["HeSo"]) ? $old["HeSo"] : false; ?>" />
                 <?php echo (!empty($errors) && array_key_exists('HeSo', $errors)) ? '<span class="text-danger">' . $errors["HeSo"] . '</span>' : false; ?>
             </div><br />
@@ -78,7 +78,7 @@
             </div><br />
             <div>
                 <label for="">Số lượng tồn</label>
-                <input type="number" name="SoLuongTon" class="form-control"
+                <input type="number" step="any" name="SoLuongTon" class="form-control"
                     value="<?php echo !empty($old["SoLuongTon"]) ? $old["SoLuongTon"] : false; ?>" />
                 <?php echo (!empty($errors) && array_key_exists('SoLuongTon', $errors)) ? '<span class="text-danger">' . $errors["SoLuongTon"] . '</span>' : false; ?>
             </div><br />

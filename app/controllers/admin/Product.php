@@ -112,15 +112,25 @@ class Product extends Controller
             $dataProduct["HinhAnh"] = $hinhAnh;
 
             $request->rules([
-                'TenHang' => 'required|min:5|max:30',
+                'TenHang' => 'required|min:5|max:30|unique:HangHoa:TenHang:MaHang='.$id.'',
+                'DVT' => 'required',
+                'GiaNhap' => 'required|callback_checkGreaterThanZero',
+                'HeSo' => 'required|callback_checkGreaterThanZero',
+                'SoLuongTon' => 'required|callback_checkGreaterThanZero',
             ]);
 
             $request->messages([
-                'TenHang.required' => 'Họ tên không được để trống',
-                'TenHang.min' => 'Họ tên phải lớn hơn 5 ký tự',
-                'TenHang.max' => 'Họ tên phải nhỏ hơn 30 ký tự',
+                'TenHang.required' => 'Tên hàng không được để trống',
+                'TenHang.min' => 'Tên hàng phải lớn hơn 5 ký tự',
+                'TenHang.max' => 'Ten hàng phải nhỏ hơn 30 ký tự',
                 'TenHang.unique' => 'Tên hàng đã tồn tại. Vui lòng chọn tên khác!',
-
+                'DVT.required' => 'Đơn vị tính không được để trống',
+                'GiaNhap.required' => 'Giá nhập không được để trống',
+                'GiaNhap.callback_checkGreaterThanZero' => 'Giá nhập phải lớn hơn 0',
+                'HeSo.required' => 'Hệ số không được để trống',
+                'HeSo.callback_checkGreaterThanZero' => 'Hệ số phải lớn hơn 0',
+                'SoLuongTon.required' => 'Số lượng tồn không được để trống',
+                'SoLuongTon.callback_checkGreaterThanZero' => 'Số lượng tồn phải lớn hơn 0',
             ]);
 
             $validate = $request->validate();
