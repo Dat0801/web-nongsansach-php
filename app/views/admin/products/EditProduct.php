@@ -1,13 +1,13 @@
-<?php if(!empty($msg)): ?>
-<div class="alert alert-danger" role="alert">
-    <?php echo $msg; ?>
-</div>
+<?php if (!empty($msg)): ?>
+    <div class="alert alert-danger" role="alert">
+        <?php echo $msg; ?>
+    </div>
 <?php endif; ?>
 <center>
     <h2>Sửa Sản Phẩm</h2>
 </center>
 <form
-    action="<?php echo _WEB_ROOT ?>/admin/product/EditProduct?MaHang=<?php echo $product["MaHang"];?>&GiaBan=<?php echo $product["GiaBan"];?>&HinhAnh=<?php echo $product["HinhAnh"];?>"
+    action="<?php echo _WEB_ROOT ?>/admin/product/EditProduct?MaHang=<?php echo $product["MaHang"]; ?>&GiaBan=<?php echo $product["GiaBan"]; ?>&HinhAnh=<?php echo $product["HinhAnh"]; ?>"
     method="post">
     <div class="row">
         <div style="margin: 0px 50px;" class="col">
@@ -50,7 +50,7 @@
             <div>
                 <label for="">Tên hàng</label>
                 <input type="text" name="TenHang" class="form-control" value="<?php echo $product["TenHang"] ?>" />
-                <?php echo (!empty($errors) && array_key_exists('TenHang', $errors)) ? '<span>' . $errors["TenHang"] . '</span>' : false; ?>
+                <?php echo (!empty($errors) && array_key_exists('TenHang', $errors)) ? '<span class="text-danger">' . $errors["TenHang"] . '</span>' : false; ?>
             </div>
             <br />
             <div>
@@ -70,24 +70,28 @@
             <div>
                 <label for="">Đơn vị tính</label>
                 <input type="text" name="DVT" class="form-control" value="<?php echo $product['DVT'] ?>" />
+                <?php echo (!empty($errors) && array_key_exists('DVT', $errors)) ? '<span class="text-danger">' . $errors["DVT"] . '</span>' : false; ?>
             </div><br />
             <div>
                 <label for="">Giá nhập</label>
-                <input type="text" name="GiaNhap" class="form-control" value="<?php echo $product['GiaNhap'] ?>" />
+                <input type="number" name="GiaNhap" class="form-control" value="<?php echo $product['GiaNhap'] ?>" />
+                <?php echo (!empty($errors) && array_key_exists('GiaNhap', $errors)) ? '<span class="text-danger">' . $errors["GiaNhap"] . '</span>' : false; ?>
             </div><br />
             <div>
                 <label for="">Hệ số</label>
-                <input type="text" name="HeSo" class="form-control" value="<?php echo $product['HeSo'] ?>" />
+                <input type="number" step="any" name="HeSo" class="form-control" value="<?php echo $product['HeSo'] ?>" />
+                <?php echo (!empty($errors) && array_key_exists('HeSo', $errors)) ? '<span class="text-danger">' . $errors["HeSo"] . '</span>' : false; ?>
             </div><br />
             <div>
                 <label for="">Giá bán</label>
-                <input type="text" name="GiaBan" class="form-control" value="<?php echo $product['GiaBan'] ?>"
+                <input type="number" name="GiaBan" class="form-control" value="<?php echo $product['GiaBan'] ?>"
                     disabled />
             </div><br />
             <div>
                 <label for="">Số lượng tồn</label>
-                <input type="number" name="SoLuongTon" class="form-control"
+                <input type="number" step="any" name="SoLuongTon" class="form-control"
                     value="<?php echo $product['SoLuongTon'] ?>" />
+                <?php echo (!empty($errors) && array_key_exists('SoLuongTon', $errors)) ? '<span class="text-danger">' . $errors["SoLuongTon"] . '</span>' : false; ?>
             </div><br />
             <div>
                 <label for="">Trạng thái</label>

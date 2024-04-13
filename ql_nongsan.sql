@@ -24,116 +24,6 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `chitiethoadon`
---
-
-CREATE TABLE `chitiethoadon` (
-  `MaHang` int(11) NOT NULL,
-  `MaHD` int(11) NOT NULL,
-  `SoLuong` int(11) DEFAULT 1,
-  `ThanhTien` float DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `chitiethoadon`
---
-
-INSERT INTO `chitiethoadon` (`MaHang`, `MaHD`, `SoLuong`, `ThanhTien`) VALUES
-(1, 1, 2, 0),
-(11, 2, 3, 0),
-(12, 2, 3, 0),
-(13, 3, 2, 0),
-(14, 3, 5, 0),
-(15, 4, 2, 0),
-(16, 4, 4, 0),
-(23, 1, 2, 0),
-(36, 2, 3, 0);
-
---
--- Triggers `chitiethoadon`
---
-DELIMITER $$
-CREATE TRIGGER `update_tongtien` AFTER INSERT ON `chitiethoadon` FOR EACH ROW BEGIN
-    UPDATE hoadon
-    SET TongTien = (
-        SELECT SUM(ThanhTien)
-        FROM chitiethoadon
-        WHERE MaHD = NEW.MaHD
-    )
-    WHERE MaHD = NEW.MaHD;
-END
-$$
-DELIMITER ;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `chitietphieunhap`
---
-
-CREATE TABLE `chitietphieunhap` (
-  `MaPN` int(11) NOT NULL,
-  `MaHang` int(11) NOT NULL,
-  `GiaNhap` int(11) NOT NULL,
-  `SoLuong` int(11) DEFAULT 5,
-  `ThanhTien` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `chitietphieunhap`
---
-
-INSERT INTO `chitietphieunhap` (`MaPN`, `MaHang`, `GiaNhap`, `SoLuong`, `ThanhTien`) VALUES
-(1, 1, 10000, 4, 40000),
-(1, 3, 12000, 5, 60000),
-(1, 6, 12000, 5, 60000),
-(1, 12, 8000, 5, 40000),
-(1, 15, 8000, 5, 40000);
-
---
--- Triggers `chitietphieunhap`
---
-DELIMITER $$
-CREATE TRIGGER `tinh_thanh_tien_insert` BEFORE INSERT ON `chitietphieunhap` FOR EACH ROW BEGIN
-    SET NEW.ThanhTien = NEW.GiaNhap * NEW.SoLuong;
-    
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `tinh_tong_tien_insert` AFTER INSERT ON `chitietphieunhap` FOR EACH ROW BEGIN
-    UPDATE phieunhap
-    SET TongTien = TongTien + (NEW.GiaNhap * NEW.SoLuong)
-    WHERE MaPN = NEW.MaPN;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `update_gia_nhap_insert` AFTER INSERT ON `chitietphieunhap` FOR EACH ROW BEGIN
-    IF NEW.GiaNhap > (
-        SELECT GiaNhap 
-        FROM hanghoa 
-        WHERE MaHang = NEW.MaHang
-    ) THEN
-        UPDATE hanghoa
-        SET GiaNhap = NEW.GiaNhap
-        WHERE MaHang = NEW.MaHang;
-    END IF;
-END
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `update_so_luong_insert` AFTER INSERT ON `chitietphieunhap` FOR EACH ROW BEGIN
-    UPDATE hanghoa
-    SET SoLuongTon = SoLuongTon + NEW.SoLuong
-    WHERE MaHang = NEW.MaHang;
-END
-$$
-DELIMITER ;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `hanghoa`
 --
 
@@ -150,6 +40,28 @@ CREATE TABLE `hanghoa` (
   `SoLuongTon` int(11) DEFAULT 0,
   `TrangThai` bit(1) DEFAULT b'1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Triggers `hanghoa`
+--
+DELIMITER $$
+CREATE TRIGGER `insert_giaban` BEFORE INSERT ON `hanghoa` FOR EACH ROW BEGIN
+    SET NEW.GiaBan = NEW.GiaNhap * NEW.HeSo;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `update_giaban` BEFORE UPDATE ON `hanghoa` FOR EACH ROW BEGIN
+    -- Kiểm tra xem giá nhập hoặc hệ số có thay đổi không
+    IF OLD.GiaNhap != NEW.GiaNhap OR OLD.HeSo != NEW.HeSo THEN
+        -- Tính lại giá bán và cập nhật vào cột GiaBan
+        SET NEW.GiaBan = NEW.GiaNhap * NEW.HeSo;
+    END IF;
+END
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
 
 --
 -- Dumping data for table `hanghoa`
@@ -200,18 +112,6 @@ INSERT INTO `hanghoa` (`MaHang`, `MaNhomHang`, `MaNCC`, `TenHang`, `DVT`, `GiaBa
 (42, 1, 1, 'Chuối già Nam Mỹ 3', 'Kg', 40000, 2, 20000, 'best-product-3.jpg', 12, b'1');
 
 --
--- Triggers `hanghoa`
---
-DELIMITER $$
-CREATE TRIGGER `insert_giaban` BEFORE INSERT ON `hanghoa` FOR EACH ROW BEGIN
-    SET NEW.GiaBan = NEW.GiaNhap * NEW.HeSo;
-END
-$$
-DELIMITER ;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `hoadon`
 --
 
@@ -251,6 +151,87 @@ $$
 DELIMITER ;
 
 -- --------------------------------------------------------
+
+--
+-- Table structure for table `chitiethoadon`
+--
+
+CREATE TABLE `chitiethoadon` (
+  `MaHang` int(11) NOT NULL,
+  `MaHD` int(11) NOT NULL,
+  `SoLuong` int(11) DEFAULT 1,
+  `ThanhTien` float DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Triggers `chitiethoadon`
+--
+DELIMITER $$
+
+CREATE TRIGGER `update_thanhtien` BEFORE INSERT ON `chitiethoadon`
+FOR EACH ROW
+BEGIN
+    -- Tính toán giá trị mới của ThanhTien
+   SET NEW.ThanhTien  = NEW.SoLuong * (SELECT GiaBan FROM hanghoa WHERE MaHang = NEW.MaHang);
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER `update_tongtien` AFTER INSERT ON `chitiethoadon`
+FOR EACH ROW
+BEGIN
+    UPDATE hoadon
+    SET TongTien = (
+        SELECT SUM(ThanhTien)
+        FROM chitiethoadon
+        WHERE MaHD = NEW.MaHD
+    )
+    WHERE MaHD = NEW.MaHD;
+END$$
+
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Dumping data for table `chitiethoadon`
+--
+
+INSERT INTO `chitiethoadon` (`MaHang`, `MaHD`, `SoLuong`, `ThanhTien`) VALUES
+(1, 1, 2, 0),
+(11, 2, 3, 0),
+(12, 2, 3, 0),
+(13, 3, 2, 0),
+(14, 3, 5, 0),
+(15, 4, 2, 0),
+(16, 4, 4, 0),
+(23, 1, 2, 0),
+(36, 2, 3, 0);
+
+--
+-- Table structure for table `chitietphieunhap`
+--
+
+CREATE TABLE `chitietphieunhap` (
+  `MaPN` int(11) NOT NULL,
+  `MaHang` int(11) NOT NULL,
+  `GiaNhap` int(11) NOT NULL,
+  `SoLuong` int(11) DEFAULT 5,
+  `ThanhTien` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `chitietphieunhap`
+--
+
+INSERT INTO `chitietphieunhap` (`MaPN`, `MaHang`, `GiaNhap`, `SoLuong`, `ThanhTien`) VALUES
+(1, 1, 10000, 4, 40000),
+(1, 3, 12000, 5, 60000),
+(1, 6, 12000, 5, 60000),
+(1, 12, 8000, 5, 40000),
+(1, 15, 8000, 5, 40000);
 
 --
 -- Table structure for table `khachhang`
