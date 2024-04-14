@@ -17,4 +17,4 @@
         </div>
     </div>
 </form>
-<h5><a href="<?php echo _WEB_ROOT ?>/admin/category" style="margin-left: 50px;">Trở lại trang sản phẩm</a></h5>
+<h5><a href="<?php echo _WEB_ROOT ?>/admin/category" style="margin-left: 50px;">Trở lại trang danh mục</a></h5>
