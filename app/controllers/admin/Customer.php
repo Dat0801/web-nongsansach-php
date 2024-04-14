@@ -20,19 +20,74 @@ class Customer extends Controller{
     public function editCustomer() {
         $this->data['content'] = '/admin/customers/EditCustomer';
         $this->data['title'] = 'Trang sửa khách hàng';
+
         $request = new Request();
-        $MaHang = $request->getFields();
-        $dataCustomer = $this->customer->getDetail($MaHang["MaKH"]);
-        $this->data['sub_content']['customer'] = $dataCustomer;
-        $this->render('layouts/admin_layout', $this->data); 
+
+        
+
+        $id = $_GET["MaKH"];
+
+        if ($request->isPost()) {
+
+            $username = $_GET["Username"]; 
+
+            $dataCustomer = $request->getFields(); 
+
+            $dataCustomer["MaKH"] = $id;
+            $dataCustomer["Username"] = $username;            
+
+            $request->rules([
+                'TenKH' => 'required|min:5|max:60',
+                'Username' => 'required|min:5|max:60|unique:khachhang:Username:MaKH=' . $id . '',                
+                'Password' => 'required|callback_validatePassword',
+                'Email' => 'required|email',
+                'SDT' => 'required|callback_validatePhoneNumber',                                
+                'DiaChi' => 'required|min:5|max:100',
+                'TrangThai' => 'required|check',                
+            ]);
+
+            $request->messages([
+                'TenKH.required' => 'Tên khách hàng không được để trống',
+                'TenKH.min' => 'Tên khách hàng phải lớn hơn 5 ký tự',
+                'TenKH.max' => 'Tên khách hàng phải nhỏ hơn 60 ký tự',
+                'Username.required' => 'Tên tài khoản không được để trống',
+                'Username.min' => 'Tên tài khoản phải lớn hơn 5 ký tự',
+                'Username.max' => 'Tên tài khoản phải nhỏ hơn 60 ký tự',
+                'Username.unique' => 'Tên tài khoản đã tồn tại. Vui lòng chọn tên khác!',
+                'Password.required' => 'Mật khẩu không được để trống',                
+                'Password.callback_validatePassword' => 'Mật khẩu phải có ít nhất 8 ký tự, chứa ít nhất một chữ cái viết hoa, một chữ cái viết thường, một số và một ký tự đặc biệt',
+                'Email.required' => 'Email không được để trống',
+                'Email.email' => 'Email không hợp lệ',
+                'SDT.required' => 'Số điện thoại không được để trống',
+                'SDT.callback_validatePhoneNumber' => 'Số điện thoại không hợp lệ',
+                'DiaChi.required' => 'Địa chỉ không được để trống',
+                'DiaChi.min' => 'Địa chỉ phải lớn hơn 5 ký tự',
+                'DiaChi.max' => 'Địa chỉ phải nhỏ hơn 100 ký tự',
+                'TrangThai.required' => 'Trạng thái không được để trống',
+                'TrangThai.check' => 'Trạng thái không hợp lệ',
+            ]);
+
+            $validate = $request->validate();
+            if (!$validate) {
+                $this->data['sub_content']['errors'] = $request->errors();
+                $this->data['sub_content']['msg'] = "Đã có lỗi xãy ra. Vui lòng kiểm tra lại!";
+                $this->data['sub_content']['customer'] = $dataCustomer;
+            } else {
+                $this->customer->updateCustomer($dataCustomer, $id);
+                header('Location: ' . _WEB_ROOT . '/admin/Customer/index?msg=Thêm thành công!');
+            }
+        } else {
+            $dataCustomer = $this->customer->getDetail($id);
+            $this->data['sub_content']['customer'] = $dataCustomer;
+        }
+        $this->render('layouts/admin_layout', $this->data);
     }
     
 
     public function addCustomer() {
         $this->data['content'] = '/admin/customers/AddCustomer';
         $this->data['title'] = 'Trang thêm khách hàng';
-        // $this->data['sub_content']['employee'] = $this->employee->getList();
-        // $this->data['sub_content']['supplier'] = $this->supplier->getSuppliersList();
+        
 
         $request = new Request();
 
@@ -115,13 +170,7 @@ class Customer extends Controller{
         return true;
     }        
 
-    public function updateCustomers() {
-        $request = new Request();
-        $id = $_GET["MaKH"];
-        $data = $request->getFields();
-        $this->customer->updateCustomer($data, $id);
-        header('Location: '._WEB_ROOT.'/admin/customer');
-    }   
+    
     
     // public function deleteProduct() {
     //     $id = $_GET["MaHang"];
