@@ -16,7 +16,7 @@ $list_productRC = $productRC_model->getListWithLimit($display, $position);
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12 my-3">
-            <a href="<?php echo _WEB_ROOT ?>/admin/productReciept"
+            <a href="<?php echo _WEB_ROOT ?>/admin/productReceipt/viewAddReceipt"
                 class="btn btn-primary material-symbols-outlined">
                 add_circle
             </a>

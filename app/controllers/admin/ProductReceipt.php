@@ -72,4 +72,15 @@ class ProductReceipt extends Controller
 
         $this->render('layouts/admin_layout', $this->data);
     }
+    public function viewAddReceipt() {
+        $this->data['content'] = '/admin/ProductRC/AddProductReceipt';
+        $this->data['title'] = 'Trang thêm phiếu nhập hàng';
+        $this->render('layouts/admin_layout', $this->data);
+    }
+    public function addReceipt() {
+        $request = new Request();
+        $data = $request->getFields();
+        $this->productRC->addProductReceipt($data);
+        header('Location: '._WEB_ROOT.'/admin/productReceipt');
+    }
 }

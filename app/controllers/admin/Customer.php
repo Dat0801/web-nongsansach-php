@@ -27,18 +27,18 @@ class Customer extends Controller{
         $this->render('layouts/admin_layout', $this->data); 
     }
 
-    // public function viewAddProduct() {
-    //     $this->data['content'] = '/admin/customers/AddProduct';
-    //     $this->data['title'] = 'Trang thêm sản phẩm';
-    //     $this->render('layouts/admin_layout', $this->data);
-    // }
+    public function viewAddCustomer() {
+        $this->data['content'] = '/admin/customers/AddCustomer';
+        $this->data['title'] = 'Trang thêm khách hàng';
+        $this->render('layouts/admin_layout', $this->data);
+    }
 
-    // public function addProduct() {
-    //     $request = new Request();
-    //     $data = $request->getFields();
-    //     $this->customer->addProduct($data);
-    //     header('Location: '._WEB_ROOT.'/admin/customer');
-    // }
+    public function addCustomer() {
+        $request = new Request();
+        $data = $request->getFields();
+        $this->customer->addCustomer($data);
+        header('Location: '._WEB_ROOT.'/admin/customer');
+    }
 
     public function updateCustomers() {
         $request = new Request();
