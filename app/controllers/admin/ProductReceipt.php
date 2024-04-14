@@ -72,15 +72,42 @@ class ProductReceipt extends Controller
 
         $this->render('layouts/admin_layout', $this->data);
     }
-    public function viewAddReceipt() {
-        $this->data['content'] = '/admin/ProductRC/AddProductReceipt';
-        $this->data['title'] = 'Trang thêm phiếu nhập hàng';
-        $this->render('layouts/admin_layout', $this->data);
-    }
+    
+    
     public function addReceipt() {
+        $this->data['content'] = '/admin/ProductRC/AddProductReceipt';
+        $this->data['title'] = 'Trang thêm phiếu nhập';
+        $this->data['sub_content']['employee'] = $this->employee->getList();
+        $this->data['sub_content']['supplier'] = $this->supplier->getSuppliersList();
+
         $request = new Request();
-        $data = $request->getFields();
-        $this->productRC->addProductReceipt($data);
-        header('Location: '._WEB_ROOT.'/admin/productReceipt');
+
+        if ($request->isPost()) {
+            $request->rules([
+                'MaNV' => 'required',
+                'MaNCC' => 'required',
+                'TrangThai' => 'required|check',                
+            ]);
+
+            $request->messages([
+                'MaNV.required' => 'Mã nhân viên không được để trống',
+                'MaNCC.required' => 'Mã nhà cung cấp không được để trống',
+                'TrangThai.required' => 'Trạng thái không được để trống',
+                'TrangThai.check' => 'Trạng thái không hợp lệ',
+            ]);
+
+            $validate = $request->validate();
+            if (!$validate) {
+                $this->data['sub_content']['errors'] = $request->errors();
+                $this->data['sub_content']['msg'] = "Đã có lỗi xãy ra. Vui lòng kiểm tra lại!";
+                $this->data['sub_content']['old'] = $request->getFields();
+            } else {
+                $data = $request->getFields();
+                $this->productRC->addProductReceipt($data);
+                header('Location: ' . _WEB_ROOT . '/admin/ProductReceipt/index?msg=Thêm thành công!');
+            }
+        }
+        $this->render('layouts/admin_layout', $this->data);
+
     }
 }
