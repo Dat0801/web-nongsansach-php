@@ -211,6 +211,27 @@ INSERT INTO `chitiethoadon` (`MaHang`, `MaHD`, `SoLuong`, `ThanhTien`) VALUES
 (36, 2, 3, 0);
 
 --
+-- Table structure for table `phieunhap`
+--
+
+CREATE TABLE `phieunhap` (
+  `MaPN` int(11) NOT NULL,
+  `MaNV` int(11) NOT NULL,
+  `MaNCC` int(11) NOT NULL,
+  `NgayNhap` datetime DEFAULT current_timestamp(),
+  `TongTien` float NOT NULL,
+  `TrangThai` bit(1) DEFAULT b'1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `phieunhap`
+--
+
+INSERT INTO `phieunhap` (`MaPN`, `MaNV`, `MaNCC`, `NgayNhap`, `TongTien`, `TrangThai`) VALUES
+(1, 1, 1, '2024-04-04 15:33:29', 0, b'1'),
+(2, 2, 1, '2024-04-09 20:33:44', 0, b'1');
+
+--
 -- Table structure for table `chitietphieunhap`
 --
 
@@ -222,6 +243,45 @@ CREATE TABLE `chitietphieunhap` (
   `ThanhTien` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+DELIMITER $$
+CREATE TRIGGER `tinh_thanh_tien_insert` BEFORE INSERT ON `chitietphieunhap` FOR EACH ROW BEGIN
+    SET NEW.ThanhTien = NEW.GiaNhap * NEW.SoLuong;
+END
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER `tinh_tong_tien_insert` AFTER INSERT ON `chitietphieunhap` FOR EACH ROW BEGIN
+    UPDATE phieunhap
+    SET TongTien = TongTien + (NEW.GiaNhap * NEW.SoLuong)
+    WHERE MaPN = NEW.MaPN;
+END
+$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER `update_gia_nhap_insert` AFTER INSERT ON `chitietphieunhap` FOR EACH ROW 
+BEGIN
+    IF NEW.GiaNhap > (
+        SELECT GiaNhap 
+        FROM hanghoa 
+        WHERE MaHang = NEW.MaHang
+    ) THEN
+        UPDATE hanghoa
+        SET GiaNhap = NEW.GiaNhap
+        WHERE MaHang = NEW.MaHang;
+	  END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `update_so_luong_insert` AFTER INSERT ON `chitietphieunhap` FOR EACH ROW BEGIN
+    UPDATE hanghoa
+    SET SoLuongTon = SoLuongTon + NEW.SoLuong
+    WHERE MaHang = NEW.MaHang;
+END
+$$
+DELIMITER ;
 --
 -- Dumping data for table `chitietphieunhap`
 --
@@ -254,9 +314,9 @@ CREATE TABLE `khachhang` (
 
 INSERT INTO `khachhang` (`MaKH`, `TenKH`, `Username`, `Password`, `Email`, `SDT`, `DiaChi`, `TrangThai`) VALUES
 (1, 'Nguyễn Văn Phú', 'nguyenvanphu', '123', 'nvp@gmail.com', '0987654321', 'Lê Trọng Tấn', b'1'),
-(2, 'Trần Thị Dung', 'tranthidung', '123', 'ttd@gmail.com', '0123456789', 'Bình Chánh', b'1'),
+(2, 'Trần Thị Dung', 'tranthidung', '123', 'ttd@gmail.com', '0763456789', 'Bình Chánh', b'1'),
 (3, 'Lê Văn Sỹ', 'levansy', '123', 'lvs@gmail.com', '0912345678', 'Lạc Long Quân', b'1'),
-(4, 'Phạm Thị Kim', 'phanthikim', '123', 'ptk@gmail.com', '0876543210', 'Thành Thái', b'1'),
+(4, 'Phạm Thị Kim', 'phanthikim', '123', 'ptk@gmail.com', '0976543210', 'Thành Thái', b'1'),
 (5, 'Hoàng Văn Cường', 'hoangvancuong', '123', 'hvc@gmail.com', '0965432187', 'Điện Biên Phủ', b'1');
 
 -- --------------------------------------------------------
@@ -278,11 +338,11 @@ CREATE TABLE `nhacungcap` (
 --
 
 INSERT INTO `nhacungcap` (`MaNCC`, `TenNCC`, `SDT`, `DiaChi`, `TrangThai`) VALUES
-(1, 'LangFarm', '0765486382', 'Bình Thạnh', b'1'),
-(2, 'Nông sản Nguyên Vy', '0765486383', 'Lâm Đồng', b'1'),
-(3, 'SUNRISE INS', '0765486384', 'Tp.HCM', b'1'),
-(4, 'Thành Nam', '0765486385', 'Bình Dương', b'1'),
-(5, 'Nam Đô', '0765486386', 'Đà Nẵng', b'1');
+(1, 'LangFarm', '02633811081', 'TP.Đà Lạt', b'1'),
+(2, 'Nông sản Nguyên Vy', ' 0902350132', 'Long An', b'1'),
+(3, 'SUNRISE INS', '02836208046', 'TP.HCM', b'1'),
+(4, 'Thành Nam', '0971001003', 'Bình Dương', b'1'),
+(5, 'Nam Đô', '0977469999', 'Đà Nẵng', b'1');
 
 -- --------------------------------------------------------
 
@@ -334,27 +394,6 @@ INSERT INTO `nhomhang` (`MaNhomHang`, `TenNhomHang`, `TrangThai`) VALUES
 (4, 'Trái cây', b'1');
 
 -- --------------------------------------------------------
-
---
--- Table structure for table `phieunhap`
---
-
-CREATE TABLE `phieunhap` (
-  `MaPN` int(11) NOT NULL,
-  `MaNV` int(11) NOT NULL,
-  `MaNCC` int(11) NOT NULL,
-  `NgayNhap` datetime DEFAULT current_timestamp(),
-  `TongTien` float NOT NULL,
-  `TrangThai` bit(1) DEFAULT b'1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `phieunhap`
---
-
-INSERT INTO `phieunhap` (`MaPN`, `MaNV`, `MaNCC`, `NgayNhap`, `TongTien`, `TrangThai`) VALUES
-(1, 1, 1, '2024-04-04 15:33:29', 730000, b'1'),
-(2, 2, 1, '2024-04-09 20:33:44', 1500000, b'1');
 
 --
 -- Indexes for dumped tables

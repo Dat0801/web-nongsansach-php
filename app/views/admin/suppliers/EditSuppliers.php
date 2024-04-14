@@ -1,7 +1,8 @@
 <center>
-    <h2>Sửa Thông Tin Nhà Cung Cấp</h2>
+    <h2>CHỈNH SỬA THÔNG TIN NHÀ CUNG CẤP</h2>
 </center>
-<form action="<?php echo _WEB_ROOT ?>/admin/suppliers/updatesuppliers?MaNCC=<?php echo $suppliers["MaNCC"] ?>"
+<?php echo (!empty($msg)) ? $msg : false; ?>
+<form action="<?php echo _WEB_ROOT ?>/admin/suppliers/Editsuppliers?MaNCC=<?php echo $suppliers["MaNCC"] ?>"
     method="post">
     <div class="row">
         <div style="margin: 0px 50px;" class="col">
@@ -13,6 +14,7 @@
             <div>
                 <label for="">Tên nhà cung cấp</label>
                 <input type="text" name="TenNCC" class="form-control" value="<?php echo $suppliers['TenNCC'] ?>" />
+                <?php echo (!empty($errors) && array_key_exists('TenNCC', $errors)) ? '<span class="text-danger">' . $errors["TenNCC"] . '</span>' : false; ?>    
             </div>
             <br />
         </div>
@@ -20,11 +22,13 @@
             <div>
                 <label for="">Số điện thoại</label>
                 <input type="text" name="SDT" class="form-control" value="<?php echo $suppliers['SDT'] ?>" />
+                <?php echo (!empty($errors) && array_key_exists('SDT', $errors)) ? '<span class="text-danger">' . $errors["SDT"] . '</span>' : false; ?>
             </div>
             <br />
             <div>
                 <label for="">Địa chỉ</label>
                 <input type="text" name="DiaChi" class="form-control" value="<?php echo $suppliers['DiaChi'] ?>" />
+                <?php echo (!empty($errors) && array_key_exists('DiaChi', $errors)) ? '<span class="text-danger">' . $errors["DiaChi"] . '</span>' : false; ?>
             </div>
         </div>
     </div>
