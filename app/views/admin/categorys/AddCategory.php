@@ -1,6 +1,7 @@
 <center>
     <h2>THÊM DANH MỤC HÀNG HÓA</h2>
 </center>
+<?php echo (!empty($msg)) ? $msg : false; ?>
 <form action="<?php echo _WEB_ROOT ?>/admin/category/addCategory" method="post">
     <div class="row">
         <div style="margin: 0px 50px;" class="col">
@@ -14,6 +15,7 @@
             <div>
                 <label for="">TenNhomHang</label>
                 <input type="text" name="TenNhomHang" class="form-control" />
+                <?php echo (!empty($errors) && array_key_exists('TenNhomHang', $errors)) ? '<span class="text-danger">' . $errors["TenNhomHang"] . '</span>' : false; ?>
             </div>
             <br />
 

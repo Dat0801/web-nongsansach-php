@@ -16,7 +16,7 @@ $category_list = $category_model->getListWithLimit($display, $position);
 <div class="container">
     <div class="row">
         <div class="col-md-12 my-3">
-            <a href="<?php echo _WEB_ROOT ?>/admin/category/viewaddcategory"
+            <a href="<?php echo _WEB_ROOT ?>/admin/category/addcategory"
                 class="btn btn-primary material-symbols-outlined">
                 add_circle
             </a>
