@@ -148,7 +148,6 @@ class Request
                                     $conditionWhere = $ruleArr[3];
                                     $conditionWhere = str_replace('=', '<>', $conditionWhere);
                                     $checkExist = $this->db->query("SELECT $fieldCheck FROM $tableName WHERE $fieldCheck = '".trim($dataFields[$fieldName])."' AND $conditionWhere")->rowCount();
-                                    var_dump($checkExist);
                                 }
                             }
                             if ($checkExist > 0) {

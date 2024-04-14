@@ -49,6 +49,11 @@ class OrderModel extends Model
         $this->db->table('hoadon')->where('MaHD', '=', $id)->update(['TrangThai' => 'Đang giao hàng']);
     }
 
+    public function completeOrder($id)
+    {
+        $this->db->table('hoadon')->where('MaHD', '=', $id)->update(['TrangThai' => 'Đã giao hàng']);
+    }
+
     public function cancelOrder($id)
     {
         $this->db->table('hoadon')->where('MaHD', '=', $id)->update(['TrangThai' => 'Đã hủy']);

@@ -1,6 +1,10 @@
 <center>
     <h2>CHI TIẾT HÓA ĐƠN</h2>
 </center>
+<?php
+    $sessionVar = 'listDetailOrder_' . $order["MaHD"];
+    $listDetailOrder = $_SESSION[$sessionVar];
+?>
 <div class="row">
     <div style="margin: 0px 50px" class="col">
         <div>
@@ -51,15 +55,15 @@
         </thead>
         <tbody>
             <?php
-            foreach ($listProduct as $product) {
+            foreach ($listDetailOrder as $detailOrder) {
                 echo '<tr>';
-                echo "<td>" . $product['MaHang'] . "</td>";
-                echo "<td>" . $product['TenHang'] . "</td>";
-                echo "<td> <img style=\"width:50px\" src=\"" . _WEB_ROOT . "/public/assets/client/img/" . $product['HinhAnh'] . "\"></td>";
-                echo "<td>" . $product['DVT'] . "</td>";
-                echo "<td>" . $product['SoLuong'] . "</td>";
-                echo "<td>" . $product['GiaBan'] . "</td>";
-                echo "<td>" . $product['ThanhTien'] . "</td>";
+                echo "<td>" . $detailOrder['MaHang'] . "</td>";
+                echo "<td>" . $detailOrder['TenHang'] . "</td>";
+                echo "<td> <img style=\"width:50px\" src=\"" . _WEB_ROOT . "/public/assets/client/img/" . $detailOrder['HinhAnh'] . "\"></td>";
+                echo "<td>" . $detailOrder['DVT'] . "</td>";
+                echo "<td>" . $detailOrder['SoLuong'] . "</td>";
+                echo "<td>" . $detailOrder['GiaBan'] . "</td>";
+                echo "<td>" . $detailOrder['ThanhTien'] . "</td>";
             }
 
             ?>

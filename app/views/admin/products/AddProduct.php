@@ -62,23 +62,23 @@
             </div><br />
             <div>
                 <label for="">Giá nhập</label>
-                <input type="text" name="GiaNhap" class="form-control"
+                <input type="number" name="GiaNhap" class="form-control"
                     value="<?php echo !empty($old["GiaNhap"]) ? $old["GiaNhap"] : false; ?>" />
                 <?php echo (!empty($errors) && array_key_exists('GiaNhap', $errors)) ? '<span class="text-danger">' . $errors["GiaNhap"] . '</span>' : false; ?>
             </div><br />
             <div>
                 <label for="">Hệ số</label>
-                <input type="text" name="HeSo" class="form-control"
+                <input type="number" step="any" name="HeSo" class="form-control"
                     value="<?php echo !empty($old["HeSo"]) ? $old["HeSo"] : false; ?>" />
                 <?php echo (!empty($errors) && array_key_exists('HeSo', $errors)) ? '<span class="text-danger">' . $errors["HeSo"] . '</span>' : false; ?>
             </div><br />
             <div>
                 <label for="">Giá bán</label>
-                <input type="text" name="GiaBan" class="form-control" disabled />
+                <input type="number" name="GiaBan" class="form-control" disabled />
             </div><br />
             <div>
                 <label for="">Số lượng tồn</label>
-                <input type="number" name="SoLuongTon" class="form-control"
+                <input type="number" step="any" name="SoLuongTon" class="form-control"
                     value="<?php echo !empty($old["SoLuongTon"]) ? $old["SoLuongTon"] : false; ?>" />
                 <?php echo (!empty($errors) && array_key_exists('SoLuongTon', $errors)) ? '<span class="text-danger">' . $errors["SoLuongTon"] . '</span>' : false; ?>
             </div><br />
