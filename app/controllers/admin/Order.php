@@ -20,7 +20,11 @@ class Order extends Controller
         $this->data['title'] = 'Trang hóa đơn';
 
         $dataOrder = $this->order->getorderList();
-        
+
+        if (!empty($_GET['msg'])) {
+            $this->data['sub_content']['msg'] = $_GET['msg'];
+        }
+
         $this->data['sub_content']['list'] = $dataOrder;
         $this->data['sub_content']['order_model'] = $this->order;
 
@@ -34,26 +38,28 @@ class Order extends Controller
 
         $request = new Request();
         $Order = $request->getFields();
-
         $dataOrder = $this->order->getDetail($Order["MaHD"]);
         $dataDetailOrder = $this->orderDetail->getDetail($Order["MaHD"]);
         $dataEmployee = $this->employee->getDetail($dataOrder["MaNV"]);
         $dataCustomer = $this->customer->getDetail($dataOrder["MaKH"]);
-        $dataListEmloyee = $this->employee->getList();
 
-        $list_product = [];
-        foreach ($dataDetailOrder as $detailOrder) {
-            $product = $this->product->getDetail($detailOrder["MaHang"]);
-            $product["SoLuong"] = $detailOrder["SoLuong"];
-            $product["ThanhTien"] = $detailOrder["ThanhTien"];
-            array_push($list_product, $product);
+        $sessionVar = 'listDetailOrder_' . $Order["MaHD"];
+        
+        if (!isset($_SESSION[$sessionVar])) {
+            for ($item = 0; $item < count($dataDetailOrder); $item++) {
+                $product = $this->product->getDetail($dataDetailOrder[$item]["MaHang"]);
+                $dataDetailOrder[$item]['MaHang'] = $product['MaHang'];
+                $dataDetailOrder[$item]['TenHang'] = $product['TenHang'];
+                $dataDetailOrder[$item]["GiaBan"] = $product["GiaBan"];
+                $dataDetailOrder[$item]["HinhAnh"] = $product["HinhAnh"];
+                $dataDetailOrder[$item]["DVT"] = $product["DVT"];
+            }
+            $_SESSION[$sessionVar] = $dataDetailOrder;
         }
 
         $this->data['sub_content']['order'] = $dataOrder;
-        $this->data['sub_content']['detailOrder'] = $dataDetailOrder;
-        $this->data['sub_content']['listProduct'] = $list_product;
+        $this->data['sub_content']['listDetailOrder'] = $_SESSION[$sessionVar];
         $this->data['sub_content']['employee'] = $dataEmployee;
-        $this->data['sub_content']['listEmployee'] = $dataListEmloyee;
         $this->data['sub_content']['customer'] = $dataCustomer;
 
         $this->render('layouts/admin_layout', $this->data);
@@ -81,8 +87,21 @@ class Order extends Controller
     {
         $id = $_GET["MaHD"];
         $this->order->acceptOrder($id);
-        header('Location: ' . _WEB_ROOT . '/admin/order');
+        header('Location: ' . _WEB_ROOT . '/admin/order?msg=Chấp nhận đơn hàng thành công');
     }
 
+    public function completeOrder()
+    {
+        $id = $_GET["MaHD"];
+        $this->order->completeOrder($id);
+        header('Location: ' . _WEB_ROOT . '/admin/order?msg=Hoàn thành đơn hàng thành công');
+    }
+
+    public function cancelOrder()
+    {
+        $id = $_GET["MaHD"];
+        $this->order->cancelOrder($id);
+        header('Location: ' . _WEB_ROOT . '/admin/order?msg=Hủy đơn hàng thành công');
+    }
 
 }

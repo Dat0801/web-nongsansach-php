@@ -1,8 +1,8 @@
-<?php echo (!empty($msg)) ? $msg : false; ?>
-<link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<?php if (!empty($msg)): ?>
+    <div class="alert alert-danger" role="alert">
+        <?php echo $msg; ?>
+    </div>
+<?php endif; ?>
 <center>
     <h2>Thêm Sản Phẩm</h2>
 </center>
@@ -10,12 +10,12 @@
     <div class="row">
         <div style="margin: 0px 50px;" class="col">
             <div>
-                <label for="">MaHang</label>
+                <label for="">Mã hàng</label>
                 <input type="text" name="MaHang" class="form-control" disabled />
             </div>
             <br />
             <div>
-                <label for="">MaNhomHang</label>
+                <label for="">Mã nhóm hàng</label>
                 <select name="MaNhomHang" class="form-select">
                     <?php
                     foreach ($category as $item) {
@@ -26,7 +26,7 @@
             </div>
             <br />
             <div>
-                <label for="">MaNCC</label>
+                <label for="">Mã nhà cung cấp</label>
                 <select name="MaNCC" class="form-select">
                     <?php
                     foreach ($suppliers as $item) {
@@ -37,10 +37,10 @@
             </div>
             <br />
             <div>
-                <label for="">TenHang</label>
+                <label for="">Tên hàng</label>
                 <input type="text" name="TenHang" class="form-control"
                     value="<?php echo !empty($old["TenHang"]) ? $old["TenHang"] : false; ?>" />
-                <?php echo (!empty($errors) && array_key_exists('TenHang', $errors)) ? '<span>' . $errors["TenHang"] . '</span>' : false; ?>
+                <?php echo (!empty($errors) && array_key_exists('TenHang', $errors)) ? '<span class="text-danger">' . $errors["TenHang"] . '</span>' : false; ?>
             </div>
             <br />
             <label for="formFile" class="form-label">Hình ảnh sản phẩm</label>
@@ -49,33 +49,41 @@
                 <label class="custom-file-label" for="customFile">Chọn hình ảnh</label>
             </div>
             <div>
-                <img src="" width="150" style="border-radius: 10px;" id="imghanghoa"/>
+                <img src="" width="150" style="border-radius: 10px;" id="imghanghoa" />
             </div><br />
         </div>
         <br />
         <div style="margin: 0px 50px" class="col">
             <div>
                 <label for="">Đơn vị tính</label>
-                <input type="text" name="GiaBan" class="form-control" />
+                <input type="text" name="DVT" class="form-control"
+                    value="<?php echo !empty($old["DVT"]) ? $old["DVT"] : false; ?>" />
+                <?php echo (!empty($errors) && array_key_exists('DVT', $errors)) ? '<span class="text-danger">' . $errors["DVT"] . '</span>' : false; ?>
             </div><br />
             <div>
-                <label for="">GiaNhap</label>
-                <input type="text" name="GiaNhap" class="form-control" />
+                <label for="">Giá nhập</label>
+                <input type="number" name="GiaNhap" class="form-control"
+                    value="<?php echo !empty($old["GiaNhap"]) ? $old["GiaNhap"] : false; ?>" />
+                <?php echo (!empty($errors) && array_key_exists('GiaNhap', $errors)) ? '<span class="text-danger">' . $errors["GiaNhap"] . '</span>' : false; ?>
             </div><br />
             <div>
-                <label for="">HeSo</label>
-                <input type="text" name="HeSo" class="form-control" />
+                <label for="">Hệ số</label>
+                <input type="number" step="any" name="HeSo" class="form-control"
+                    value="<?php echo !empty($old["HeSo"]) ? $old["HeSo"] : false; ?>" />
+                <?php echo (!empty($errors) && array_key_exists('HeSo', $errors)) ? '<span class="text-danger">' . $errors["HeSo"] . '</span>' : false; ?>
             </div><br />
             <div>
-                <label for="">GiaBan</label>
-                <input type="text" name="GiaBan" class="form-control" disabled/>
+                <label for="">Giá bán</label>
+                <input type="number" name="GiaBan" class="form-control" disabled />
             </div><br />
             <div>
-                <label for="">SoLuongTon</label>
-                <input type="number" name="SoLuongTon" class="form-control" />
+                <label for="">Số lượng tồn</label>
+                <input type="number" step="any" name="SoLuongTon" class="form-control"
+                    value="<?php echo !empty($old["SoLuongTon"]) ? $old["SoLuongTon"] : false; ?>" />
+                <?php echo (!empty($errors) && array_key_exists('SoLuongTon', $errors)) ? '<span class="text-danger">' . $errors["SoLuongTon"] . '</span>' : false; ?>
             </div><br />
             <div>
-                <label for="">TrangThai</label>
+                <label for="">Trạng thái</label>
                 <select name="TrangThai" class="form-select">
                     <option value="1">1</option>
                     <option value="0">0</option>

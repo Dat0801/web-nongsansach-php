@@ -2,7 +2,14 @@
 class Request
 {
 
-    private $__rules = [], $__messages = [], $errors = [];
+    private $__rules = [], $__messages = [], $__errors = [];
+    public $db;
+
+    public function __construct()
+    {
+        $this->db = new Database();
+    }
+
     public function getMethod()
     {
         return strtolower($_SERVER['REQUEST_METHOD']);
@@ -121,6 +128,51 @@ class Request
                             $checkValidate = false;
                         }
                     }
+
+                    if ($ruleName == 'unique') {
+                        $tableName = null;
+                        $fieldCheck = null;
+
+                        if (!empty($ruleArr[1])) {
+                            $tableName = $ruleArr[1];
+                        }
+                        if (!empty($ruleArr[2])) {
+                            $fieldCheck = $ruleArr[2];
+                        }
+
+                        if (!empty($tableName) && !empty($fieldCheck)) {
+                            if (count($ruleArr) == 3) {
+                                $checkExist = $this->db->query("SELECT $fieldCheck FROM $tableName WHERE $fieldCheck = '".trim($dataFields[$fieldName])."'")->rowCount();
+                            } else if (count($ruleArr) == 4) {
+                                if (!empty($ruleArr[3]) && preg_match('~.+?\=.+?~is', $ruleArr[3])) {
+                                    $conditionWhere = $ruleArr[3];
+                                    $conditionWhere = str_replace('=', '<>', $conditionWhere);
+                                    $checkExist = $this->db->query("SELECT $fieldCheck FROM $tableName WHERE $fieldCheck = '".trim($dataFields[$fieldName])."' AND $conditionWhere")->rowCount();
+                                }
+                            }
+                            if ($checkExist > 0) {
+                                $this->setErrors($fieldName, $ruleName);
+                                $checkValidate = false;
+                            }
+                        }
+                    }
+
+                    //Callback validate
+                    if (preg_match('~^callback_(.+)~is', $ruleName, $callbackArr)) {
+                        if (!empty($callbackArr[1])) {
+                            $callbackName = $callbackArr[1];
+                            $controller = App::$app->getCurrentController();
+
+                            if (method_exists($controller, $callbackName)) {
+                                $checkCallback = call_user_func_array([$controller, $callbackName], [trim($dataFields[$fieldName])]);
+
+                                if(!$checkCallback) {
+                                    $this->setErrors($fieldName, $ruleName);
+                                    $checkValidate = false;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -130,21 +182,21 @@ class Request
     //get errors
     public function errors($fieldName = '')
     {
-        if (!empty($this->errors)) {
+        if (!empty($this->__errors)) {
             if ($fieldName == '') {
                 $errorsArr = [];
-                foreach ($this->errors as $key => $value) {
+                foreach ($this->__errors as $key => $value) {
                     $errorsArr[$key] = reset($value);
                 }
                 return $errorsArr;
             }
-            return reset($this->errors[$fieldName]);
+            return reset($this->__errors[$fieldName]);
         }
         return false;
     }
 
     public function setErrors($fieldName, $ruleName)
     {
-        $this->errors[$fieldName][$ruleName] = $this->__messages[$fieldName . '.' . $ruleName];
+        $this->__errors[$fieldName][$ruleName] = $this->__messages[$fieldName . '.' . $ruleName];
     }
 }

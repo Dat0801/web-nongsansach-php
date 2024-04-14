@@ -112,6 +112,10 @@ class App
 
     }
 
+    public function getCurrentController() {
+        return $this->__controller;
+    }
+
     public function loadError($name = '404', $data = [])
     {
         extract($data);

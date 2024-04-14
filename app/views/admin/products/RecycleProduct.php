@@ -1,53 +1,61 @@
 <?php
 include_once "app/views/admin/pagination/pagination.php";
-$suppliers_list = $suppliers_model->getListWithLimit($display, $position);
+$list_product = $product_model->getListRecycleWithLimit($display, $position);
 ?>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-    integrity="sha384-pzjw8s+ekmvplp5f/ZxXnDQbcz0S7bJr6W2kcoFVGLsRakET4Qc5I2tG4LDA2tB" crossorigin="anonymous">
+<?php if (!empty($msg)): ?>
+    <div class="alert alert-success" role="alert">
+        <?php echo $msg; ?>
+    </div>
+<?php endif; ?>
 <form class="d-flex" action="" method="post">
     <div style="margin: 0 auto">
-        <input class="form-control me-2" type="search" placeholder="Tìm kiếm nhà cung cấp"
-            aria-label="Tìm kiếm sản phẩm..." style="width:400px; margin: 0 auto" name="searchStr" id="searchStr">
+        <input class="form-control me-2" type="search" placeholder="Tìm kiếm hàng hóa" aria-label="Tìm kiếm hàng hóa..."
+            style="width:400px; margin: 0 auto" name="searchStr" id="searchStr">
         <center>
-            <button class="btn btn-outline-success m-2" type="submit">Search</button>
+            <button class="btn btn-outline-success m-2 material-symbols-outlined" type="submit">
+                search
+            </button>
         </center>
     </div>
 </form>
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-12 my-3">
-            <a href="<?php echo _WEB_ROOT ?>/admin/suppliers/viewaddsuppliers"
-                class="btn btn-primary material-symbols-outlined">
-                add_circle
-            </a>
-        </div>
-    </div>
-</div>
 <div class="table-responsive container-fluid ">
     <table class="table table-secondary table-bordered"
         style="text-align: center; border-radius: 10px; overflow: hidden; color: black;">
         <thead>
             <tr>
+                <th scope="col">Mã hàng</th>
+                <th scope="col">Mã nhóm hàng</th>
                 <th scope="col">Mã nhà cung cấp</th>
-                <th scope="col">Tên nhà cung cấp</th>
-                <th scope="col">Số điện thoại</th>
-                <th scope="col">Địa chỉ</th>
+                <th scope="col">Tên hàng</th>
+                <th scope="col">Đơn vị tính</th>
+                <th scope="col">Giá bán</th>
+                <th scope="col">Hệ số</th>
+                <th scope="col">Giá nhập</th>
+                <th scope="col">Hình ảnh</th>
+                <th scope="col">Số lượng tồn</th>
                 <th scope="col">Trạng thái</th>
                 <th scope="col" colspan="2" style="text-align: center;">CRUD</th>
             </tr>
         </thead>
         <tbody>
             <?php
-            foreach ($suppliers_list as $suppliers) {
+            foreach ($list_product as $product) {
                 echo '<tr>';
-                echo "<td>" . $suppliers['MaNCC'] . "</td>";
-                echo "<td>" . $suppliers['TenNCC'] . "</td>";
-                echo "<td>" . $suppliers['SDT'] . "</td>";
-                echo "<td>" . $suppliers['DiaChi'] . "</td>";
-                echo "<td>" . $suppliers['TrangThai'] . "</td>";
+                echo "<td>" . $product['MaHang'] . "</td>";
+                echo "<td>" . $product['MaNhomHang'] . "</td>";
+                echo "<td>" . $product['MaNCC'] . "</td>";
+                echo "<td>" . $product['TenHang'] . "</td>";
+                echo "<td>" . $product['DVT'] . "</td>";
+                echo "<td>" . $product['GiaBan'] . "</td>";
+                echo "<td>" . $product['HeSo'] . "</td>";
+                echo "<td>" . $product['GiaNhap'] . "</td>";
+                echo "<td> <img style=\"width:50px\" src=\"" . _WEB_ROOT . "/public/assets/client/img/" . $product['HinhAnh'] . "\"></td>";
+                echo "<td> " . $product['SoLuongTon'] . "</td>";
+                echo "<td> " . $product['TrangThai'] . "</td>";
+                echo "<td><a href=\"" . _WEB_ROOT . "/admin/product/recoverProduct?MaHang=" . $product["MaHang"] . "\" class=\"btn btn-sm btn-success material-symbols-outlined\"\">cycle</a></td>";
                 echo "<td>
-                <a href=\"" . _WEB_ROOT . "/admin/suppliers/Editsuppliers?MaNCC=" . $suppliers["MaNCC"] . "\" class=\"btn btn-sm btn-success material-symbols-outlined\"\">edit</a>
-                <a class=\"btn-delete btn btn-sm btn-danger material-symbols-outlined\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-suppliersid=\"" . $suppliers['MaNCC'] . "\" data-suppliersname=\"" . $suppliers['TenNCC'] . "\">delete</a>
+                <a class=\"btn-delete btn btn-sm btn-danger material-symbols-outlined\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-productid=\"" . $product['MaHang'] . "\"
+                data-productname=\"" . $product['TenHang'] . "\" data-productimg=\"" . $product['HinhAnh'] . "\">delete</a>
                 </td>";
                 echo '</tr>';
             }
@@ -129,41 +137,52 @@ $suppliers_list = $suppliers_model->getListWithLimit($display, $position);
         </ul>
     </nav>
 <?php endif; ?>
-<!-- Xử lý nút delete -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous">
-</script>
+<div>
+    <a href="<?php echo _WEB_ROOT ?>/admin/product" style="margin: 0px 50px;"
+        class="btn btn-lg btn-primary material-symbols-outlined">
+        keyboard_return
+    </a>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    crossorigin="anonymous"></script>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel" style="color:black">Huỷ hợp tác với nhà cung cấp</h5>
+                <h5 class="modal-title" id="exampleModalLabel" style="color:black">Xóa sản phẩm</h5>
             </div>
             <div class="modal-body">
-                <p style="color: red">Bạn có muốn xoá tên nhà cung cấp ra khỏi danh sách?</p>
-                <table class="table table-suppliers">
+                <p style="color: red">Bạn có chắc muốn xóa vĩnh viễn sản phẩm?</p>
+                <table class="table table-product">
                     <tr>
-                        <td>MaNCC</td>
-                        <td><span id="DeletesuppliersIDSpan"></span></td>
+                        <td>MaHang</td>
+                        <td><span id="DeleteProductIDSpan"></span></td>
                     </tr>
                     <tr>
-                        <td>TenNCC</td>
-                        <td><span id="DeletesuppliersNameSpan"></span></td>
+                        <td>TenHang</td>
+                        <td><span id="DeleteProductNameSpan"></span></td>
+                    </tr>
+                    <tr>
+                        <td>HinhAnh</td>
+                        <td><span id="DeleteProductImgSpan"></span></td>
                     </tr>
                 </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                <a href="" id="btn-xoa" class="btn btn-success">Xóa</a>
+                <a href="" id="btn-xoa" class="btn btn-danger">Xóa</a>
             </div>
         </div>
     </div>
 </div>
 <script>
     $('.btn-delete').click((event) => {
-        const suppliersid = $(event.target).attr('data-suppliersid');
-        const suppliersname = $(event.target).attr('data-suppliersname');
-        $('#DeletesuppliersIDSpan').html(suppliersid);
-        $('#DeletesuppliersNameSpan').html(suppliersname);
-        $("#btn-xoa").attr("href", "<?php echo _WEB_ROOT ?>/admin/suppliers/deletesuppliers?MaNCC=" + suppliersid);
+        const productid = $(event.target).attr('data-productid');
+        const productname = $(event.target).attr('data-productname');
+        const productimg = $(event.target).attr('data-productimg');
+        $('#DeleteProductIDSpan').html(productid);
+        $('#DeleteProductNameSpan').html(productname);
+        $('#DeleteProductImgSpan').html(`<img style="width:150px" src="<?php echo _WEB_ROOT ?>/public/assets/client/img/${productimg}">`);
+        $("#btn-xoa").attr("href", "<?php echo _WEB_ROOT ?>/admin/product/deletePermanentProduct?MaHang=" + productid);
     })
 </script>

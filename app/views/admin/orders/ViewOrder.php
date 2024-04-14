@@ -2,10 +2,11 @@
 include_once "app/views/admin/pagination/pagination.php";
 $list_order = $order_model->getListWithLimit($display, $position);
 ?>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-    integrity="sha384-pzjw8s+ekmvplp5f/ZxXnDQbcz0S7bJr6W2kcoFVGLsRakET4Qc5I2tG4LDA2tB" crossorigin="anonymous">
-<link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+<?php if(!empty($msg)): ?>
+<div class="alert alert-success" role="alert">
+    <?php echo $msg; ?>
+</div>
+<?php endif; ?>
 <form class="d-flex" action="" method="post">
     <div style="margin: 0 auto">
         <input class="form-control me-2" type="search" placeholder="Tìm kiếm sản phẩm" aria-label="Tìm kiếm sản phẩm..."
@@ -17,21 +18,23 @@ $list_order = $order_model->getListWithLimit($display, $position);
 </form>
 
 <div class="table-responsive container-fluid ">
-    <table class="table table-dark table-bordered" style="text-align: center; border-radius: 10px; overflow: hidden;">
+    <table class="table table-secondary table-bordered"
+        style="text-align: center; border-radius: 10px; overflow: hidden; color: black">
         <thead>
             <tr>
-                <th scope="col">MaHD</th>
-                <th scope="col">MaNV</th>
-                <th scope="col">MaKH</th>
-                <th scope="col">NgayTao</th>
-                <th scope="col">NgayGiao</th>
-                <th scope="col">TongTien</th>
-                <th scope="col">TrangThai</th>
+                <th scope="col">Mã hóa đơn</th>
+                <th scope="col">Mã nhân viên</th>
+                <th scope="col">Mã khách hàng</th>
+                <th scope="col">Ngày tạo</th>
+                <th scope="col">Ngày giao</th>
+                <th scope="col">Tổng tiền</th>
+                <th scope="col">Trạng thái</th>
                 <th scope="col" colspan="2">CRUD</th>
             </tr>
         </thead>
         <tbody>
             <?php
+            $color = "";
             foreach ($list_order as $order) {
                 echo '<tr>';
                 echo "<td>" . $order['MaHD'] . "</td>";
@@ -40,17 +43,28 @@ $list_order = $order_model->getListWithLimit($display, $position);
                 echo "<td>" . $order['NgayTao'] . "</td>";
                 echo "<td>" . $order['NgayGiao'] . "</td>";
                 echo "<td>" . $order['TongTien'] . "</td>";
-                echo "<td> " . $order['TrangThai'] . "</td>";
-                if ($order['TrangThai'] == "Đang xử lý") {
-                    echo "<td>
-                    <a href=\"" . _WEB_ROOT . "/admin/order/acceptOrder?MaHD=" . $order["MaHD"] . "\" class=\"btn btn-sm btn-success material-symbols-outlined\"\">check_circle</a>
-                    </td>";
+                if ($order['TrangThai'] == "Đang xử lý" || $order['TrangThai'] == "Đang giao hàng") {
+                    $color = "#e65c00";
+                } else if ($order['TrangThai'] == "Đã giao hàng") {
+                    $color = "#008000";
+                } else {
+                    $color = "#cc0000";
                 }
+                echo "<td style='color:$color;'> " . $order['TrangThai'] . "</td>";
                 echo "<td>
                 <a href=\"" . _WEB_ROOT . "/admin/order/OrderDetail?MaHD=" . $order["MaHD"] . "\" class=\"btn btn-sm btn-primary material-symbols-outlined\"\">visibility</a>
                 </td>";
+                echo "<td>";
+                if ($order['TrangThai'] == "Đang xử lý" || $order['TrangThai'] == "Đang giao hàng") {
+                    if ($order['TrangThai'] == "Đang xử lý") {
+                        echo "<a href=\"" . _WEB_ROOT . "/admin/order/acceptOrder?MaHD=" . $order["MaHD"] . "\" class=\"btn btn-sm btn-success material-symbols-outlined\"\">check_circle</a>";
+                    } else {
+                        echo "<a href=\"" . _WEB_ROOT . "/admin/order/completeOrder?MaHD=" . $order["MaHD"] . "\" class=\"btn btn-sm btn-success material-symbols-outlined\"\">check_circle</a>";
+                    }
+                    echo "<a class=\"btn-delete btn btn-sm btn-danger material-symbols-outlined\" style='margin-left:10px;' data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-orderid=\"" . $order['MaHD'] . "\" data-orderstatus=\"" . $order['TrangThai'] . "\">cancel</a>";
+                }   
+                echo "</td>";
             }
-
             ?>
     </table>
     <?php
@@ -137,40 +151,34 @@ $list_order = $order_model->getListWithLimit($display, $position);
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel" style="color:black">Xóa sản phẩm</h5>
+                <h5 class="modal-title" id="exampleModalLabel" style="color:black">Hủy hóa đơn</h5>
             </div>
             <div class="modal-body">
-                <p style="color: red">Bạn có chắc muốn xóa sản phẩm?</p>
+                <p style="color: red">Bạn có chắc hủy hóa đơn?</p>
                 <table class="table table-product">
                     <tr>
-                        <td>MaHang</td>
-                        <td><span id="DeleteProductIDSpan"></span></td>
+                        <td>Mã Hóa Đơn</td>
+                        <td><span id="DeleteOrderIDSpan"></span></td>
                     </tr>
                     <tr>
-                        <td>TenHang</td>
-                        <td><span id="DeleteProductNameSpan"></span></td>
-                    </tr>
-                    <tr>
-                        <td>HinhAnh</td>
-                        <td><span id="DeleteProductImgSpan"></span></td>
+                        <td>Trạng thái</td>
+                        <td><span id="DeleteOrderStatusSpan"></span></td>
                     </tr>
                 </table>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                <a href="" id="btn-xoa" class="btn btn-danger">Xóa</a>
+                <a href="" id="btn-xoa" class="btn btn-danger">Hủy</a>
             </div>
         </div>
     </div>
 </div>
 <script>
     $('.btn-delete').click((event) => {
-        const productid = $(event.target).attr('data-productid');
-        const productname = $(event.target).attr('data-productname');
-        const productimg = $(event.target).attr('data-productimg');
-        $('#DeleteProductIDSpan').html(productid);
-        $('#DeleteProductNameSpan').html(productname);
-        $('#DeleteProductImgSpan').html(`<img style="width:150px" src="<?php echo _WEB_ROOT ?>/public/assets/client/img/${productimg}">`);
-        $("#btn-xoa").attr("href", "<?php echo _WEB_ROOT ?>/admin/product/deleteProduct?MaHang=" + productid);
+        const id = $(event.target).attr('data-orderid');
+        const status = $(event.target).attr('data-orderstatus');
+        $('#DeleteOrderIDSpan').html(id);
+        $('#DeleteOrderStatusSpan').html(status);
+        $("#btn-xoa").attr("href", "<?php echo _WEB_ROOT ?>/admin/order/cancelOrder?MaHD=" + id);
     })
 </script>
