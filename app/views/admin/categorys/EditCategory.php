@@ -1,12 +1,10 @@
-<center><h2>SỬA DANH MỤC SẢN PHẨM</h2></center>
-<form action="<?php echo _WEB_ROOT ?>/admin/category/updatecategory?MaNhomHang=<?php echo $category["MaNhomHang"] ?>" method="post">
-    <div class="row">
-        <div style="margin: 0px 50px;" class="col">
-            <div>
-                <label for="">MaNhomHang</label>
-                <input type="text" name="MaNhomHang" class="form-control" value="<?php echo $category['MaNhomHang']?>" disabled/>
-            </div>
-            <br />
+<?php echo (!empty($msg)) ? $msg : false; ?>
+<center><h2>Sửa Danh Mục sản phẩm</h2></center>
+<form action="<?php echo _WEB_ROOT ?>/admin/category/EditCategory?MaNhomHang=<?php echo $category["MaNhomHang"] ?>" method="post">
+    <div style="width: 70%; margin-left: 50px">
+        <div>
+            MaNhomHang
+            <input type="text" name="MaNhomHang" class="form-control" value="<?php echo $category['MaNhomHang']?>" />
         </div>
         <div style="margin: 0px 50px;" class="col">
             <div>
