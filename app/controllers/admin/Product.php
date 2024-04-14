@@ -62,6 +62,7 @@ class Product extends Controller
             ]);
 
             $validate = $request->validate();
+            
             if (!$validate) {
                 $this->data['sub_content']['errors'] = $request->errors();
                 $this->data['sub_content']['msg'] = "Đã có lỗi xãy ra. Vui lòng kiểm tra lại!";

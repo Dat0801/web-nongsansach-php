@@ -37,7 +37,7 @@ CREATE TABLE `hanghoa` (
   `HeSo` float DEFAULT 1.2,
   `GiaNhap` float NOT NULL,
   `HinhAnh` varchar(50) DEFAULT 'Chưa xác định',
-  `SoLuongTon` int(11) DEFAULT 0,
+  `SoLuongTon` float DEFAULT 0,
   `TrangThai` bit(1) DEFAULT b'1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -68,18 +68,18 @@ DELIMITER ;
 --
 
 INSERT INTO `hanghoa` (`MaHang`, `MaNhomHang`, `MaNCC`, `TenHang`, `DVT`, `GiaBan`, `HeSo`, `GiaNhap`, `HinhAnh`, `SoLuongTon`, `TrangThai`) VALUES
-(1, 4, 1, 'Chuối già Nam Mỹ', 'Kg', 12000, 1.2, 10000, 'chuoiGia.jpg', 20, b'1'),
-(2, 4, 2, 'Dưa hấu đỏ', 'Kg', 9600, 1.2, 8000, 'duaHauDo.jpg', 8, b'1'),
+(1, 4, 1, 'Chuối già Nam Mỹ', 'Kg', 12000, 1.2, 10000, 'chuoiGia.jpg', 20.2, b'1'),
+(2, 4, 2, 'Dưa hấu đỏ', 'Kg', 9600, 1.2, 8000, 'duaHauDo.jpg', 8.5, b'1'),
 (3, 4, 1, 'Dưa lưới', 'Kg', 72000, 1.2, 60000, 'duaLuoi.jpg', 22, b'1'),
-(4, 4, 2, 'Cam vàng nội địa Trung', 'Kg', 24000, 1.2, 20000, 'camVang.jpg', 20, b'1'),
+(4, 4, 2, 'Cam vàng nội địa Trung', 'Kg', 24000, 1.2, 20000, 'camVang.jpg', 19.5, b'1'),
 (5, 4, 3, 'Nho xanh Nam Phi', 'Kg', 108000, 1.2, 90000, 'nhoXanh.jpg', 8, b'1'),
 (6, 4, 4, 'Dừa xiêm', 'Trái', 14400, 1.2, 12000, 'duaXiem.jpg', 30, b'1'),
 (7, 4, 4, 'Quýt giống Úc', 'Kg', 33600, 1.2, 28000, 'quytUc.jpg', 12, b'1'),
 (8, 4, 3, 'Cam sành', 'Kg', 24000, 1.2, 20000, 'camSanh.jpg', 23, b'1'),
-(9, 4, 5, 'Táo Autumn Mỹ', 'Kg', 33000, 1.2, 27500, 'taoMy.jpg', 8, b'1'),
+(9, 4, 5, 'Táo Autumn Mỹ', 'Kg', 33000, 1.2, 27500, 'taoMy.jpg', 8.2, b'1'),
 (10, 4, 5, 'Ổi Đài Loan', 'Kg', 16800, 1.2, 14000, 'oiDaiLoan.jpg', 6, b'1'),
 (11, 1, 1, 'Cải bẹ xanh', 'Kg', 8400, 1.2, 7000, 'caiBeXanh.jpg', 9, b'1'),
-(12, 1, 1, 'Cải ngọt', 'Kg', 9600, 1.2, 8000, 'caiNgot.jpg', 11, b'1'),
+(12, 1, 1, 'Cải ngọt', 'Kg', 9600, 1.2, 8000, 'caiNgot.jpg', 11.5, b'1'),
 (13, 1, 2, 'Cải thìa', 'Kg', 7200, 1.2, 6000, 'caiThia.jpg', 11, b'1'),
 (14, 1, 3, 'Cải bẹ dún', 'Kg', 19800, 1.2, 16500, 'caiBeDun.jpg', 9, b'1'),
 (15, 1, 3, 'Rau dền', 'Kg', 10800, 1.2, 9000, 'rauDen.jpg', 22, b'1'),
@@ -313,10 +313,10 @@ CREATE TABLE `khachhang` (
 --
 
 INSERT INTO `khachhang` (`MaKH`, `TenKH`, `Username`, `Password`, `Email`, `SDT`, `DiaChi`, `TrangThai`) VALUES
-(1, 'Nguyễn Văn Phú', 'nguyenvanphu', '123', 'nvp@gmail.com', '0987654321', 'Lê Trọng Tấn', b'1'),
-(2, 'Trần Thị Dung', 'tranthidung', '123', 'ttd@gmail.com', '0763456789', 'Bình Chánh', b'1'),
-(3, 'Lê Văn Sỹ', 'levansy', '123', 'lvs@gmail.com', '0912345678', 'Lạc Long Quân', b'1'),
-(4, 'Phạm Thị Kim', 'phanthikim', '123', 'ptk@gmail.com', '0976543210', 'Thành Thái', b'1'),
+(1, 'Nguyễn Văn Phú', 'nguyenvanphu', '123', 'nvp@gmail.com', '0989341334', 'Lê Trọng Tấn', b'1'),
+(2, 'Trần Thị Dung', 'tranthidung', '123', 'ttd@gmail.com', '0399639999', 'Bình Chánh', b'1'),
+(3, 'Lê Văn Sỹ', 'levansy', '123', 'lvs@gmail.com', '0946731303', 'Lạc Long Quân', b'1'),
+(4, 'Phạm Thị Kim', 'phanthikim', '123', 'ptk@gmail.com', '0777934114', 'Thành Thái', b'1'),
 (5, 'Hoàng Văn Cường', 'hoangvancuong', '123', 'hvc@gmail.com', '0965432187', 'Điện Biên Phủ', b'1');
 
 -- --------------------------------------------------------
