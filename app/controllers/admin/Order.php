@@ -24,7 +24,7 @@ class Order extends Controller
         if (!empty($_GET['msg'])) {
             $this->data['sub_content']['msg'] = $_GET['msg'];
         }
-        
+
         $this->data['sub_content']['list'] = $dataOrder;
         $this->data['sub_content']['order_model'] = $this->order;
 
@@ -38,23 +38,27 @@ class Order extends Controller
 
         $request = new Request();
         $Order = $request->getFields();
-
         $dataOrder = $this->order->getDetail($Order["MaHD"]);
         $dataDetailOrder = $this->orderDetail->getDetail($Order["MaHD"]);
         $dataEmployee = $this->employee->getDetail($dataOrder["MaNV"]);
         $dataCustomer = $this->customer->getDetail($dataOrder["MaKH"]);
 
-        $list_product = [];
-        foreach ($dataDetailOrder as $detailOrder) {
-            $product = $this->product->getDetail($detailOrder["MaHang"]);
-            $product["SoLuong"] = $detailOrder["SoLuong"];
-            $product["ThanhTien"] = $detailOrder["ThanhTien"];
-            array_push($list_product, $product);
+        $sessionVar = 'listDetailOrder_' . $Order["MaHD"];
+        
+        if (!isset($_SESSION[$sessionVar])) {
+            for ($item = 0; $item < count($dataDetailOrder); $item++) {
+                $product = $this->product->getDetail($dataDetailOrder[$item]["MaHang"]);
+                $dataDetailOrder[$item]['MaHang'] = $product['MaHang'];
+                $dataDetailOrder[$item]['TenHang'] = $product['TenHang'];
+                $dataDetailOrder[$item]["GiaBan"] = $product["GiaBan"];
+                $dataDetailOrder[$item]["HinhAnh"] = $product["HinhAnh"];
+                $dataDetailOrder[$item]["DVT"] = $product["DVT"];
+            }
+            $_SESSION[$sessionVar] = $dataDetailOrder;
         }
 
         $this->data['sub_content']['order'] = $dataOrder;
-        $this->data['sub_content']['detailOrder'] = $dataDetailOrder;
-        $this->data['sub_content']['listProduct'] = $list_product;
+        $this->data['sub_content']['listDetailOrder'] = $_SESSION[$sessionVar];
         $this->data['sub_content']['employee'] = $dataEmployee;
         $this->data['sub_content']['customer'] = $dataCustomer;
 
