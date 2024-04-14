@@ -108,6 +108,13 @@ class Request
                         }
                     }
 
+                    if ($ruleName == 'check') {
+                        if ($dataFields[$fieldName] < 0 || $dataFields[$fieldName] > 1) {
+                            $this->setErrors($fieldName, $ruleName);
+                            $checkValidate = false;
+                        }
+                    }
+
                     if ($ruleName == 'min') {
                         if (strlen(trim($dataFields[$fieldName])) < $ruleValue) {
                             $this->setErrors($fieldName, $ruleName);
@@ -128,6 +135,8 @@ class Request
                             $checkValidate = false;
                         }
                     }
+                    
+                    
 
                     if ($ruleName == 'unique') {
                         $tableName = null;
@@ -179,6 +188,10 @@ class Request
         return $checkValidate;
     }
 
+    
+
+    
+    
     //get errors
     public function errors($fieldName = '')
     {
@@ -194,6 +207,7 @@ class Request
         }
         return false;
     }
+
 
     public function setErrors($fieldName, $ruleName)
     {
