@@ -22,5 +22,7 @@ class EmployeeModel extends Model{
         $data = $this->db->table('nhanvien')->where('MaNV', '=', $MaNV)->first();
         return $data;
     }
-    
+    public function updateEmployee($data, $id) {
+        $this->db->table('nhanvien')->where('MaNV', '=', $id)->update($data);        
+    }
 }

@@ -1,59 +1,79 @@
+<?php if (!empty($msg)): ?>
+    <div class="alert alert-danger" role="alert">
+        <?php echo $msg; ?>
+    </div>
+<?php endif; ?>
 <center>
     <h2>Sửa khách hàng</h2>
 </center>
-<form action="<?php echo _WEB_ROOT ?>/admin/customer/updateCustomers?MaKH=<?php echo $customer["MaKH"] ?>"
-    method="post">
+<form action="<?php echo _WEB_ROOT ?>/admin/Customer/editCustomer?MaKH=<?php echo $customer["MaKH"]; ?>&Username=<?php echo $customer["Username"]; ?>" method="post">
     <div class="row">
         <div style="margin: 0px 50px;" class="col">
             <div>
-                Mã khách hàng
+                <label for="">Mã khách hàng</label>
                 <input type="text" name="MaKH" class="form-control" value="<?php echo $customer["MaKH"] ?>" disabled />
             </div>
             <br />
             <div>
-                Tên khách hàng
-                <input type="text" name="TenKH" class="form-control" value="<?php echo $customer['TenKH'] ?>" />
+                <label for="">Tên khách hàng</label>
+                <input type="text" name="TenKH" class="form-control"
+                    value="<?php echo $customer["TenKH"]; !empty($old["TenKH"]) ? $old["TenKH"] : false;?>" />
+                <?php echo (!empty($errors) && array_key_exists('TenKH', $errors)) ? '<span class="text-danger">' . $errors["TenKH"] . '</span>' : false; ?>
             </div>
             <br />
             <div>
-                Tên đăng nhập
-                <input type="text" name="Username" class="form-control" value="<?php echo $customer['Username'] ?>" />
+                <label for="">Tên tài khoản</label>
+                <input type="text" name="Username" class="form-control"
+                    value="<?php echo $customer["Username"] ?>" />
+                <?php echo (!empty($errors) && array_key_exists('Username', $errors)) ? '<span class="text-danger">' . $errors["Username"] . '</span>' : false; ?>
             </div>
             <br />
             <div>
-                Mật khẩu
+                <label for="">Mật khẩu</label>
                 <input type="password" name="Password" class="form-control"
-                    value="<?php echo $customer['Password'] ?>" />
+                    value="<?php echo $customer["Password"]; !empty($old["Password"]) ? $old["Password"] : false; ?>" />
+                <?php echo (!empty($errors) && array_key_exists('Password', $errors)) ? '<span class="text-danger">' . $errors["Password"] . '</span>' : false; ?>
             </div>
             <br />
-        </div>
+        </div>                            
         <div style="margin: 0px 50px;" class="col">
             <div>
-                Email
-                <input type="email" name="Email" class="form-control" value="<?php echo $customer['Email'] ?>" />
-            </div><br />
+                <label for="">Email</label>
+                <input type="email" name="Email" class="form-control"
+                    value="<?php echo $customer["Email"]; !empty($old["Email"]) ? $old["Email"] : false; ?>" />
+                <?php echo (!empty($errors) && array_key_exists('Email', $errors)) ? '<span class="text-danger">' . $errors["Email"] . '</span>' : false; ?>
+            </div>
+            <br />  
             <div>
-                Số điện thoại
-                <input type="text" name="SDT" class="form-control" value="<?php echo $customer['SDT'] ?>" />
-            </div><br />
+                <label for="">Số điện thoại</label>
+                <input type="text" name="SDT" class="form-control"
+                    value="<?php echo $customer["SDT"]; !empty($old["SDT"]) ? $old["SDT"] : false; ?>" />
+                <?php echo (!empty($errors) && array_key_exists('SDT', $errors)) ? '<span class="text-danger">' . $errors["SDT"] . '</span>' : false; ?>
+            </div>
+            <br />
             <div>
-                Địa chỉ
-                <input type="text" name="DiaChi" class="form-control" value="<?php echo $customer['DiaChi'] ?>" />
-            </div><br />
-
+                <label for="">Địa chỉ</label>
+                <input type="text" name="DiaChi" class="form-control"
+                    value="<?php echo $customer["DiaChi"]; !empty($old["DiaChi"]) ? $old["DiaChi"] : false; ?>" />
+                <?php echo (!empty($errors) && array_key_exists('DiaChi', $errors)) ? '<span class="text-danger">' . $errors["DiaChi"] . '</span>' : false; ?>
+            </div>
+            <br />
             <div>
-                <label for="">TrangThai</label>
+                <label for="">Trạng thái</label>
                 <select name="TrangThai" class="form-select">
-                    <option value="1" <?= $customer['TrangThai'] == 1 ? 'selected' : '' ?>>1</option>
-                    <option value="0" <?= $customer['TrangThai'] == 0 ? 'selected' : '' ?>>0</option>
+                    <option value="1">1</option>
+                    <option value="0">0</option>
                 </select>
-            </div><br />
-        </div>
+                <?php echo (!empty($errors) && array_key_exists('TrangThai', $errors)) ? '<span class="text-danger">' . $errors["TrangThai"] . '</span>' : false; ?>
+            </div>
+            <br />
+        </div>    
     </div>
     <div>
-        <center><button type="submit" class="btn  btn-lg btn-success material-symbols-outlined">edit</button>
+        <center>
+            <button type="submit" class="btn  btn-lg btn-success material-symbols-outlined">add_circle </button>
         </center>
-        <a href="<?php echo _WEB_ROOT ?>/admin/customer" style="margin: 0px 50px;"
+        <a href="<?php echo _WEB_ROOT ?>/admin/Customer" style="margin: 0px 50px;"
             class="btn btn-lg btn-primary material-symbols-outlined">
             keyboard_return
         </a>
