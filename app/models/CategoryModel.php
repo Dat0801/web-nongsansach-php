@@ -42,4 +42,14 @@ class CategoryModel extends Model{
     public function getListWithLimit($limit, $offset) {
         return $this->db->table('NhomHang')->limit($limit, $offset)->get();
     }   
+
+    public function countProductsInCategory($categoryid) {
+        $data = $this->db->table('hanghoa')->where('MaNhomHang', '=', $categoryid)->get();
+        return count($data);
+    }
+
+    public function getProductByCategory($categoryid) {
+        $data = $this->db->table('hanghoa')->where('MaNhomHang', '=', $categoryid)->get();
+        return $data;
+    }
 }

@@ -17,6 +17,7 @@ class Suppliers extends Controller
         $datasuppliers = $this->suppliers->getsuppliersList();
         $this->data['sub_content']['list'] = $datasuppliers;
         $this->data['sub_content']['suppliers_model'] = $this->suppliers;
+        $this->data['sub_content']['display'] = 5;
         $this->render('layouts/admin_layout', $this->data);
     }
 

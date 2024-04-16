@@ -61,6 +61,16 @@
                 <?php echo (!empty($errors) && array_key_exists('DVT', $errors)) ? '<span class="text-danger">' . $errors["DVT"] . '</span>' : false; ?>
             </div><br />
             <div>
+                <label for="">Trọng lượng</label>
+                <input type="number" name="TrongLuong" class="form-control" />
+                <?php echo (!empty($errors) && array_key_exists('TrongLuong', $errors)) ? '<span class="text-danger">' . $errors["TrongLuong"] . '</span>' : false; ?>
+            </div><br />
+            <div>
+                <label for="">Đơn vị trọng lượng</label>
+                <input type="text" name="DonViTrongLuong" class="form-control" />
+                <?php echo (!empty($errors) && array_key_exists('DonViTrongLuong', $errors)) ? '<span class="text-danger">' . $errors["DonViTrongLuong"] . '</span>' : false; ?>
+            </div><br />
+            <div>
                 <label for="">Giá nhập</label>
                 <input type="number" name="GiaNhap" class="form-control"
                     value="<?php echo !empty($old["GiaNhap"]) ? $old["GiaNhap"] : false; ?>" />
@@ -73,10 +83,6 @@
                 <?php echo (!empty($errors) && array_key_exists('HeSo', $errors)) ? '<span class="text-danger">' . $errors["HeSo"] . '</span>' : false; ?>
             </div><br />
             <div>
-                <label for="">Giá bán</label>
-                <input type="number" name="GiaBan" class="form-control" disabled />
-            </div><br />
-            <div>
                 <label for="">Số lượng tồn</label>
                 <input type="number" step="any" name="SoLuongTon" class="form-control"
                     value="<?php echo !empty($old["SoLuongTon"]) ? $old["SoLuongTon"] : false; ?>" />
@@ -85,8 +91,8 @@
             <div>
                 <label for="">Trạng thái</label>
                 <select name="TrangThai" class="form-select">
-                    <option value="1">1</option>
-                    <option value="0">0</option>
+                    <option value="1">Hiển thị</option>
+                    <option value="0">Ẩn đi</option>
                 </select>
             </div><br />
         </div>

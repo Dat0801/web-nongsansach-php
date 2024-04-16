@@ -42,6 +42,8 @@ $list_product = $product_model->getListWithLimit($display, $position);
                 <th scope="col">Mã nhà cung cấp</th>
                 <th scope="col">Tên hàng</th>
                 <th scope="col">Đơn vị tính</th>
+                <th scope="col">Trọng lượng</th>
+                <th scope="col">Đơn vị trọng lượng</th>
                 <th scope="col">Giá bán</th>
                 <th scope="col">Hệ số</th>
                 <th scope="col">Giá nhập</th>
@@ -60,6 +62,8 @@ $list_product = $product_model->getListWithLimit($display, $position);
                 echo "<td>" . $product['MaNCC'] . "</td>";
                 echo "<td>" . $product['TenHang'] . "</td>";
                 echo "<td>" . $product['DVT'] . "</td>";
+                echo "<td>" . $product['TrongLuong'] . "</td>";
+                echo "<td>" . $product['DonViTrongLuong'] . "</td>";
                 echo "<td>" . $product['GiaBan'] . "</td>";
                 echo "<td>" . $product['HeSo'] . "</td>";
                 echo "<td>" . $product['GiaNhap'] . "</td>";

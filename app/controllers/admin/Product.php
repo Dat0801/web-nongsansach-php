@@ -25,6 +25,7 @@ class Product extends Controller
 
         $this->data['sub_content']['list'] = $dataProduct;
         $this->data['sub_content']['product_model'] = $this->product;
+        $this->data['sub_content']['display'] = 7;
 
         $this->render('layouts/admin_layout', $this->data);
     }
@@ -42,6 +43,8 @@ class Product extends Controller
             $request->rules([
                 'TenHang' => 'required|min:5|max:30|unique:HangHoa:TenHang',
                 'DVT' => 'required',
+                'TrongLuong' => 'required|callback_checkGreaterThanZero',
+                'DonViTrongLuong' => 'required',
                 'GiaNhap' => 'required|callback_checkGreaterThanZero',
                 'HeSo' => 'required|callback_checkGreaterThanZero',
                 'SoLuongTon' => 'required|callback_checkGreaterThanZero',
@@ -53,6 +56,9 @@ class Product extends Controller
                 'TenHang.max' => 'Ten hàng phải nhỏ hơn 30 ký tự',
                 'TenHang.unique' => 'Tên hàng đã tồn tại. Vui lòng chọn tên khác!',
                 'DVT.required' => 'Đơn vị tính không được để trống',
+                'TrongLuong.required' => 'Trọng lượng không được để trống',
+                'TrongLuong.callback_checkGreaterThanZero' => 'Trọng lượng phải lớn hơn 0',
+                'DonViTrongLuong.required' => 'Đơn vị trọng lượng không được để trống',
                 'GiaNhap.required' => 'Giá nhập không được để trống',
                 'GiaNhap.callback_checkGreaterThanZero' => 'Giá nhập phải lớn hơn 0',
                 'HeSo.required' => 'Hệ số không được để trống',
@@ -115,6 +121,8 @@ class Product extends Controller
             $request->rules([
                 'TenHang' => 'required|min:5|max:30|unique:HangHoa:TenHang:MaHang='.$id.'',
                 'DVT' => 'required',
+                'TrongLuong' => 'required|callback_checkGreaterThanZero',
+                'DonViTrongLuong' => 'required',
                 'GiaNhap' => 'required|callback_checkGreaterThanZero',
                 'HeSo' => 'required|callback_checkGreaterThanZero',
                 'SoLuongTon' => 'required|callback_checkGreaterThanZero',
@@ -126,6 +134,9 @@ class Product extends Controller
                 'TenHang.max' => 'Ten hàng phải nhỏ hơn 30 ký tự',
                 'TenHang.unique' => 'Tên hàng đã tồn tại. Vui lòng chọn tên khác!',
                 'DVT.required' => 'Đơn vị tính không được để trống',
+                'TrongLuong.required' => 'Trọng lượng không được để trống',
+                'TrongLuong.callback_checkGreaterThanZero' => 'Trọng lượng phải lớn hơn 0',
+                'DonViTrongLuong.required' => 'Đơn vị trọng lượng không được để trống',
                 'GiaNhap.required' => 'Giá nhập không được để trống',
                 'GiaNhap.callback_checkGreaterThanZero' => 'Giá nhập phải lớn hơn 0',
                 'HeSo.required' => 'Hệ số không được để trống',
@@ -169,6 +180,7 @@ class Product extends Controller
         }
         $this->data['sub_content']['list'] = $dataProduct;
         $this->data['sub_content']['product_model'] = $this->product;
+        $this->data['sub_content']['display'] = 7;
 
         $this->render('layouts/admin_layout', $this->data);
     }
