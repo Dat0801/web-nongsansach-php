@@ -27,6 +27,7 @@ class Order extends Controller
 
         $this->data['sub_content']['list'] = $dataOrder;
         $this->data['sub_content']['order_model'] = $this->order;
+        $this->data['sub_content']['display'] = 5;
 
         $this->render('layouts/admin_layout', $this->data);
     }
@@ -53,6 +54,8 @@ class Order extends Controller
                 $dataDetailOrder[$item]["GiaBan"] = $product["GiaBan"];
                 $dataDetailOrder[$item]["HinhAnh"] = $product["HinhAnh"];
                 $dataDetailOrder[$item]["DVT"] = $product["DVT"];
+                $dataDetailOrder[$item]["TrongLuong"] = $product["TrongLuong"];
+                $dataDetailOrder[$item]["DonViTrongLuong"] = $product["DonViTrongLuong"];
             }
             $_SESSION[$sessionVar] = $dataDetailOrder;
         }

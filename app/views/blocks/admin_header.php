@@ -70,7 +70,7 @@
                 </a>
                 <div id="collapseQLTrang" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-gradient-success py-2 collapse-inner rounded">
-                        <a class="collapse-item" href="../index.php">Trang người dùng</a>
+                        <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/home">Trang người dùng</a>
                     </div>
                 </div>
             </li>

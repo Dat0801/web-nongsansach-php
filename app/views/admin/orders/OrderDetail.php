@@ -48,6 +48,8 @@
                 <th scope="col">Tên hàng</th>
                 <th scope="col">Hình ảnh</th>
                 <th scope="col">Đơn vị tính</th>
+                <th scope="col">Trọng lượng</th>
+                <th scope="col">Đơn vị trọng lượng</th>
                 <th scope="col">Số lượng</th>
                 <th scope="col">Giá bán</th>
                 <th scope="col">Thành tiền</th>
@@ -61,6 +63,8 @@
                 echo "<td>" . $detailOrder['TenHang'] . "</td>";
                 echo "<td> <img style=\"width:50px\" src=\"" . _WEB_ROOT . "/public/assets/client/img/" . $detailOrder['HinhAnh'] . "\"></td>";
                 echo "<td>" . $detailOrder['DVT'] . "</td>";
+                echo "<td>" . $detailOrder['TrongLuong'] . "</td>";
+                echo "<td>" . $detailOrder['DonViTrongLuong'] . "</td>";
                 echo "<td>" . $detailOrder['SoLuong'] . "</td>";
                 echo "<td>" . $detailOrder['GiaBan'] . "</td>";
                 echo "<td>" . $detailOrder['ThanhTien'] . "</td>";

@@ -18,6 +18,11 @@ class ProductModel extends Model{
         return $data;
     }
 
+    public function getProductByCategory($categoryid) {
+        $data = $this->db->table('hanghoa')->where('MaNhomHang', '=', $categoryid)->get();
+        return $data;
+    }
+
     public function getDetail($MaHang) {
         $data = $this->db->table('hanghoa')->where('MaHang', '=', $MaHang)->first();
         return $data;
@@ -39,8 +44,11 @@ class ProductModel extends Model{
     public function updateProduct($data, $id) {
         $this->db->table('hanghoa')->where('MaHang', '=', $id)->update($data);
     }
-    public function getListWithLimit($limit, $offset) {
-        return $this->db->table('hanghoa')->limit($limit, $offset)->get();
+    public function getListWithLimit($limit, $offset, $categoryid = null) {
+        if($categoryid == null) {
+            return $this->db->table('hanghoa')->limit($limit, $offset)->get();
+        }
+        return $this->db->table('hanghoa')->where('MaNhomHang', '=', $categoryid)->limit($limit, $offset)->get();
     }
     public function getListRecycleWithLimit($limit, $offset) {
         return $this->db->table('hanghoa')->limit($limit, $offset)->get(0);

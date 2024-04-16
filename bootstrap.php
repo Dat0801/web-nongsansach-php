@@ -23,6 +23,8 @@ if(!empty($configs_dir)) {
         }
     }
 }
+
+require_once 'core/Session.php';// Load session
 require_once 'app/App.php';// Load app
 
 // Kiểm tra config và load Database

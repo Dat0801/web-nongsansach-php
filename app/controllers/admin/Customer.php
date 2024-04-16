@@ -11,9 +11,13 @@ class Customer extends Controller{
     public function index() {
         $this->data['content'] = '/admin/customers/ViewCustomer';
         $this->data['title'] = 'Trang khách hàng';
+        
         $dataCustomer = $this->customer->getCustomerList();
+
+        $this->data['sub_content']['display'] = 5;
         $this->data['sub_content']['list'] = $dataCustomer;
         $this->data['sub_content']['customer_model'] = $this->customer;
+
         $this->render('layouts/admin_layout', $this->data);
     }
 

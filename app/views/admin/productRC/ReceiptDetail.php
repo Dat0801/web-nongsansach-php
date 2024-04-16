@@ -40,7 +40,7 @@
                 <th scope="col">HinhAnh</th>
                 <th scope="col">DVT</th>
                 <th scope="col">SoLuong</th>
-                <th scope="col">GiaBan</th>
+                <th scope="col">GiaNhap</th>
                 <th scope="col">ThanhTien</th>
             </tr>
         </thead>
@@ -53,7 +53,7 @@
                 echo "<td> <img style=\"width:50px\" src=\"" . _WEB_ROOT . "/public/assets/client/img/" . $product['HinhAnh'] . "\"></td>";
                 echo "<td>" . $product['DVT'] . "</td>";
                 echo "<td>" . $product['SoLuong'] . "</td>";
-                echo "<td>" . $product['GiaBan'] . "</td>";
+                echo "<td>" . $product['GiaNhap'] . "</td>";
                 echo "<td>" . $product['ThanhTien'] . "</td>";
             }
             ?>

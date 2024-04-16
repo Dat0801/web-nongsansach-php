@@ -1,61 +1,60 @@
 <?php
-class Product extends Controller{
+class Product extends Controller
+{
 
     public $data = [];
-    public $product;
+    public $product, $category, $supplier;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->product = $this->model('ProductModel');
+        $this->category = $this->model('CategoryModel');
+        $this->supplier = $this->model('SuppliersModel');
     }
 
-    public function index() {
+    public function index()
+    {
         $this->data['content'] = 'products/index';
         $this->data['title'] = 'Trang sản phẩm';
+
         $this->data['sub_content']['name'] = 'Sản Phẩm';
+        $this->data['sub_content']['display'] = 9;
+
+        if (isset($_GET['categoryid'])) {
+            $this->data['sub_content']['categoryid'] = $_GET['categoryid'];
+            $this->data['sub_content']['list'] = $this->product->getProductByCategory($_GET['categoryid']);
+        } else {
+            $this->data['sub_content']['list'] = $this->product->getProductList();
+        }
+
+        $categories = $this->category->getCategoryList();
+
+        foreach ($categories as $key => $category) {
+            $categories[$key]['productCount'] = $this->category->countProductsInCategory($category['MaNhomHang']);
+        }
+
+        $this->data['sub_content']['categories'] = $categories;
+        $this->data['sub_content']['productsBestSelling'] = $this->product->getListWithLimit(3, 0);
+        $this->data['sub_content']['product_model'] = $this->product;
+
         $this->render('layouts/client_layout', $this->data);
     }
 
-    public function list_product() {
-       // $dataProduct = $this->product->getProductList();
-        //$dataProduct = $this->product->get();
-        $dataProduct = $this->db->table('hanghoa')->get();
-        $this->data['product_list'] = $dataProduct;
-        //Render View
-        $this->render('products/list', $this->data);
-    }
-
-    public function detail($id=0) {
-        $product = $this->model('ProductModel');
-        //$this->data['sub-content']['info'] = $product->getDetail($id);
+    public function detail()
+    {
         $this->data['content'] = 'products/detail';
-        $this->data['title'] = 'Trang chi tiết sản phẩm';
-        $this->render('layouts/client_layout', $this->data);
-    }
+        $this->data['title'] = 'Chi tiết sản phẩm';
 
-    public function get_category() {
-        $request = new Request();
+        $id = $_GET['productid'];
         
-    }
+        $dataProduct = $this->product->getDetail($id);
 
-    public function post_category() {
-        $request = new Request();
-        $data = $request->getFields();
-        print_r($data);
+        $this->data['sub_content']['product'] = $dataProduct;
+        $this->data['sub_content']['category'] = $this->category->getDetail($dataProduct["MaNhomHang"]);
+        $this->data['sub_content']['categories'] = $this->category->getCategoryList();
+        $this->data['sub_content']['supplier'] = $this->supplier->getDetail($dataProduct["MaNCC"]);
+        $this->data['sub_content']['productsByCategory'] = $this->product->getProductByCategory($dataProduct["MaNhomHang"]);
 
-        $request->rules([
-            'fullname' => 'required|min:5|max:30',
-            'email' => 'required|email|min:6',
-        ]);
-
-        $request->messages([
-            'fullname.required' => 'Họ tên không được để trống',
-            'fullname.min' => 'Họ tên phải lớn hơn 5 ký tự',
-            'fullname.max' => 'Họ tên phải nhỏ hơn 30 ký tự',
-            'email.required' => 'Email không được để trống',
-            'email.email' => 'Email không đúng định dạng',
-            'email.min' => 'Email phải lớn hơn 6 ký tự',
-        ]);
-
-        $validate = $request->validate();
+        $this->render('layouts/client_layout', $this->data);
     }
 }

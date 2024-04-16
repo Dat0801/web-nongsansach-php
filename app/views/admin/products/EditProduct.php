@@ -54,6 +54,11 @@
             </div>
             <br />
             <div>
+                <label for="">Giá bán</label>
+                <input type="number" name="GiaBan" class="form-control" value="<?php echo $product['GiaBan'] ?>"
+                    disabled />
+            </div><br />
+            <div>
                 <label for="formFile" class="form-label">Hình ảnh sản phẩm</label>
                 <div class="custom-file mb-3">
                     <input type="file" class="custom-file-input" id="customFile" name="HinhAnh">
@@ -63,7 +68,8 @@
             <div>
                 <img src="<?php echo _WEB_ROOT ?>/public/assets/client/img/<?php echo $product['HinhAnh'] ?>"
                     width="150" style="border-radius: 10px;" id="imghanghoa" />
-            </div><br />
+            </div>
+            
         </div>
         <br />
         <div style="margin: 0px 50px" class="col">
@@ -73,20 +79,29 @@
                 <?php echo (!empty($errors) && array_key_exists('DVT', $errors)) ? '<span class="text-danger">' . $errors["DVT"] . '</span>' : false; ?>
             </div><br />
             <div>
+                <label for="">Trọng lượng</label>
+                <input type="number" name="TrongLuong" class="form-control"
+                    value="<?php echo $product['TrongLuong'] ?>" />
+                <?php echo (!empty($errors) && array_key_exists('TrongLuong', $errors)) ? '<span class="text-danger">' . $errors["TrongLuong"] . '</span>' : false; ?>
+            </div><br />
+            <div>
+                <label for="">Đơn vị trọng lượng</label>
+                <input type="text" name="DonViTrongLuong" class="form-control"
+                    value="<?php echo $product['DonViTrongLuong'] ?>" />
+                <?php echo (!empty($errors) && array_key_exists('DonViTrongLuong', $errors)) ? '<span class="text-danger">' . $errors["DonViTrongLuong"] . '</span>' : false; ?>
+            </div><br />
+            <div>
                 <label for="">Giá nhập</label>
                 <input type="number" name="GiaNhap" class="form-control" value="<?php echo $product['GiaNhap'] ?>" />
                 <?php echo (!empty($errors) && array_key_exists('GiaNhap', $errors)) ? '<span class="text-danger">' . $errors["GiaNhap"] . '</span>' : false; ?>
             </div><br />
             <div>
                 <label for="">Hệ số</label>
-                <input type="number" step="any" name="HeSo" class="form-control" value="<?php echo $product['HeSo'] ?>" />
+                <input type="number" step="any" name="HeSo" class="form-control"
+                    value="<?php echo $product['HeSo'] ?>" />
                 <?php echo (!empty($errors) && array_key_exists('HeSo', $errors)) ? '<span class="text-danger">' . $errors["HeSo"] . '</span>' : false; ?>
             </div><br />
-            <div>
-                <label for="">Giá bán</label>
-                <input type="number" name="GiaBan" class="form-control" value="<?php echo $product['GiaBan'] ?>"
-                    disabled />
-            </div><br />
+
             <div>
                 <label for="">Số lượng tồn</label>
                 <input type="number" step="any" name="SoLuongTon" class="form-control"
@@ -96,8 +111,8 @@
             <div>
                 <label for="">Trạng thái</label>
                 <select name="TrangThai" class="form-select">
-                    <option value="1" <?= $product['TrangThai'] == 1 ? 'selected' : '' ?>>1</option>
-                    <option value="0" <?= $product['TrangThai'] == 0 ? 'selected' : '' ?>>0</option>
+                    <option value="1" <?= $product['TrangThai'] == 1 ? 'selected' : '' ?>>Hiển thị</option>
+                    <option value="0" <?= $product['TrangThai'] == 0 ? 'selected' : '' ?>>Ẩn đi</option>
                 </select>
             </div><br />
         </div>
