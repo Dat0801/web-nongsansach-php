@@ -21,6 +21,7 @@ class Category extends Controller
         } else {
             $datacategory = $this->category->getcategoryList();
         }
+
         $this->data['sub_content']['display'] = 5;
         $this->data['sub_content']['list'] = $datacategory;
         $this->data['sub_content']['category_model'] = $this->category;
