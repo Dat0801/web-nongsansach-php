@@ -4,7 +4,7 @@ $category_list = $category_model->getListWithLimit($display, $position);
 ?>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
     integrity="sha384-pzjw8s+ekmvplp5f/ZxXnDQbcz0S7bJr6W2kcoFVGLsRakET4Qc5I2tG4LDA2tB" crossorigin="anonymous">
-<form class="d-flex" action="" method="post">
+<form class="d-flex" action="<?php echo _WEB_ROOT ?>/admin/category" method="get">
     <div style="margin: 0 auto">
         <input class="form-control me-2" type="search" placeholder="Tìm kiếm sản phẩm" aria-label="Tìm kiếm sản phẩm..."
             style="width:400px; margin: 0 auto" name="searchStr" id="searchStr">
@@ -35,7 +35,7 @@ $category_list = $category_model->getListWithLimit($display, $position);
         </thead>
         <tbody>
             <?php
-            foreach ($category_list as $category) {
+            foreach ($list as $category) {
                 echo '<tr>';
                 echo "<td>" . $category['MaNhomHang'] . "</td>";
                 echo "<td>" . $category['TenNhomHang'] . "</td>";
