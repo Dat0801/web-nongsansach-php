@@ -29,7 +29,11 @@ class ProductModel extends Model{
     }
     
     public function searchProduct($searchStr) {
-        $data = $this->db->table('hanghoa')->where('TenHang', 'like', '%'.$searchStr.'%')->get();
+        $tableColumns = [
+            'hanghoa' => ['MaHang', 'MaNhomHang', 'MaNCC', 'TenHang', 'DVT', 'TrongLuong', 'DonViTrongLuong', 'GiaBan', 'HeSo', 'GiaNhap', 'HinhAnh', 'SoLuongTon', 'TrangThai']                   
+        ];
+        // $data = $this->db->table('hanghoa')->orWhereAllColumns($searchStr, $tableColumns)->get();
+        $data = $this->db->table('hanghoa')->where('TenHang', 'LIKE', "%$searchStr%")->get();
         return $data;
     }
 

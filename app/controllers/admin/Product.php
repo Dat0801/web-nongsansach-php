@@ -16,17 +16,23 @@ class Product extends Controller
     {
         $this->data['content'] = '/admin/products/ViewProduct';
         $this->data['title'] = 'Danh sách sản phẩm';
-
-        $dataProduct = $this->product->getProductList();
+        
 
         if (!empty($_GET['msg'])) {
             $this->data['sub_content']['msg'] = $_GET['msg'];
         }
 
+        if (!empty($_GET['searchStr'])) {
+            $str = $_GET['searchStr'];
+            $dataProduct = $this->product->searchProduct($str);
+        } else {
+            $dataProduct = $this->product->getProductList();
+        }
+        
         $this->data['sub_content']['list'] = $dataProduct;
         $this->data['sub_content']['product_model'] = $this->product;
         $this->data['sub_content']['display'] = 7;
-
+        
         $this->render('layouts/admin_layout', $this->data);
     }
 
@@ -198,4 +204,11 @@ class Product extends Controller
         $this->product->deletePermanentProduct($id);
         header('Location: ' . _WEB_ROOT . '/admin/product/recycleProduct/index?msg=Xóa vĩnh viễn thành công!');
     }
+    public function searchProduct()
+    {
+        $str = $_GET["searchStr"];
+        $this->product->searchProduct($str);
+        header('Location: ' . _WEB_ROOT . '/admin/product/index?msg=Kết quả tìm kiếm: ' . $str);
+    }
+    
 }
