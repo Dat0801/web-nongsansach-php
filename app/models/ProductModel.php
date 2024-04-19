@@ -1,72 +1,99 @@
 <?php
-class ProductModel extends Model{
-    
-    function tableFill() {
+class ProductModel extends Model
+{
+
+    function tableFill()
+    {
         return 'hanghoa';
     }
 
-    function fieldFill() {
+    function fieldFill()
+    {
         return '*';
     }
 
-    function primaryKey(){
+    function primaryKey()
+    {
         return 'MaHang';
     }
 
-    public function getProductList() {
+    public function getProductList()
+    {
         $data = $this->db->table('hanghoa')->get();
         return $data;
     }
 
-    public function getProductByCategory($categoryid) {
+    public function getProductByCategory($categoryid)
+    {
         $data = $this->db->table('hanghoa')->where('MaNhomHang', '=', $categoryid)->get();
         return $data;
     }
 
-    public function getDetail($MaHang) {
+    public function getDetail($MaHang)
+    {
         $data = $this->db->table('hanghoa')->where('MaHang', '=', $MaHang)->first();
         return $data;
     }
-    
-    public function searchProduct($searchStr) {
+
+    public function searchProduct($searchStr)
+    {
         $tableColumns = [
-            'hanghoa' => ['MaHang', 'MaNhomHang', 'MaNCC', 'TenHang', 'DVT', 'TrongLuong', 'DonViTrongLuong', 'GiaBan', 'HeSo', 'GiaNhap', 'HinhAnh', 'SoLuongTon', 'TrangThai']                   
+            'hanghoa' => ['MaHang', 'MaNhomHang', 'MaNCC', 'TenHang', 'DVT', 'TrongLuong', 'DonViTrongLuong', 'GiaBan', 'HeSo', 'GiaNhap', 'HinhAnh', 'SoLuongTon', 'TrangThai']
         ];
-        // $data = $this->db->table('hanghoa')->orWhereAllColumns($searchStr, $tableColumns)->get();
-        $data = $this->db->table('hanghoa')->where('TenHang', 'LIKE', "%$searchStr%")->get();
+        $data = $this->db->table('hanghoa')->orWhereLikeAllColumns($searchStr, $tableColumns)->get();
         return $data;
     }
 
-    public function addProduct($data) {
+    public function addProduct($data)
+    {
         $this->db->table('hanghoa')->insert($data);
     }
 
-    public function deleteProduct($id) {
+    public function deleteProduct($id)
+    {
         $this->db->table('hanghoa')->where('MaHang', '=', $id)->delete();
     }
 
-    public function updateProduct($data, $id) {
+    public function updateProduct($data, $id)
+    {
         $this->db->table('hanghoa')->where('MaHang', '=', $id)->update($data);
     }
-    public function getListWithLimit($limit, $offset, $categoryid = null) {
-        if($categoryid == null) {
+    public function getListWithLimit($limit, $offset, $categoryid = null)
+    {
+        if ($categoryid == null) {
             return $this->db->table('hanghoa')->limit($limit, $offset)->get();
         }
         return $this->db->table('hanghoa')->where('MaNhomHang', '=', $categoryid)->limit($limit, $offset)->get();
     }
-    public function getListRecycleWithLimit($limit, $offset) {
+
+    public function getListWithLimitSearch($limit, $offset, $searchStr = null)
+    {
+        $tableColumns = [
+            'hanghoa' => ['MaHang', 'MaNhomHang', 'MaNCC', 'TenHang', 'DVT', 'TrongLuong', 'DonViTrongLuong', 'GiaBan', 'HeSo', 'GiaNhap', 'HinhAnh', 'SoLuongTon', 'TrangThai']
+        ];
+        if ($searchStr) {
+            return $this->db->table('hanghoa')->orWhereLikeAllColumns($searchStr, $tableColumns)->limit($limit, $offset)->get();
+        }
+        return $this->db->table('hanghoa')->limit($limit, $offset)->get();
+    }
+
+    public function getListRecycleWithLimit($limit, $offset)
+    {
         return $this->db->table('hanghoa')->limit($limit, $offset)->get(0);
     }
-    public function getRecycleProductList() {
+    public function getRecycleProductList()
+    {
         $data = $this->db->table('hanghoa')->get(0);
         return $data;
     }
 
-    public function recoverProduct($id) {
+    public function recoverProduct($id)
+    {
         $this->db->table('hanghoa')->where('MaHang', '=', $id)->update(['TrangThai' => 1]);
     }
 
-    public function deletePermanentProduct($id) {
+    public function deletePermanentProduct($id)
+    {
         $this->db->table('hanghoa')->where('MaHang', '=', $id)->delete(true);
     }
 }
