@@ -1,6 +1,12 @@
 <?php
 include_once "app/views/admin/pagination/pagination.php";
-$list_product = $product_model->getListWithLimit($display, $position);
+if(isset($_GET['searchStr'])){
+    $searchStr = $_GET['searchStr'];
+}
+else{
+    $searchStr = null;
+}
+$list_product = $product_model->getListWithLimitSearch($display, $position, $searchStr);
 ?>
 <?php if(!empty($msg)): ?>
 <div class="alert alert-success" role="alert">
@@ -88,7 +94,7 @@ $list_product = $product_model->getListWithLimit($display, $position);
             $first_page = 1;
             ?>
             <li class="page-item" style="margin-right: 10px;">
-                <a class="page-link" href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$first_page" ?>"
+                <a class="page-link" href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$first_page".  (!empty($searchStr) ? "&searchStr=$searchStr" : "") ?>"
                     aria-label="Previous">
                     <span aria-hidden="true">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -100,7 +106,7 @@ $list_product = $product_model->getListWithLimit($display, $position);
                 </a>
             </li>
             <li class="page-item">
-                <a class="page-link" href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$prev_page" ?>"
+                <a class="page-link" href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$prev_page".  (!empty($searchStr) ? "&searchStr=$searchStr" : "") ?>"
                     aria-label="Previous">
                     <span aria-hidden="true">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -117,7 +123,7 @@ $list_product = $product_model->getListWithLimit($display, $position);
             $isActive = ($curr_page == $page_item) ? 'active' : '';
             ?>
             <li class="page-item <?php echo $isActive; ?>">
-                <a class="page-link" href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$page_item" ?>">
+                <a class="page-link" href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$page_item".  (!empty($searchStr) ? "&searchStr=$searchStr" : "") ?>">
                     <?php echo $page_item ?>
                 </a>
             </li>
@@ -128,7 +134,7 @@ $list_product = $product_model->getListWithLimit($display, $position);
             $last_page = $total_pages;
             ?>
             <li class="page-item">
-                <a class="page-link" href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$next_page" ?>"
+                <a class="page-link" href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$next_page".  (!empty($searchStr) ? "&searchStr=$searchStr" : "") ?>"
                     aria-label="Next">
                     <span aria-hidden="true">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -140,7 +146,7 @@ $list_product = $product_model->getListWithLimit($display, $position);
                 </a>
             </li>
             <li class="page-item" style="margin-left: 10px;">
-                <a class="page-link" href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$last_page" ?>"
+                <a class="page-link" href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$last_page".  (!empty($searchStr) ? "&seachStr=$searchStr" : "") ?>"
                     aria-label="Next">
                     <span aria-hidden="true">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

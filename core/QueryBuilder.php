@@ -40,7 +40,7 @@ trait QueryBuilder
     }
 
 
-    public function orWhereAllColumns($searchTerm, $tableColumns)
+    public function orWhereLikeAllColumns($searchTerm, $tableColumns)
     {
         if (empty($this->where)) {
             $this->operator = ' WHERE ';
