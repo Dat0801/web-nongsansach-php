@@ -113,7 +113,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-gradient-success py-2 collapse-inner rounded">
                         <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/category">Xem danh mục</a>
-                        <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/category/viewaddcategory">Thêm danh
+                        <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/category/addcategory">Thêm danh
                             mục</a>
                     </div>
                 </div>
@@ -172,7 +172,7 @@
                     data-parent="#accordionSidebar">
                     <div class="bg-gradient-success py-2 collapse-inner rounded">
                         <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/suppliers">Xem nhà cung cấp</a>
-                        <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/suppliers/viewaddsuppliers">Thêm
+                        <a class="collapse-item" href="<?php echo _WEB_ROOT ?>/admin/suppliers/addsuppliers">Thêm
                             nhà cung cấp</a>
                     </div>
                 </div>

@@ -6,10 +6,10 @@ $suppliers_list = $suppliers_model->getListWithLimit($display, $position);
     integrity="sha384-pzjw8s+ekmvplp5f/ZxXnDQbcz0S7bJr6W2kcoFVGLsRakET4Qc5I2tG4LDA2tB" crossorigin="anonymous">
 <form class="d-flex" action="" method="post">
     <div style="margin: 0 auto">
-        <input class="form-control me-2" type="search" placeholder="Tìm kiếm nhà cung cấp"
-            aria-label="Tìm kiếm sản phẩm..." style="width:400px; margin: 0 auto" name="searchStr" id="searchStr">
+        <input class="form-control me-2" type="search" placeholder="Nhập tên nhà cung cấp..."
+            aria-label="Tìm kiếm nhà cung cấp..." style="width:400px; margin: 0 auto" name="searchStr" id="searchStr">
         <center>
-            <button class="btn btn-outline-success m-2" type="submit">Search</button>
+            <button class="btn btn-outline-success m-2" type="submit">Tìm kiếm</button>
         </center>
     </div>
 </form>

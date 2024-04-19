@@ -80,7 +80,7 @@ class Suppliers extends Controller
     public function AddSuppliers()
     {
         $this->data['content'] = '/admin/suppliers/Addsuppliers';
-        $this->data['title'] = 'Trang thêm danh mục';
+        $this->data['title'] = 'Trang thêm thoong tin nhà cung cấp';
         $request = new Request();
 
         if ($request->isPost()) {
