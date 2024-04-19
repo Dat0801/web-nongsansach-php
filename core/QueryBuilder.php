@@ -39,6 +39,27 @@ trait QueryBuilder
         return $this;
     }
 
+
+    public function orWhereAllColumns($searchTerm, $tableColumns)
+    {
+        if (empty($this->where)) {
+            $this->operator = ' WHERE ';
+        } else {
+            $this->operator = ' OR ';
+        }
+
+        $conditions = [];
+        foreach ($tableColumns as $table => $columns) {
+            foreach ($columns as $column) {
+                $conditions[] = "$table.$column LIKE '%$searchTerm%'";
+            }
+        }
+
+        $this->where .= $this->operator . implode(' OR ', $conditions);
+
+        return $this;
+    }
+
     // Like
     public function whereLike($field, $value)
     {

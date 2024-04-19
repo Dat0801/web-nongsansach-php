@@ -7,7 +7,7 @@ $list_product = $product_model->getListWithLimit($display, $position);
     <?php echo $msg; ?>
 </div>
 <?php endif; ?>
-<form class="d-flex" action="" method="post">
+<form class="d-flex" action="<?php echo _WEB_ROOT ?>/admin/product/index" method="get">
     <div style="margin: 0 auto">
         <input class="form-control me-2" type="search" placeholder="Tìm kiếm hàng hóa" aria-label="Tìm kiếm hàng hóa..."
             style="width:400px; margin: 0 auto" name="searchStr" id="searchStr">
