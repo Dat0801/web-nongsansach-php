@@ -59,8 +59,27 @@ class OrderModel extends Model
         $this->db->table('hoadon')->where('MaHD', '=', $id)->update(['TrangThai' => 'Đã hủy']);
     }
 
+    public function searchOrder($searchStr)
+    {
+        $tableColumns = [
+            'hoadon' => ['MaHD', 'MaNV', 'MaKH', 'NgayTao', 'NgayGiao', 'TongTien', 'TrangThai']
+        ];
+        $data = $this->db->table('hoadon')->orWhereLikeAllColumns($searchStr, $tableColumns)->get();
+        return $data;
+    }
     public function getListWithLimit($limit, $offset)
     {
         return $this->db->table('hoadon')->limit($limit, $offset)->get();
     }
+    public function getListWithLimitSearch($limit, $offset, $searchStr = null)
+    {
+        $tableColumns = [
+            'hoadon' => ['MaHD', 'MaNV', 'MaKH', 'NgayTao', 'NgayGiao', 'TongTien', 'TrangThai']
+        ];
+        if ($searchStr) {
+            return $this->db->table('hoadon')->orWhereLikeAllColumns($searchStr, $tableColumns)->limit($limit, $offset)->get();
+        }
+        return $this->db->table('hoadon')->limit($limit, $offset)->get();
+    }
+
 }

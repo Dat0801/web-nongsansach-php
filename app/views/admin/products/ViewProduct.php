@@ -1,7 +1,7 @@
 <?php
 include_once "app/views/admin/pagination/pagination.php";
 if(isset($_GET['searchStr'])){
-    $searchStr = $_GET['searchStr'];
+    $searchStr = trim($_GET['searchStr']);
 }
 else{
     $searchStr = null;

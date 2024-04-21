@@ -23,7 +23,14 @@ class ProductReceiptModel extends Model{
         return $data;
     }
     
-    
+    public function searchProductRC($searchStr)
+    {
+        $tableColumns = [
+            'phieunhap' => ['MaPN', 'MaNV', 'MaNCC', 'NgayNhap', 'TongTien', 'TrangThai']
+        ];
+        $data = $this->db->table('phieunhap')->orWhereLikeAllColumns($searchStr, $tableColumns)->get();
+        return $data;
+    }
 
     public function addProductReceipt($data) {
         $this->db->table('phieunhap')->insert($data);
@@ -37,6 +44,16 @@ class ProductReceiptModel extends Model{
         $this->db->table('phieunhap')->where('MaPN', '=', $id)->update($data);
     }
     public function getListWithLimit($limit, $offset) {
+        return $this->db->table('phieunhap')->limit($limit, $offset)->get();
+    }
+    public function getListWithLimitSearch($limit, $offset, $searchStr = null)
+    {
+        $tableColumns = [
+            'phieunhap' => ['MaPN', 'MaNV', 'MaNCC', 'NgayNhap', 'TongTien', 'TrangThai']
+        ];
+        if ($searchStr) {
+            return $this->db->table('phieunhap')->orWhereLikeAllColumns($searchStr, $tableColumns)->limit($limit, $offset)->get();
+        }
         return $this->db->table('phieunhap')->limit($limit, $offset)->get();
     }
 }

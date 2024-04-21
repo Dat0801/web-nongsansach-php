@@ -25,6 +25,13 @@ class Order extends Controller
             $this->data['sub_content']['msg'] = $_GET['msg'];
         }
 
+        if (!empty($_GET['searchStr'])) {
+            $str = $_GET['searchStr'];
+            $dataOrder = $this->order->searchOrder($str);
+        } else {
+            $dataOrder = $this->order->getOrderList();
+        }
+
         $this->data['sub_content']['list'] = $dataOrder;
         $this->data['sub_content']['order_model'] = $this->order;
         $this->data['sub_content']['display'] = 5;

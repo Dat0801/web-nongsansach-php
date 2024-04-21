@@ -18,8 +18,20 @@ class ProductReceipt extends Controller
     {
         $this->data['content'] = '/admin/productRC/ViewProductReceipt';
         $this->data['title'] = 'Trang nhập hàng';
-        $dataProduct = $this->productRC->getProductRCList();
-        $this->data['sub_content']['list'] = $dataProduct;
+        $dataProductRC = $this->productRC->getProductRCList();
+
+        if (!empty($_GET['msg'])) {
+            $this->data['sub_content']['msg'] = $_GET['msg'];
+        }
+
+        if (!empty($_GET['searchStr'])) {
+            $str = $_GET['searchStr'];
+            $dataProductRC = $this->productRC->searchProductRC($str);
+        } else {
+            $dataProductRC = $this->productRC->getProductRCList();
+        }
+
+        $this->data['sub_content']['list'] = $dataProductRC;
         $this->data['sub_content']['productRC_model'] = $this->productRC;
         $this->data['sub_content']['display'] = 5;
         $this->render('layouts/admin_layout', $this->data);
