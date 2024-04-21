@@ -44,6 +44,15 @@ class ProductModel extends Model
         return $data;
     }
 
+    public function searchProductClient($searchStr)
+    {
+        $tableColumns = [
+            'hanghoa' => ['TenHang', 'DVT', 'TrongLuong', 'DonViTrongLuong', 'GiaBan']
+        ];
+        $data = $this->db->table('hanghoa')->orWhereLikeAllColumns($searchStr, $tableColumns)->get();
+        return $data;
+    }
+
     public function addProduct($data)
     {
         $this->db->table('hanghoa')->insert($data);
@@ -58,12 +67,18 @@ class ProductModel extends Model
     {
         $this->db->table('hanghoa')->where('MaHang', '=', $id)->update($data);
     }
-    public function getListWithLimit($limit, $offset, $categoryid = null)
+    public function getListWithLimit($limit, $offset, $categoryid = null, $searchStr = null)
     {
-        if ($categoryid == null) {
+        if ($categoryid != null && $searchStr == null) {
+            return $this->db->table('hanghoa')->where('MaNhomHang', '=', $categoryid)->limit($limit, $offset)->get();
+        } else if ($searchStr != null) {
+            $tableColumns = [
+                'hanghoa' => ['TenHang', 'DVT', 'TrongLuong', 'DonViTrongLuong', 'GiaBan']
+            ];
+            return $this->db->table('hanghoa')->orWhereLikeAllColumns($searchStr, $tableColumns)->limit($limit, $offset)->get();
+        } else {
             return $this->db->table('hanghoa')->limit($limit, $offset)->get();
         }
-        return $this->db->table('hanghoa')->where('MaNhomHang', '=', $categoryid)->limit($limit, $offset)->get();
     }
 
     public function getListWithLimitSearch($limit, $offset, $searchStr = null)

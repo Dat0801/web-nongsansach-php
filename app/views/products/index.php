@@ -1,6 +1,12 @@
 <?php
 include_once "app/views/admin/pagination/pagination.php";
-$products = $product_model->getListWithLimit($display, $position, $categoryid);
+if(isset($_GET['searchStr'])){
+    $searchStr = trim($_GET['searchStr']);
+}
+else{
+    $searchStr = null;
+}
+$products = $product_model->getListWithLimit($display, $position, $categoryid, $searchStr);
 ?>
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
@@ -14,11 +20,11 @@ $products = $product_model->getListWithLimit($display, $position, $categoryid);
         <div class="row g-4">
             <div class="row g-4" style="padding-bottom: 20px;">
                 <div class="col-xl-3">
-                    <div class="input-group w-100 mx-auto d-flex">
+                    <form class="input-group w-100 mx-auto d-flex" action="<?php echo _WEB_ROOT ?>/product" method="get">
                         <input type="search" class="form-control p-3" placeholder="Từ khóa"
-                            aria-describedby="search-icon-1">
-                        <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
-                    </div>
+                            aria-describedby="search-icon-1" name="searchStr">
+                        <button id="search-icon-1" class="input-group-text p-3" type="submit"><i class="fa fa-search"></i></button>
+                    </form>
                 </div>
             </div>
             <div class="col-lg-3">
@@ -117,19 +123,20 @@ $products = $product_model->getListWithLimit($display, $position, $categoryid);
                             </div>
                         </div>
                     <?php endforeach; ?>
+                    <?php if($total_pages > 1): ?>
                     <div class="col-12">
                         <div class="pagination d-flex justify-content-center mt-5">
                             <?php if ($curr_page > 1):
                                 $first_page = 1;
                                 ?>
-                                <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$first_page" . (!empty($categoryid) ? "&categoryid=$categoryid" : "") ?>"
+                                <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$first_page" . (!empty($categoryid) ? "&categoryid=$categoryid" : "") . (!empty($searchStr) ? "&searchStr=$searchStr" : "") ?>"
                                     class="rounded">&laquo;</a>
                             <?php endif; ?>
                             <?php
                             for ($page_item = $start; $page_item <= $end; $page_item++):
                                 $isActive = ($curr_page == $page_item) ? 'active' : '';
                                 ?>
-                                <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$page_item" . (!empty($categoryid) ? "&categoryid=$categoryid" : "") ?>"
+                                <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$page_item" . (!empty($categoryid) ? "&categoryid=$categoryid" : ""). (!empty($searchStr) ? "&searchStr=$searchStr" : "") ?>"
                                     class="<?php echo $isActive; ?> rounded">
                                     <?php echo $page_item ?>
                                 </a>
@@ -138,11 +145,12 @@ $products = $product_model->getListWithLimit($display, $position, $categoryid);
                             if ($curr_page < $total_pages):
                                 $last_page = $total_pages;
                                 ?>
-                                <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$last_page" . (!empty($categoryid) ? "&categoryid=$categoryid" : "") ?>"
+                                <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$last_page" . (!empty($categoryid) ? "&categoryid=$categoryid" : ""). (!empty($searchStr) ? "&searchStr=$searchStr" : "") ?>"
                                     class="rounded">&raquo;</a>
                             <?php endif; ?>
                         </div>
                     </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

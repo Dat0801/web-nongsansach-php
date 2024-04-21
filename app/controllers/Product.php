@@ -20,9 +20,12 @@ class Product extends Controller
         $this->data['sub_content']['name'] = 'Sản Phẩm';
         $this->data['sub_content']['display'] = 9;
 
-        if (isset($_GET['categoryid'])) {
+        if (isset($_GET['categoryid']) && empty($_GET['searchStr'])) {
             $this->data['sub_content']['categoryid'] = $_GET['categoryid'];
             $this->data['sub_content']['list'] = $this->product->getProductByCategory($_GET['categoryid']);
+        } else if (!empty($_GET['searchStr'])) {
+            $list = $this->product->searchProduct($_GET['searchStr']);
+            $this->data['sub_content']['list'] = $this->product->searchProductClient($_GET['searchStr']);
         } else {
             $this->data['sub_content']['list'] = $this->product->getProductList();
         }
@@ -46,7 +49,7 @@ class Product extends Controller
         $this->data['title'] = 'Chi tiết sản phẩm';
 
         $id = $_GET['productid'];
-        
+
         $dataProduct = $this->product->getDetail($id);
 
         $this->data['sub_content']['product'] = $dataProduct;
