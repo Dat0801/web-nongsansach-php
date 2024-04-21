@@ -4,13 +4,13 @@
             <div class="col-md-12 col-lg-7">
                 <h4 class="mb-3 text-secondary">100% Nông sản sạch</h4>
                 <h1 class="mb-5 display-3 text-primary">Nông sản hữu cơ</h1>
-                <div class="position-relative mx-auto">
-                    <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" type="number"
-                        placeholder="Từ khóa">
+                <form class="position-relative mx-auto" action="<?php echo _WEB_ROOT ?>/product" method="get">
+                    <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" type="search"
+                        placeholder="Từ khóa" name="searchStr">
                     <button type="submit"
                         class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100"
                         style="top: 0; right: 25%;">Tìm kiếm</button>
-                </div>
+                </form>
             </div>
             <div class="col-md-12 col-lg-5">
                 <div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
