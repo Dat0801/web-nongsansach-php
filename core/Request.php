@@ -135,8 +135,8 @@ class Request
                             $checkValidate = false;
                         }
                     }
-                    
-                    
+
+
 
                     if ($ruleName == 'unique') {
                         $tableName = null;
@@ -151,18 +151,19 @@ class Request
 
                         if (!empty($tableName) && !empty($fieldCheck)) {
                             if (count($ruleArr) == 3) {
-                                $checkExist = $this->db->query("SELECT $fieldCheck FROM $tableName WHERE $fieldCheck = '".trim($dataFields[$fieldName])."'")->rowCount();
+                                $checkExist = $this->db->query("SELECT $fieldCheck FROM $tableName WHERE $fieldCheck = '" . trim($dataFields[$fieldName]) . "'")->rowCount();
                             } else if (count($ruleArr) == 4) {
                                 if (!empty($ruleArr[3]) && preg_match('~.+?\=.+?~is', $ruleArr[3])) {
                                     $conditionWhere = $ruleArr[3];
                                     $conditionWhere = str_replace('=', '<>', $conditionWhere);
-                                    $checkExist = $this->db->query("SELECT $fieldCheck FROM $tableName WHERE $fieldCheck = '".trim($dataFields[$fieldName])."' AND $conditionWhere")->rowCount();
+                                    $checkExist = $this->db->query("SELECT $fieldCheck FROM $tableName WHERE $fieldCheck = '" . trim($dataFields[$fieldName]) . "' AND $conditionWhere")->rowCount();
                                 }
                             }
-                            if ($checkExist > 0) {
+                            if (!empty($checkExist) && $checkExist > 0) {
                                 $this->setErrors($fieldName, $ruleName);
                                 $checkValidate = false;
                             }
+
                         }
                     }
 
@@ -175,7 +176,7 @@ class Request
                             if (method_exists($controller, $callbackName)) {
                                 $checkCallback = call_user_func_array([$controller, $callbackName], [trim($dataFields[$fieldName])]);
 
-                                if(!$checkCallback) {
+                                if (!$checkCallback) {
                                     $this->setErrors($fieldName, $ruleName);
                                     $checkValidate = false;
                                 }
@@ -188,10 +189,10 @@ class Request
         return $checkValidate;
     }
 
-    
 
-    
-    
+
+
+
     //get errors
     public function errors($fieldName = '')
     {
