@@ -2,6 +2,31 @@
 <div class="container-fluid page-header py-5">
     <h1 class="text-center text-white display-6">Chi tiết sản phẩm</h1>
 </div>
+<?php if (isset($successMsg) && $successMsg == true) { ?>
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                <div class="d-flex align-items-center">
+                    <img src="<?php echo _WEB_ROOT ?>/public/assets/client/img/<?php echo $product['HinhAnh'] ?>"
+                        class="rounded img-thumbnail me-2" style="width:40px;">
+                    <p class="mb-0"><?php echo $product['TenHang'] ?> đã được thêm vào giỏ hàng. <a
+                            href="<?php echo _WEB_ROOT ?>/Cart" class="alert-link">Xem giỏ hàng</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php } ?>
+<div class="toast bg-primary text-white" role="alert" aria-live="assertive" aria-atomic="true"
+    style="position: fixed; top: 100px; right:10px; z-index: 9999;">
+    <div class="toast-header">
+        <strong class="me-auto">Thông báo</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        Thêm sản phẩm vào giỏ hàng thành công!
+    </div>
+</div>
 <!-- Single Page Header End -->
 <div class="container-fluid mt-5" style="padding: 0;">
     <div class="container py-5">
@@ -30,67 +55,25 @@
                             <i class="fa fa-star text-primary"></i>
                             <i class="fa fa-star"></i>
                         </div>
-                        <!-- <p class="mb-4">The generated Lorem Ipsum is therefore always free from repetition injected
-                            humour, or non-characteristic words etc.</p>
-                        <p class="mb-4">Susp endisse ultricies nisi vel quam suscipit. Sabertooth peacock flounder;
-                            chain pickerel hatchetfish, pencilfish snailfish</p> -->
-                        <div class="input-group mb-5" style="width: 100px;">
-                            <div class="input-group-btn">
-                                <button class="btn btn-sm btn-minus rounded-circle bg-light border"
-                                    onclick="decreaseQuantity()">
-                                    <i class="fa fa-minus"></i>
-                                </button>
+                        <form action="<?php echo _WEB_ROOT ?>/product/detail" method="post">
+                            <div class="mb-5" style="width: 110px;">
+                                <input type="number" name="SoLuong" id="productQty" class="form-control"
+                                    placeholder="Số lượng" min="1" max="<?php echo $product["SoLuongTon"] ?>" value="1"
+                                    required>
+                                <input type="hidden" name="MaHang" value="<?php echo $product['MaHang'] ?>">
                             </div>
-                            <input type="text" class="form-control form-control-sm text-center border-0" value="1"
-                                id="quantity" onchange="validateQuantity()">
-                            <div class="input-group-btn">
-                                <button class="btn btn-sm btn-plus rounded-circle bg-light border"
-                                    onclick="increaseQuantity()">
-                                    <i class="fa fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <script>
-                            function decreaseQuantity() {
-                                let quantityInput = document.getElementById('quantity');
-                                let quantity = parseInt(quantityInput.value);
-                                if (quantity > 1) {
-                                    quantityInput.value = quantity - 1;
-                                } else {
-                                    quantityInput.value = 1;
-                                }
-                            }
 
-                            function increaseQuantity() {
-                                let quantityInput = document.getElementById('quantity');
-                                let quantity = parseInt(quantityInput.value);
-                                let maxQuantity = <?php echo $product["SoLuongTon"] ?>;
-                                if (quantity < maxQuantity) {
-                                    quantityInput.value = quantity + 1;
-                                } else {
-                                    quantityInput.value = maxQuantity;
-                                }
-                            }
-
-                            function validateQuantity() {
-                                let quantityInput = document.getElementById('quantity');
-                                let quantity = parseInt(quantityInput.value);
-                                let maxQuantity = <?php echo $product["SoLuongTon"] ?>;
-                                if (quantity < 1) {
-                                    quantityInput.value = 1;
-                                } else if (quantity > maxQuantity) {
-                                    quantityInput.value = maxQuantity;
-                                }
-                            }
-                        </script>
-                        <?php if ($product["SoLuongTon"] > 0): ?>
-                            <a href="#" class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i
-                                    class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</a>
-                        <?php else: ?>
-                            <a href="<?php echo _WEB_ROOT ?>/contact"
-                                class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i
-                                    class="fa fa-shopping-bag me-2 text-primary"></i> Liên hệ shop</a>
-                        <?php endif; ?>
+                            <?php if ($product["SoLuongTon"] > 0): ?>
+                                <button type="submit"
+                                    class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"
+                                    name="add_to_cart" value="add to cart"><i
+                                        class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng</button>
+                            <?php else: ?>
+                                <a href="<?php echo _WEB_ROOT ?>/contact"
+                                    class="btn border border-secondary rounded-pill px-4 py-2 mb-4 text-primary"><i
+                                        class="fa fa-shopping-bag me-2 text-primary"></i> Liên hệ shop</a>
+                            <?php endif; ?>
+                        </form>
                     </div>
                     <div class="col-lg-12">
                         <nav>
@@ -105,13 +88,6 @@
                         </nav>
                         <div class="tab-content mb-5">
                             <div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
-                                <!-- <p>The generated Lorem Ipsum is therefore always free from repetition injected humour,
-                                    or non-characteristic words etc.
-                                    Susp endisse ultricies nisi vel quam suscipit </p>
-                                <p>Sabertooth peacock flounder; chain pickerel hatchetfish, pencilfish snailfish
-                                    filefish Antarctic
-                                    icefish goldeye aholehole trumpetfish pilot fish airbreathing catfish, electric ray
-                                    sweeper.</p> -->
                                 <div class="px-2">
                                     <div class="row g-4">
                                         <div class="col-6">
@@ -255,7 +231,7 @@
             <div class="vesitable">
                 <div class="owl-carousel vegetable-carousel justify-content-center">
                     <?php foreach ($productsByCategory as $product): ?>
-                        <div class="border border-primary rounded position-relative vesitable-item">
+                        <div class="border border-primary rounded position-relative" style="transition: 0.5s;">
                             <div class="vesitable-img">
                                 <a href="<?php echo _WEB_ROOT ?>/product/detail?productid=<?php echo $product["MaHang"] ?>">
                                     <img src="<?php echo _WEB_ROOT ?>/public/assets/client/img/<?php echo $product["HinhAnh"] ?>"
@@ -279,8 +255,16 @@
                                         <?php echo number_format($product["GiaBan"]) . "<sup><small>đ</small></sup><sub>/<small>" . $product["DVT"] . " "
                                             . $product["TrongLuong"] . $product["DonViTrongLuong"] . "</small></sub>"; ?>
                                     </p>
-                                    <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                            class="fa fa-shopping-bag me-2 text-primary"></i>Thêm vào giỏ hàng</a>
+                                    <button class="add-cart btn border border-secondary rounded-pill px-3 text-primary"
+                                        data-url-base="<?php echo _WEB_ROOT ?>"
+                                        data-product-id="<?php echo $product['MaHang'] ?>" data-product-qty="1"
+                                        data-product-dvt="<?php echo $product['DVT'] ?>"
+                                        data-product-price="<?php echo $product['GiaBan'] ?>"
+                                        data-product-name="<?php echo $product['TenHang'] ?>"
+                                        data-product-img="<?php echo $product['HinhAnh'] ?>"
+                                        data-product-quantity="<?php echo $product['SoLuongTon'] ?>">
+                                        <i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -290,3 +274,20 @@
         </div>
     </div>
     <!-- Single Product End -->
+    <script>
+        window.onload = function () {
+            var productQty = document.getElementById('productQty');
+
+            productQty.oninput = function (e) {
+                if (e.target.validity.rangeUnderflow) {
+                    e.target.setCustomValidity("Số lượng không thể nhỏ hơn 1.");
+                } else if (e.target.validity.rangeOverflow) {
+                    e.target.setCustomValidity("Số lượng không thể lớn hơn số lượng tồn.");
+                } else if (e.target.validity.valueMissing) {
+                    e.target.setCustomValidity("Vui lòng nhập số lượng.");
+                } else {
+                    e.target.setCustomValidity("");
+                }
+            };
+        }
+    </script>
