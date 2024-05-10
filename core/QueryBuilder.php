@@ -115,7 +115,52 @@ trait QueryBuilder
         }
         return false;
     }
+    
+    public function getList()
+    {        
+        $sqlQuery = "SELECT $this->selectField FROM $this->tableName $this->innerJoin $this->where $this->limit $this->orderBy";
+        $query = $this->queryApi($sqlQuery);
+        var_dump($query);
+                
+        // Reset field
+        $this->resetQuery();
 
+        if (!empty($query)) {
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return false;
+    }
+    public function getPlaces($id)
+    {        
+        if ($this->tableName == 'district'){
+            if (empty($this->where)) {
+                $this->where = "WHERE province_id = $id";
+            } else {
+                $this->where .= " AND province_id = $id";
+            }
+        }
+        if ($this->tableName == 'wards'){
+            if (empty($this->where)) {
+                $this->where = "WHERE district_id = $id";
+            } else {
+                $this->where .= " AND district_id = $id";
+            }
+        }
+        
+
+        $sqlQuery = "SELECT $this->selectField FROM $this->tableName $this->innerJoin $this->where $this->limit $this->orderBy";
+        $query = $this->queryApi($sqlQuery);
+
+        // Reset field
+        $this->resetQuery();
+
+        if (!empty($query)) {
+            return $query->fetchAll(PDO::FETCH_ASSOC);
+        }
+        return false;
+    }
+
+    
     //Inner join
     public function join($tableName, $relationship)
     {
