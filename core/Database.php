@@ -2,32 +2,13 @@
 class Database
 {
     private $__conn;
-    private $__apiconn;
     use QueryBuilder;
 
     // Kết nối database
     function __construct()
     {
         global $db_config;
-        global $db_config_country;
         $this->__conn = Connection::getInstance($db_config);
-        $this->__apiconn = Connection::getInstance($db_config_country);   
-        var_dump($db_config);     
-        var_dump($db_config_country);     
-        
-        if ($this->__conn instanceof PDO) {
-            echo "Kết nối cơ sở dữ liệu chính thành công!";
-        } else {
-            echo "Kết nối cơ sở dữ liệu chính không thành công!";
-        }
-        
-        echo "<br>";
-        
-        if ($this->__apiconn instanceof PDO) {
-            echo "Kết nối cơ sở dữ liệu API thành công!";
-        } else {
-            echo "Kết nối cơ sở dữ liệu API không thành công!";
-        }
     }
 
     // Thêm dữ liệu
@@ -113,21 +94,6 @@ class Database
         }
 
     }
-    function queryApi($sql)
-    {
-        try {
-            $statement = $this->__apiconn->prepare($sql);
-            $statement->execute();
-            return $statement;
-        } catch (Exception $exception) {
-            $mess = $exception->getMessage();
-            $data['message'] = $mess;
-            App::$app->loadError('database',$data);
-            die();
-        }
-
-    }
-
 
     // Trả về id mới nhất sau khi đã insert
     function lastInsertId()
