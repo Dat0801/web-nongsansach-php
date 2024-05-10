@@ -24,7 +24,8 @@ class SuppliersModel extends Model{
     }
     
     public function searchSuppliers($searchStr) {
-        $data = $this->db->table('nhacungcap')->where('tenncc', 'like', '%'.$searchStr.'%')->get();
+        $tableColumns = ['nhacungcap' => ['MaNCC', 'TenNCC', 'DiaChi', 'SDT']];
+        $data = $this->db->table('nhacungcap')->orWhereLikeAllColumns($searchStr, $tableColumns)->get();
         return $data;
     }
 
@@ -39,7 +40,11 @@ class SuppliersModel extends Model{
     public function updateSuppliers($data, $id) {
         $this->db->table('nhacungcap')->where('mancc', '=', $id)->update($data);
     }
-    public function getListWithLimit($limit, $offset) {
+    public function getListWithLimit($limit, $offset, $searchStr = null) {
+        $tableColumns = ['nhacungcap' => ['MaNCC', 'TenNCC', 'DiaChi', 'SDT']];
+        if ($searchStr) {
+            return $this->db->table('nhacungcap')->orWhereLikeAllColumns($searchStr, $tableColumns)->limit($limit, $offset)->get();
+        }
         return $this->db->table('nhacungcap')->limit($limit, $offset)->get();
     }
 }

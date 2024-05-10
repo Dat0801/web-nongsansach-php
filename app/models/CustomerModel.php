@@ -24,7 +24,8 @@ class CustomerModel extends Model{
     }
     
     public function searchCustomer($searchStr) {
-        $data = $this->db->table('khachhang')->where('TenKH', 'like', '%'.$searchStr.'%')->get();
+        $tableColumns = ['khachhang' => ['MaKH', 'TenKH', 'Username', 'Password', 'Email', 'SDT', 'DiaChi', 'TrangThai']];
+        $data = $this->db->table('khachhang')->orWhereLikeAllColumns($searchStr, $tableColumns)->get();
         return $data;
     }
 
@@ -39,7 +40,11 @@ class CustomerModel extends Model{
     public function updateCustomer($data, $id) {
         $this->db->table('khachhang')->where('MaKH', '=', $id)->update($data);
     }
-    public function getListWithLimit($limit, $offset) {
+    public function getListWithLimit($limit, $offset, $searchStr = null) {
+        $tableColumns = ['khachhang' => ['MaKH', 'TenKH', 'Username', 'Password', 'Email', 'SDT', 'DiaChi', 'TrangThai']];
+        if ($searchStr) {
+            return $this->db->table('khachhang')->orWhereLikeAllColumns($searchStr, $tableColumns)->limit($limit, $offset)->get();
+        }
         return $this->db->table('khachhang')->limit($limit, $offset)->get();
     }
 }

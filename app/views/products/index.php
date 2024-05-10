@@ -1,24 +1,39 @@
 <?php
 include_once "app/views/admin/pagination/pagination.php";
-$products = $product_model->getListWithLimit($display, $position, $categoryid);
+if (isset($_GET['searchStr'])) {
+    $searchStr = trim($_GET['searchStr']);
+} else {
+    $searchStr = null;
+}
+$products = $product_model->getListWithLimit($display, $position, $categoryid, $searchStr);
 ?>
 <!-- Single Page Header start -->
 <div class="container-fluid page-header py-5">
     <h1 class="text-center text-white display-6"><?php echo $name ?></h1>
 </div>
 <!-- Single Page Header End -->
-
+<div class="toast bg-primary text-white" role="alert" aria-live="assertive" aria-atomic="true" style="position: fixed; top: 100px; right:10px; z-index: 9999;">
+  <div class="toast-header">
+    <strong class="me-auto">Thông báo</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+  </div>
+  <div class="toast-body">
+    Thêm sản phẩm vào giỏ hàng thành công!
+  </div>
+</div>
 <!-- Fruits Shop Start-->
 <div class="container-fluid fruite py-5">
     <div class="container py-5">
         <div class="row g-4">
             <div class="row g-4" style="padding-bottom: 20px;">
                 <div class="col-xl-3">
-                    <div class="input-group w-100 mx-auto d-flex">
+                    <form class="input-group w-100 mx-auto d-flex" action="<?php echo _WEB_ROOT ?>/product"
+                        method="get">
                         <input type="search" class="form-control p-3" placeholder="Từ khóa"
-                            aria-describedby="search-icon-1">
-                        <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
-                    </div>
+                            aria-describedby="search-icon-1" name="searchStr">
+                        <button id="search-icon-1" class="input-group-text p-3" type="submit"><i
+                                class="fa fa-search"></i></button>
+                    </form>
                 </div>
             </div>
             <div class="col-lg-3">
@@ -108,41 +123,51 @@ $products = $product_model->getListWithLimit($display, $position, $categoryid);
                                     <div class="d-flex justify-content-between flex-lg-wrap">
                                         <p class="text-dark fs-5 fw-bold mb-0">
                                             <?php echo number_format($product["GiaBan"]) . "<sup><small>đ</small></sup><sub>/<small>" . $product["DVT"] . " "
-                                            . $product["TrongLuong"]  . $product["DonViTrongLuong"] . "</small></sub>"; ?>
+                                                . $product["TrongLuong"] . $product["DonViTrongLuong"] . "</small></sub>"; ?>
                                         </p>
-                                        <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                                class="fa fa-shopping-bag me-2 text-primary"></i> Mua</a>
+                                        <button class="add-cart btn border border-secondary rounded-pill px-3 text-primary"
+                                            data-url-base="<?php echo _WEB_ROOT ?>"
+                                            data-product-id="<?php echo $product['MaHang'] ?>" data-product-qty="1"
+                                            data-product-dvt = "<?php echo $product['DVT'] ?>"
+                                            data-product-price="<?php echo $product['GiaBan'] ?>"
+                                            data-product-name="<?php echo $product['TenHang'] ?>"
+                                            data-product-img="<?php echo $product['HinhAnh'] ?>"
+                                            data-product-quantity="<?php echo $product['SoLuongTon'] ?>">
+                                            <i class="fa fa-shopping-bag me-2 text-primary"></i> Mua
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     <?php endforeach; ?>
-                    <div class="col-12">
-                        <div class="pagination d-flex justify-content-center mt-5">
-                            <?php if ($curr_page > 1):
-                                $first_page = 1;
-                                ?>
-                                <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$first_page" . (!empty($categoryid) ? "&categoryid=$categoryid" : "") ?>"
-                                    class="rounded">&laquo;</a>
-                            <?php endif; ?>
-                            <?php
-                            for ($page_item = $start; $page_item <= $end; $page_item++):
-                                $isActive = ($curr_page == $page_item) ? 'active' : '';
-                                ?>
-                                <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$page_item" . (!empty($categoryid) ? "&categoryid=$categoryid" : "") ?>"
-                                    class="<?php echo $isActive; ?> rounded">
-                                    <?php echo $page_item ?>
-                                </a>
-                            <?php endfor; ?>
-                            <?php
-                            if ($curr_page < $total_pages):
-                                $last_page = $total_pages;
-                                ?>
-                                <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$last_page" . (!empty($categoryid) ? "&categoryid=$categoryid" : "") ?>"
-                                    class="rounded">&raquo;</a>
-                            <?php endif; ?>
+                    <?php if ($total_pages > 1): ?>
+                        <div class="col-12">
+                            <div class="pagination d-flex justify-content-center mt-5">
+                                <?php if ($curr_page > 1):
+                                    $first_page = 1;
+                                    ?>
+                                    <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$first_page" . (!empty($categoryid) ? "&categoryid=$categoryid" : "") . (!empty($searchStr) ? "&searchStr=$searchStr" : "") ?>"
+                                        class="rounded">&laquo;</a>
+                                <?php endif; ?>
+                                <?php
+                                for ($page_item = $start; $page_item <= $end; $page_item++):
+                                    $isActive = ($curr_page == $page_item) ? 'active' : '';
+                                    ?>
+                                    <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$page_item" . (!empty($categoryid) ? "&categoryid=$categoryid" : "") . (!empty($searchStr) ? "&searchStr=$searchStr" : "") ?>"
+                                        class="<?php echo $isActive; ?> rounded">
+                                        <?php echo $page_item ?>
+                                    </a>
+                                <?php endfor; ?>
+                                <?php
+                                if ($curr_page < $total_pages):
+                                    $last_page = $total_pages;
+                                    ?>
+                                    <a href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$last_page" . (!empty($categoryid) ? "&categoryid=$categoryid" : "") . (!empty($searchStr) ? "&searchStr=$searchStr" : "") ?>"
+                                        class="rounded">&raquo;</a>
+                                <?php endif; ?>
+                            </div>
                         </div>
-                    </div>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>

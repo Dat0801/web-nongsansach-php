@@ -11,8 +11,12 @@ class Customer extends Controller{
     public function index() {
         $this->data['content'] = '/admin/customers/ViewCustomer';
         $this->data['title'] = 'Trang khách hàng';
-        
-        $dataCustomer = $this->customer->getCustomerList();
+        if (isset($_GET['searchStr'])) {
+            $searchStr = $_GET['searchStr'];
+            $dataCustomer = $this->customer->searchCustomer($searchStr);
+        } else {
+            $dataCustomer = $this->customer->getCustomerList();
+        }
 
         $this->data['sub_content']['display'] = 5;
         $this->data['sub_content']['list'] = $dataCustomer;

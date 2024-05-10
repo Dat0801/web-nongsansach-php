@@ -15,7 +15,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `ql_nongsan`
@@ -41,7 +41,7 @@ CREATE TABLE `hanghoa` (
   `HinhAnh` varchar(50) DEFAULT 'Chưa xác định',
   `SoLuongTon` int DEFAULT 0,
   `TrangThai` bit(1) DEFAULT b'1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Triggers `hanghoa`
@@ -128,7 +128,7 @@ CREATE TABLE `hoadon` (
   `NgayGiao` datetime NOT NULL DEFAULT (current_timestamp() + interval 1 day),
   `TongTien` float DEFAULT 0,
   `TrangThai` varchar(50) DEFAULT 'Đang xử lý'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `hoadon`
@@ -166,7 +166,7 @@ CREATE TABLE `chitiethoadon` (
   `MaHD` int(11) NOT NULL,
   `SoLuong` int(11) DEFAULT 1,
   `ThanhTien` float DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Triggers `chitiethoadon`
@@ -226,7 +226,7 @@ CREATE TABLE `phieunhap` (
   `NgayNhap` datetime DEFAULT current_timestamp(),
   `TongTien` float NOT NULL,
   `TrangThai` bit(1) DEFAULT b'1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `phieunhap`
@@ -246,7 +246,7 @@ CREATE TABLE `chitietphieunhap` (
   `GiaNhap` int(11) NOT NULL,
   `SoLuong` int(11) DEFAULT 5,
   `ThanhTien` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 DELIMITER $$
 CREATE TRIGGER `tinh_thanh_tien_insert` BEFORE INSERT ON `chitietphieunhap` FOR EACH ROW BEGIN
@@ -311,7 +311,7 @@ CREATE TABLE `khachhang` (
   `SDT` varchar(30) DEFAULT 'Chưa xác định',
   `DiaChi` varchar(50) DEFAULT 'Chưa xác định',
   `TrangThai` bit(1) DEFAULT b'1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `khachhang`
@@ -336,7 +336,7 @@ CREATE TABLE `nhacungcap` (
   `SDT` varchar(30) DEFAULT 'Chưa xác định',
   `DiaChi` varchar(50) DEFAULT 'Chưa xác định',
   `TrangThai` bit(1) DEFAULT b'1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `nhacungcap`
@@ -364,7 +364,7 @@ CREATE TABLE `nhanvien` (
   `ChucVu` varchar(50) DEFAULT 'Nhân viên',
   `DiaChi` varchar(50) DEFAULT 'Chưa xác định',
   `TrangThai` bit(1) DEFAULT b'1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `nhanvien`
@@ -386,7 +386,7 @@ CREATE TABLE `nhomhang` (
   `MaNhomHang` int(11) NOT NULL,
   `TenNhomHang` varchar(50) NOT NULL,
   `TrangThai` bit(1) DEFAULT b'1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `nhomhang`

@@ -84,6 +84,7 @@
 
     <!-- Template Javascript -->
     <script src="<?php echo _WEB_ROOT ?>/public/assets/client/js/main.js"></script>
+    <script src="<?php echo _WEB_ROOT ?>/public/assets/client/js/cart.js"></script>
     </body>
 
 </html>

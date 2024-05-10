@@ -119,8 +119,7 @@ trait QueryBuilder
     public function getList()
     {        
         $sqlQuery = "SELECT $this->selectField FROM $this->tableName $this->innerJoin $this->where $this->limit $this->orderBy";
-        $query = $this->queryApi($sqlQuery);
-        var_dump($query);
+        $query = $this->query($sqlQuery);
                 
         // Reset field
         $this->resetQuery();

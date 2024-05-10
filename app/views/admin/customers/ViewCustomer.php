@@ -1,10 +1,15 @@
 <?php
-include_once "app/views/admin/pagination/pagination.php";
-$list_customer = $customer_model->getListWithLimit($display, $position);
+    include_once "app/views/admin/pagination/pagination.php";
+    if (isset($_GET['searchStr'])) {
+        $searchStr = trim($_GET['searchStr']);
+    } else {
+        $searchStr = null;
+    }
+    $list_customer = $customer_model->getListWithLimit($display, $position, $searchStr);
 ?>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
     integrity="sha384-pzjw8s+ekmvplp5f/ZxXnDQbcz0S7bJr6W2kcoFVGLsRakET4Qc5I2tG4LDA2tB" crossorigin="anonymous">
-<form class="d-flex" action="" method="post">
+<form class="d-flex" action="<?php echo _WEB_ROOT ?>/admin/customer" method="get">
     <div style="margin: 0 auto">
         <input class="form-control me-2" type="search" placeholder="Tìm kiếm khách hàng" aria-label="Tìm kiếm..."
             style="width:400px; margin: 0 auto" name="searchStr" id="searchStr">

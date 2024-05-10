@@ -24,8 +24,9 @@
     <!-- Template Stylesheet -->
     <link href="<?php echo _WEB_ROOT ?>/public/assets/client/css/style.css" rel="stylesheet">
 
-    <link rel="stylesheet" type="text/css" href="<?php echo _WEB_ROOT ?>/public/assets/client/css/product.css">  
-
+    <link rel="stylesheet" type="text/css" href="<?php echo _WEB_ROOT ?>/public/assets/client/css/product.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
@@ -70,15 +71,23 @@
                             ký</a>
                     </div>
                     <div class="d-flex m-3 me-0">
-                        <button
+                        <!-- <button
                             class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
                             data-bs-toggle="modal" data-bs-target="#searchModal"><i
-                                class="fas fa-search text-primary"></i></button>
+                                class="fas fa-search text-primary"></i></button> -->
                         <a href="<?php echo _WEB_ROOT ?>/cart" class="position-relative me-4 my-auto">
                             <i class="fa fa-shopping-bag fa-2x"></i>
-                            <span
+                            <span id="cart-quantity"
                                 class="position-absolute bg-secondary rounded-circle d-flex align-items-center justify-content-center text-dark px-1"
-                                style="top: -5px; left: 15px; height: 20px; min-width: 20px;">3</span>
+                                style="top: -5px; left: 15px; height: 20px; min-width: 20px;">
+                                <?php
+                                if (isset($_SESSION['cart_items'])) {
+                                    echo count($_SESSION['cart_items']) > 0 ? count($_SESSION['cart_items']) : '0';
+                                } else {
+                                    echo '0';
+                                }
+                                ?>
+                            </span>
                         </a>
                     </div>
                 </div>

@@ -14,10 +14,17 @@ class Suppliers extends Controller
     {
         $this->data['content'] = '/admin/suppliers/ViewSuppliers';
         $this->data['title'] = 'Danh mục các nhà cung cấp';
-        $datasuppliers = $this->suppliers->getsuppliersList();
+        
+        if (isset($_GET['searchStr'])) {
+            $searchStr = $_GET['searchStr'];
+            $datasuppliers = $this->suppliers->searchSuppliers($searchStr);
+        } else {
+            $datasuppliers = $this->suppliers->getSuppliersList();
+        }
+        $this->data['sub_content']['display'] = 5;
         $this->data['sub_content']['list'] = $datasuppliers;
         $this->data['sub_content']['suppliers_model'] = $this->suppliers;
-        $this->data['sub_content']['display'] = 5;
+                
         $this->render('layouts/admin_layout', $this->data);
     }
 

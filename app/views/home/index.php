@@ -4,13 +4,13 @@
             <div class="col-md-12 col-lg-7">
                 <h4 class="mb-3 text-secondary">100% Nông sản sạch</h4>
                 <h1 class="mb-5 display-3 text-primary">Nông sản hữu cơ</h1>
-                <div class="position-relative mx-auto">
-                    <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" type="number"
-                        placeholder="Từ khóa">
+                <form class="position-relative mx-auto" action="<?php echo _WEB_ROOT ?>/product" method="get">
+                    <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" type="search"
+                        placeholder="Từ khóa" name="searchStr">
                     <button type="submit"
                         class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100"
                         style="top: 0; right: 25%;">Tìm kiếm</button>
-                </div>
+                </form>
             </div>
             <div class="col-md-12 col-lg-5">
                 <div id="carouselId" class="carousel slide position-relative" data-bs-ride="carousel">
@@ -41,7 +41,16 @@
         </div>
     </div>
 </div>
-
+<div class="toast bg-primary text-white" role="alert" aria-live="assertive" aria-atomic="true"
+    style="position: fixed; top: 100px; right:10px; z-index: 9999;">
+    <div class="toast-header">
+        <strong class="me-auto">Thông báo</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        Thêm sản phẩm vào giỏ hàng thành công!
+    </div>
+</div>
 <!-- Featurs Section Start -->
 <div class="container-fluid featurs py-5">
     <div class="container py-5">
@@ -100,7 +109,7 @@
         <h1 class="mb-0">Sản Phẩm</h1>
         <div class="owl-carousel vegetable-carousel justify-content-center">
             <?php foreach ($products as $product): ?>
-                <div class="border border-primary rounded position-relative vesitable-item">
+                <div class="border border-primary rounded position-relative" style="transition: 0.5s;">
                     <div class="vesitable-img">
                         <a href="<?php echo _WEB_ROOT ?>/product/detail?productid=<?php echo $product["MaHang"] ?>">
                             <img src="<?php echo _WEB_ROOT ?>/public/assets/client/img/<?php echo $product["HinhAnh"] ?>"
@@ -123,8 +132,15 @@
                                 <?php echo number_format($product["GiaBan"]) . "<sup><small>đ</small></sup><sub>/<small>" . $product["DVT"] . " "
                                     . $product["TrongLuong"] . $product["DonViTrongLuong"] . "</small></sub>"; ?>
                             </p>
-                            <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                    class="fa fa-shopping-bag me-2 text-primary"></i>Thêm vào giỏ hàng</a>
+                            <button class="add-cart btn border border-secondary rounded-pill px-3 text-primary"
+                                data-url-base="<?php echo _WEB_ROOT ?>" data-product-id="<?php echo $product['MaHang'] ?>"
+                                data-product-qty="1" data-product-dvt="<?php echo $product['DVT'] ?>"
+                                data-product-price="<?php echo $product['GiaBan'] ?>"
+                                data-product-name="<?php echo $product['TenHang'] ?>"
+                                data-product-img="<?php echo $product['HinhAnh'] ?>"
+                                data-product-quantity="<?php echo $product['SoLuongTon'] ?>">
+                                <i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -173,8 +189,16 @@
                                 <h4 class="mb-3">
                                     <?php echo number_format($product["GiaBan"]) . "<sup><small>VNĐ</small></sup>" ?>
                                 </h4>
-                                <a href="#" class="btn border border-secondary rounded-pill px-3 text-primary"><i
-                                        class="fa fa-shopping-bag me-2 text-primary"></i>Mua</a>
+                                <button class="add-cart btn border border-secondary rounded-pill px-3 text-primary"
+                                    data-url-base="<?php echo _WEB_ROOT ?>"
+                                    data-product-id="<?php echo $product['MaHang'] ?>" data-product-qty="1"
+                                    data-product-dvt="<?php echo $product['DVT'] ?>"
+                                    data-product-price="<?php echo $product['GiaBan'] ?>"
+                                    data-product-name="<?php echo $product['TenHang'] ?>"
+                                    data-product-img="<?php echo $product['HinhAnh'] ?>"
+                                    data-product-quantity="<?php echo $product['SoLuongTon'] ?>">
+                                    <i class="fa fa-shopping-bag me-2 text-primary"></i> Mua
+                                </button>
                             </div>
                         </div>
                     </div>
