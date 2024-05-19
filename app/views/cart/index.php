@@ -92,14 +92,16 @@
                                 <p class="mb-0 mt-2">
                                     <strong>
                                         <?php
-                                        echo $itemCounter.' Sản Phẩm' ?>
+                                        echo $itemCounter . ' Sản Phẩm' ?>
                                     </strong>
                                 </p>
 
                             </td>
                             <td>
                                 <p class="mb-0 mt-2">
-                                    <?php echo number_format($totalCounter); ?><sup><small>đ</small></sup>
+                                    <strong>
+                                        <?php echo number_format($totalCounter); ?><sup><small>đ</small></sup>
+                                    </strong>
                                 </p>
                             </td>
                             <td></td>

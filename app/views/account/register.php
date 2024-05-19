@@ -1,7 +1,7 @@
 <?php    
     // $list_province = $province_model->getProvinceList();
-    $list_district = $district_model->getPlaces($_GET['province_id']);
-    $list_ward = $wards_model->getPlaces($_GET['district_id']);
+    // $list_district = $district_model->getPlaces($_GET['province_id']);
+    // $list_ward = $wards_model->getPlaces($_GET['district_id']);
     var_dump($province_list);
     // if (isset($_POST['add_sale'])) {
     //     echo "<pre>";

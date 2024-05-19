@@ -28,17 +28,15 @@ require_once 'core/Session.php';// Load session
 require_once 'app/App.php';// Load app
 
 // Kiểm tra config và load Database
-if(!empty($config['database']) && !empty($config['api'])) {
+if(!empty($config['database'])) {
     $db_config = array_filter($config['database']);
-    $db_config_country = array_filter($config['api']);
 
-    if(!empty($db_config) && !empty($db_config_country)) {
+    if(!empty($db_config)) {
         require_once 'core/Connection.php';
         require_once 'core/QueryBuilder.php';
         require_once 'core/Database.php';
         require_once 'core/DB.php';
     }
-
 
 }
 
