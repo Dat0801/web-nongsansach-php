@@ -47,4 +47,8 @@ class CustomerModel extends Model{
         }
         return $this->db->table('khachhang')->limit($limit, $offset)->get();
     }
+    public function checkLogin($username, $password) {
+        $data = $this->db->table('khachhang')->where('Username', '=', $username)->where('Password', '=', $password)->first();
+        return $data;
+    }
 }
