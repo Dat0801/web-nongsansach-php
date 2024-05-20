@@ -1,11 +1,11 @@
 <?php
-include_once "app/views/admin/pagination/pagination.php";
-if (isset($_GET['searchStr'])) {
-    $searchStr = trim($_GET['searchStr']);
-} else {
-    $searchStr = null;
-}
- $category_list = $category_model->getListWithLimit($display, $position, $searchStr);
+    include_once "app/views/admin/pagination/pagination.php";
+    if (isset($_GET['searchStr'])) {
+        $searchStr = trim($_GET['searchStr']);
+    } else {
+        $searchStr = null;
+    }
+    $category_list = $category_model->getListWithLimit($display, $position, $searchStr);
 ?>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
     integrity="sha384-pzjw8s+ekmvplp5f/ZxXnDQbcz0S7bJr6W2kcoFVGLsRakET4Qc5I2tG4LDA2tB" crossorigin="anonymous">

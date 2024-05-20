@@ -1,8 +1,7 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -17,7 +16,6 @@
 </head>
 
 <body>
-
     <div class="container hero-header">
 
         <!-- Outer Row -->
@@ -36,7 +34,7 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Chào mừng bạn trở lại!</h1>
                                     </div>
-                                    <form class="user">
+                                    <form action="<?php echo _WEB_ROOT ?>/Account/login" method="POST" class="user">
                                         <div class="form-group mb-4">
                                             <input type="email" class="form-control" id="exampleInputEmail"
                                                 aria-describedby="emailHelp" placeholder="Nhập địa chỉ email tại đây">
@@ -44,6 +42,7 @@
                                         <div class="form-group mb-4">
                                             <input type="password" class="form-control form-control-user"
                                                 id="exampleInputPassword" placeholder="Nhập mật khẩu tại đây">
+                                                <?php echo (!empty($errors) && array_key_exists('Password', $errors)) ? '<span class="text-danger">' . $errors["Password"] . '</span>' : false; ?>    
                                         </div>
                                         <div class="form-group mb-4">
                                             <div class="custom-control custom-checkbox small">
@@ -52,9 +51,9 @@
                                                     đăng nhập của tôi</label>
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">
                                             Đăng nhập
-                                        </a>
+                                        </button>
                                         <hr>
                                         <a href="index.html" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Đăng nhập bằng Google
@@ -65,7 +64,7 @@
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Bạn đã quên mật khẩu?</a>
+                                        <a class="small" href="<?php echo _WEB_ROOT ?>/account/forgotPassword">Bạn đã quên mật khẩu?</a>
                                     </div>
                                     <div class="text-center">
                                         <a class="small" href="<?php echo _WEB_ROOT ?>/account/register">Tạo tài khoản
