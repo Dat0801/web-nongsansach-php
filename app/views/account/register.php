@@ -1,3 +1,14 @@
+<?php    
+    // $list_province = $province_model->getProvinceList();
+    // $list_district = $district_model->getPlaces($_GET['province_id']);
+    // $list_ward = $wards_model->getPlaces($_GET['district_id']);
+    var_dump($province_list);
+    // if (isset($_POST['add_sale'])) {
+    //     echo "<pre>";
+    //     print_r($_POST);
+    //     die();
+    // }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +27,7 @@
         rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+        rel="stylesheet">        
 </head>
 
 <body>
@@ -38,20 +49,46 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Đăng ký tài khoản mới tại đây!</h1>
                                     </div>
-                                    <form class="user">
+                                    <form class="user" method="post" action="">
                                         <div class="form-group row mb-4">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                                <input type="text" class="form-control form-control-user"
+                                                <input type="text" name="FirstName" class="form-control form-control-user"
                                                     id="exampleFirstName" placeholder="Tên của bạn">
                                             </div>
                                             <div class="col-sm-6">
-                                                <input type="text" class="form-control form-control-user"
+                                                <input type="text" name="LastName" class="form-control form-control-user"
                                                     id="exampleLastName" placeholder="Họ của bạn">
                                             </div>
                                         </div>
                                         <div class="form-group mb-4">
-                                            <input type="email" class="form-control form-control-user"
+                                            <input type="email" name="email" class="form-control form-control-user"
                                                 id="exampleInputEmail" placeholder="Địa chỉ Email">
+                                        </div>
+                                        <div class="form-group row mb-4">
+                                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                                <div class="form-group">
+                                                    <label for="province">Tỉnh/Thành phố</label>
+                                                    <select id="province" name="province" class="form-control">
+                                                        <option value="">Chọn một tỉnh</option>
+                                                        <!-- populate options with data from your database or API -->
+                                                        <?php
+                                                        foreach($province_list as $row) {
+                                                        ?>
+                                                            <option value="<?php echo $row['province_id'] ?>"><?php echo $row['name'] ?></option>
+                                                        <?php
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group">
+                                                    <label for="district">Quận/Huyện</label>
+                                                    <select id="district" name="district" class="form-control">
+                                                        <option value="">Chọn một quận/huyện</option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
                                         <div class="form-group row mb-4">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
@@ -63,7 +100,7 @@
                                                     id="exampleRepeatPassword" placeholder="Xác nhận mật khẩu">
                                             </div>
                                         </div>
-                                        <a href="login.html" class="btn btn-primary btn-user btn-block">
+                                        <a href="#" class="btn btn-primary btn-user btn-block">
                                             Đăng Ký
                                         </a>
                                         <hr>
@@ -93,6 +130,6 @@
 
     <!-- Custom scripts for all pages-->
     <script src="<?php echo _WEB_ROOT ?>/public/assets/admin/Content/js/sb-admin-2.min.js"></script>
-
+    <script src="js/app.js"></script>
 </body>
 </html>

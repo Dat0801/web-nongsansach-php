@@ -39,6 +39,7 @@ if(!empty($config['database'])) {
     }
 
 }
+
 require_once 'core/Model.php';// Load app
 require_once 'core/Controller.php'; //Load base controller
 require_once 'core/Request.php'; // Load request
