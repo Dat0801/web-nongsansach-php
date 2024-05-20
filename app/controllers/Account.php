@@ -6,22 +6,23 @@ require 'vendor/autoload.php';
 class Account extends Controller{
 
     public $data = [];
-    public $province, $district, $wards;
+    public $customer, $province, $district, $wards;
+
     public function __construct() {
         $this->province = $this->model('ProvinceModel');
         $this->district = $this->model('DistrictModel');
         $this->wards = $this->model('WardsModel');
+        $this->customer = $this->model('CustomerModel');
     }
     public function login() {
         $this->data['title'] = 'Trang đăng nhập';
         $this->data['content'] = 'account/login';
-        //Validate form
         $request = new Request();
 
         if ($request->isPost()) {
             $request->rules([
-                'Username' => 'required|min:5|max:60|unique:khachhang:Username',                
-                'Password' => 'required|callback_validatePassword',
+                'Username' => 'required',                
+                'Password' => 'required',
             ]);
 
             $request->messages([
@@ -30,18 +31,19 @@ class Account extends Controller{
                 'Username.max' => 'Tên tài khoản phải nhỏ hơn 60 ký tự',
                 'Username.unique' => 'Tên tài khoản đã tồn tại. Vui lòng chọn tên khác!',
                 'Password.required' => 'Mật khẩu không được để trống',                
-                'Password.callback_validatePassword' => 'Mật khẩu phải có ít nhất 8 ký tự, chứa ít nhất một chữ cái viết hoa, một chữ cái viết thường, một số và một ký tự đặc biệt',
             ]);
-
             $validate = $request->validate();
             if (!$validate) {
                 $this->data['sub_content']['errors'] = $request->errors();
                 $this->data['sub_content']['msg'] = "Đã có lỗi xãy ra. Vui lòng kiểm tra lại!";
                 $this->data['sub_content']['old'] = $request->getFields();
             } else {
+                unset($_SESSION['user']);
                 $data = $request->getFields();
-                //$this->customer->addCustomer($data);
-                //header('Location: ' . _WEB_ROOT . '/admin/Customer/index?msg=Thêm thành công!');
+                $customer = $this->customer->checkLogin($data['Username'], $data['Password']);
+                if($customer != null) {
+                    $_SESSION['user'] = $customer;
+                }
             }
         }
         $this->render('layouts/client_layout', $this->data);

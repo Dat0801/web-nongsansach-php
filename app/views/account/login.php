@@ -36,12 +36,13 @@
                                     </div>
                                     <form action="<?php echo _WEB_ROOT ?>/Account/login" method="POST" class="user">
                                         <div class="form-group mb-4">
-                                            <input type="email" class="form-control" id="exampleInputEmail"
-                                                aria-describedby="emailHelp" placeholder="Nhập địa chỉ email tại đây">
+                                            <input type="text" class="form-control" id="exampleInputEmail"
+                                                aria-describedby="emailHelp" placeholder="Nhập username" name="Username">
+                                                <?php echo (!empty($errors) && array_key_exists('Username', $errors)) ? '<span class="text-danger">' . $errors["Username"] . '</span>' : false; ?>    
                                         </div>
                                         <div class="form-group mb-4">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Nhập mật khẩu tại đây">
+                                                id="exampleInputPassword" placeholder="Nhập mật khẩu tại đây"  name="Password">
                                                 <?php echo (!empty($errors) && array_key_exists('Password', $errors)) ? '<span class="text-danger">' . $errors["Password"] . '</span>' : false; ?>    
                                         </div>
                                         <div class="form-group mb-4">

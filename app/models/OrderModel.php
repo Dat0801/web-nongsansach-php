@@ -23,6 +23,12 @@ class OrderModel extends Model
         return $data;
     }
 
+    public function getOrderListByCustomer($MaKH)
+    {
+        $data = $this->db->table('hoadon')->where('MaKH', '=', $MaKH)->get();
+        return $data;
+    }
+
     public function getDetail($MaHD)
     {
         $data = $this->db->table('hoadon')->where('MaHD', '=', $MaHD)->first();
