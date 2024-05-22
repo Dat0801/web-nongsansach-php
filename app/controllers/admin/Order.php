@@ -1,5 +1,5 @@
 <?php
-class Order extends Controller
+class Order extends AdminController
 {
 
     public $data = [];
@@ -7,6 +7,7 @@ class Order extends Controller
 
     public function __construct()
     {
+        parent::__construct();
         $this->order = $this->model('OrderModel');
         $this->orderDetail = $this->model('OrderDetailModel');
         $this->product = $this->model('ProductModel');

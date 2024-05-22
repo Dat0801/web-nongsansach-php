@@ -1,12 +1,13 @@
 <?php
 
-class Suppliers extends Controller
+class Suppliers extends AdminController
 {
     public $data = [];
     public $suppliers;
 
     public function __construct()
     {
+        parent::__construct();
         $this->suppliers = $this->model('SuppliersModel');
     }
 

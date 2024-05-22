@@ -13,26 +13,43 @@
                     <h3 class="mb-4">Địa chỉ nhận hàng</h3>
                     <div class="form-item">
                         <label class="form-label my-3">Họ và tên<sup style="color: red"> (*)</sup></label>
-                        <input type="text" class="form-control" name="TenKH"
-                            value="<?php echo !empty($old["TenKH"]) ? $old["TenKH"] : false; ?>">
+                        <input type="text" class="form-control" name="TenKH" value="<?php
+                        if (isset($_SESSION['user'])) {
+                            echo $_SESSION['user']['TenKH'];
+                        } else {
+                            echo !empty($old["TenKH"]) ? $old["TenKH"] : false;
+                        }
+                        ?>">
                         <?php echo (!empty($errors) && array_key_exists('TenKH', $errors)) ? '<span class="text-danger">' . $errors["TenKH"] . '</span>' : false; ?>
                     </div>
                     <div class="form-item">
                         <label class="form-label my-3">Email<sup style="color: red"> (*)</sup></label>
-                        <input type="email" class="form-control" name="Email"
-                            value="<?php echo !empty($old["Email"]) ? $old["Email"] : false; ?>">
+                        <input type="email" class="form-control" name="Email" value="<?php
+                        if (isset($_SESSION['user'])) {
+                            echo $_SESSION['user']['Email'];
+                        } else {
+                            echo !empty($old["Email"]) ? $old["Email"] : false;
+                        } ?>">
                         <?php echo (!empty($errors) && array_key_exists('Email', $errors)) ? '<span class="text-danger">' . $errors["Email"] . '</span>' : false; ?>
                     </div>
                     <div class="form-item">
                         <label class="form-label my-3">Số điện thoại<sup style="color: red"> (*)</sup></label>
-                        <input type="tel" class="form-control" name="SDT"
-                            value="<?php echo !empty($old["SDT"]) ? $old["SDT"] : false; ?>">
+                        <input type="tel" class="form-control" name="SDT" value="<?php
+                        if (isset($_SESSION['user'])) {
+                            echo $_SESSION['user']['SDT'];
+                        } else {
+                            echo !empty($old["SDT"]) ? $old["SDT"] : false;
+                        } ?>">
                         <?php echo (!empty($errors) && array_key_exists('SDT', $errors)) ? '<span class="text-danger">' . $errors["SDT"] . '</span>' : false; ?>
                     </div>
                     <div class="form-item">
                         <label class="form-label my-3">Địa chỉ <sup style="color: red"> (*)</sup></label>
-                        <input type="text" class="form-control" placeholder="" name="DiaChi"
-                            value="<?php echo !empty($old["DiaChi"]) ? $old["DiaChi"] : false; ?>">
+                        <input type="text" class="form-control" placeholder="" name="DiaChi" value="<?php
+                        if (isset($_SESSION['user'])) {
+                            echo $_SESSION['user']['DiaChi'];
+                        } else {
+                            echo !empty($old["DiaChi"]) ? $old["DiaChi"] : false;
+                        } ?>">
                         <?php echo (!empty($errors) && array_key_exists('DiaChi', $errors)) ? '<span class="text-danger">' . $errors["DiaChi"] . '</span>' : false; ?>
                     </div>
                     <div class="row">

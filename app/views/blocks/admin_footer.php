@@ -32,7 +32,7 @@
                 <div class="modal-body">Chọn "Đăng xuất" bên dưới để thoát</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
-                    <a class="btn btn-primary" href="/Home/DangXuat">Đăng xuất</a>
+                    <a class="btn btn-primary" href="<?php echo _WEB_ROOT ?>/admin/account/logout">Đăng xuất</a>
                 </div>
             </div>
         </div>
