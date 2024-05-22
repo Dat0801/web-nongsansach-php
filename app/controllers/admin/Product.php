@@ -1,5 +1,5 @@
 <?php
-class Product extends Controller
+class Product extends AdminController
 {
 
     public $data = [];
@@ -7,6 +7,7 @@ class Product extends Controller
 
     public function __construct()
     {
+        parent::__construct();
         $this->product = $this->model('ProductModel');
         $this->category = $this->model('CategoryModel');
         $this->suppliers = $this->model('SuppliersModel');

@@ -1,10 +1,11 @@
 <?php
-class Category extends Controller{
+class Category extends AdminController{
 
     public $data = [];
     public $category;
 
     public function __construct(){
+        parent::__construct();
         $this->category = $this->model('categoryModel');
     }
 

@@ -47,4 +47,21 @@ class CustomerModel extends Model{
         }
         return $this->db->table('khachhang')->limit($limit, $offset)->get();
     }
+    public function checkLogin($username, $password) {
+        $data = $this->db->table('khachhang')->where('Username', '=', $username)->where('Password', '=', $password)->first();
+        return $data;
+    }
+
+    public function changePassword($username, $newPassword) {
+        $this->db->table('khachhang')->where('Username', '=', $username)->update(['Password' => $newPassword]);
+    }
+
+    public function updatePassword($id, $newPassword) {
+        $this->db->table('khachhang')->where('MaKH', '=', $id)->update(['Password' => $newPassword]);
+    }
+
+    public function getCustomerByEmail($email) {
+        $data = $this->db->table('khachhang')->where('Email', '=', $email)->first();
+        return $data;
+    }
 }
