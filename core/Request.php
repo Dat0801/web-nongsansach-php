@@ -115,6 +115,13 @@ class Request
                         }
                     }
 
+                    if ($ruleName == 'same') {
+                        if ($dataFields[$fieldName] !== $dataFields[$ruleValue]) {
+                            $this->setErrors($fieldName, $ruleName);
+                            $checkValidate = false;
+                        }
+                    }
+                    
                     if ($ruleName == 'min') {
                         if (strlen(trim($dataFields[$fieldName])) < $ruleValue) {
                             $this->setErrors($fieldName, $ruleName);
@@ -135,9 +142,6 @@ class Request
                             $checkValidate = false;
                         }
                     }
-
-
-
                     if ($ruleName == 'unique') {
                         $tableName = null;
                         $fieldCheck = null;

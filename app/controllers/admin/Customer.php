@@ -181,11 +181,7 @@ class Customer extends AdminController{
 
     
     
-    // public function deleteProduct() {
-    //     $id = $_GET["MaHang"];
-    //     $this->customer->deleteProduct($id);
-    //     header('Location: '._WEB_ROOT.'/admin/customer');
-    // }
+    
 
    
 }
