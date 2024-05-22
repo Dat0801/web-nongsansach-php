@@ -41,6 +41,8 @@ if(!empty($config['database'])) {
 }
 
 require_once 'core/Model.php';// Load app
+require_once 'core/PHPMailer.php';// Load PHPMailer
 require_once 'core/Controller.php'; //Load base controller
+require_once 'core/AdminController.php'; //Load base controller
 require_once 'core/Request.php'; // Load request
 require_once 'core/Response.php'; // Load response

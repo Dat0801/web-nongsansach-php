@@ -25,4 +25,9 @@ class EmployeeModel extends Model{
     public function updateEmployee($data, $id) {
         $this->db->table('nhanvien')->where('MaNV', '=', $id)->update($data);        
     }
+
+    public function checkLogin($username, $password) {
+        $data = $this->db->table('nhanvien')->where('Username', '=', $username)->where('Password', '=', $password)->first();
+        return $data;
+    }
 }

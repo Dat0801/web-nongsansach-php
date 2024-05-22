@@ -1,5 +1,5 @@
 <?php
-class ProductReceipt extends Controller
+class ProductReceipt extends AdminController
 {
 
     public $data = [];
@@ -7,6 +7,7 @@ class ProductReceipt extends Controller
 
     public function __construct()
     {
+        parent::__construct();
         $this->productRC = $this->model('ProductReceiptModel');
         $this->product = $this->model('ProductModel');
         $this->employee = $this->model('EmployeeModel');
