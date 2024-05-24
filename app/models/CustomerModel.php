@@ -64,4 +64,9 @@ class CustomerModel extends Model{
         $data = $this->db->table('khachhang')->where('Email', '=', $email)->first();
         return $data;
     }
+
+    public function lastInsertId() {
+        return $this->db->lastInsertId();
+    }
+    
 }
