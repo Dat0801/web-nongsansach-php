@@ -24,8 +24,8 @@
                         <tr>
                             <th scope="col">Sản phẩm</th>
                             <th scope="col">Giá</th>
-                            <th scope="col">Số lượng</th>
                             <th scope="col">Đơn vị tính</th>
+                            <th scope="col">Số lượng</th>
                             <th scope="col">Tổng</th>
                             <th scope="col">Thao tác</th>
                         </tr>

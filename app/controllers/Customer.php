@@ -14,7 +14,7 @@ class Customer extends Controller
 
     public function index()
     {
-
+        var_dump($_SESSION['user']);
         $this->data['title'] = 'Hồ sơ khách hàng';
         $this->data['content'] = 'customer/index';
         if (isset($_SESSION['user'])) {
@@ -38,46 +38,97 @@ class Customer extends Controller
             $field = $request->getFields();
 
             if (isset($field["btnChangePassword"])) {
-                if ($field['oldpassword'] != $_SESSION['user']['Password']) {
-                    $this->data['sub_content']['errormsg'] = 'Mật khẩu cũ không đúng';
+                $request->rules([
+                    'newpassword' => 'required|callback_validatePassword',
+                ]);
+                $request->messages([
+                    'newpassword.required' => 'Mật khẩu không được để trống',
+                    'newpassword.callback_validatePassword' => 'Mật khẩu phải có ít nhất 8 ký tự, chứa ít nhất một chữ cái viết hoa, một chữ cái viết thường, một số và một ký tự đặc biệt',
+                ]);
+
+                $validate = $request->validate();
+                if (!$validate) {
+                    $this->data['sub_content']['errors'] = $request->errors();
+                    $this->data['sub_content']['errormsg'] = "Đã có lỗi xãy ra. Vui lòng kiểm tra lại!";
+                    $this->data['sub_content']['old'] = $request->getFields();
                 } else {
-                    if ($field['newpassword'] != $field['renewpassword']) {
-                        $this->data['sub_content']['errormsg'] = 'Mật khẩu mới không khớp';
+                    if ($field['oldpassword'] != $_SESSION['user']['Password']) {
+                        $this->data['sub_content']['errormsg'] = 'Mật khẩu cũ không đúng';
                     } else {
-                        $this->customer->changePassword($_SESSION['user']['Username'], $field['newpassword']);
-                        $_SESSION['user']['Password'] = $field['newpassword'];
-                        $this->data['sub_content']['successmsg'] = 'Đổi mật khẩu thành công';
+                        if ($field['newpassword'] != $field['renewpassword']) {
+                            $this->data['sub_content']['errormsg'] = 'Mật khẩu mới không khớp';
+                        } else {
+                            $this->customer->changePassword($_SESSION['user']['Username'], $field['newpassword']);
+                            $_SESSION['user']['Password'] = $field['newpassword'];
+                            $this->data['sub_content']['successmsg'] = 'Đổi mật khẩu thành công';
+                        }
                     }
                 }
             }
 
-            //validate client data
-            $request->rules([
-                'TenKH' => 'required|min:5|max:60',
-            ]);
-
-            $request->messages([
-                'TenKH.required' => 'Tên khách hàng không được để trống',
-                'TenKH.min' => 'Tên khách hàng phải lớn hơn 5 ký tự',
-                'TenKH.max' => 'Tên khách hàng phải nhỏ hơn 60 ký tự',
-            ]);
-
-            $validate = $request->validate();
-
-            if (!$validate) {
-                $this->data['sub_content']['errors'] = $request->errors();
-                $this->data['sub_content']['errormsg'] = "Đã có lỗi xãy ra. Vui lòng kiểm tra lại!";
-                $this->data['sub_content']['old'] = $request->getFields();
-            } else {
+            if (isset($field["btnCreateAccount"])) {
                 $data = $request->getFields();
-                $_SESSION['user']['TenKH'] = $data["TenKH"];
-                $this->customer->updateCustomer($_SESSION['user'], $_SESSION['user']['MaKH']);
-                $this->data['sub_content']['successmsg'] = 'Cập nhật thông tin thành công';
+                $customer = $this->customer->getCustomerByEmail($_SESSION['user']['Email']);
+                if ($data['username'] != '') {
+                    $_SESSION['user']['Username'] = $data['username'];
+                    $_SESSION['user']['Password'] = $data['password'];
+                }
+                $this->customer->updateCustomer($_SESSION['user'], $customer['MaKH']);
+                $this->data['sub_content']['successmsg'] = 'Tạo tài khoản thành công';
+            }
+
+            if (isset($field["btnUpdateProfile"])) {
+                $request->rules([
+                    'TenKH' => 'required|min:5|max:60',
+                ]);
+
+                $request->messages([
+                    'TenKH.required' => 'Tên khách hàng không được để trống',
+                    'TenKH.min' => 'Tên khách hàng phải lớn hơn 5 ký tự',
+                    'TenKH.max' => 'Tên khách hàng phải nhỏ hơn 60 ký tự',
+                ]);
+
+                $validate = $request->validate();
+
+                if (!$validate) {
+                    $this->data['sub_content']['errors'] = $request->errors();
+                    $this->data['sub_content']['errormsg'] = "Đã có lỗi xãy ra. Vui lòng kiểm tra lại!";
+                    $this->data['sub_content']['old'] = $request->getFields();
+                } else {
+                    $data = $request->getFields();
+                    $_SESSION['user']['TenKH'] = $data["TenKH"];
+                    $this->customer->updateCustomer($_SESSION['user'], $_SESSION['user']['MaKH']);
+                    $this->data['sub_content']['successmsg'] = 'Cập nhật thông tin thành công';
+                }
             }
         }
 
-
-
         $this->render('layouts/client_layout', $this->data);
     }
+    function validatePassword($value)
+    {
+
+        if (strlen($value) < 8) {
+            return false;
+        }
+
+        if (!preg_match("/[A-Z]/", $value)) {
+            return false;
+        }
+
+        if (!preg_match("/[a-z]/", $value)) {
+            return false;
+        }
+
+        if (!preg_match("/[0-9]/", $value)) {
+            return false;
+        }
+
+        if (!preg_match("/[!@#$%^&*()\-_=+{};:,<.>]/", $value)) {
+            return false;
+        }
+
+        return true;
+    }
 }
+

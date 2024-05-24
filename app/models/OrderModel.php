@@ -50,9 +50,9 @@ class OrderModel extends Model
         $this->db->table('hoadon')->where('MaHD', '=', $id)->update($data);
     }
 
-    public function acceptOrder($id)
+    public function acceptOrder($id, $data)
     {
-        $this->db->table('hoadon')->where('MaHD', '=', $id)->update(['TrangThai' => 'Đang giao hàng']);
+        $this->db->table('hoadon')->where('MaHD', '=', $id)->update($data);
     }
 
     public function completeOrder($id)
@@ -86,6 +86,11 @@ class OrderModel extends Model
             return $this->db->table('hoadon')->orWhereLikeAllColumns($searchStr, $tableColumns)->limit($limit, $offset)->get();
         }
         return $this->db->table('hoadon')->limit($limit, $offset)->get();
+    }
+
+    public function lastInsertId()
+    {
+        return $this->db->lastInsertId();
     }
 
 }

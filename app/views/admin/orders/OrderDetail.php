@@ -30,7 +30,7 @@
         <br />
         <div>
             <label for="">Tên nhân viên</label>
-            <input type="text" name="MaNV" class="form-control" value="<?php echo $employee['TenNV'] ?>" disabled />
+            <input type="text" name="MaNV" class="form-control" value="<?php echo isset($employee['TenNV'])?$employee['TenNV']:'' ?>" disabled />
         </div>
         <br />
         <div style="">

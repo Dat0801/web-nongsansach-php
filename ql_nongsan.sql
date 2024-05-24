@@ -238,7 +238,7 @@ DELIMITER ;
 
 CREATE TABLE `hoadon` (
   `MaHD` int(11) NOT NULL,
-  `MaNV` int(11) NOT NULL,
+  `MaNV` int(11) DEFAULT NULL,
   `MaKH` int(11) DEFAULT NULL,
   `NgayTao` datetime DEFAULT current_timestamp(),
   `NgayGiao` datetime NOT NULL DEFAULT (current_timestamp() + interval 1 day),
@@ -251,10 +251,10 @@ CREATE TABLE `hoadon` (
 --
 
 INSERT INTO `hoadon` (`MaHD`, `MaNV`, `MaKH`, `NgayTao`, `NgayGiao`, `TongTien`, `TrangThai`) VALUES
-(1, 1, 1, '2024-04-04 15:19:11', '2024-04-13 00:00:00', 58800, 'Đang giao hàng'),
-(2, 2, 2, '2024-04-12 09:24:48', '2024-04-13 09:24:48', 162000, 'Đang xử lý'),
-(3, 3, 3, '2024-04-12 09:26:45', '2024-04-13 09:26:45', 84000, 'Đã hủy'),
-(4, 4, 4, '2024-04-12 09:27:11', '2024-04-13 09:27:11', 54000, 'Đã giao hàng');
+(1, 1, 1, '2024-04-04 15:19:11', '2024-04-13 00:00:00', 58800, 'Đã giao hàng'),
+(2, 2, 2, '2024-04-12 09:24:48', '2024-04-13 09:24:48', 162000, 'Đã giao hàng'),
+(3, 3, 1, '2024-04-12 09:26:45', '2024-04-13 09:26:45', 84000, 'Đã hủy'),
+(4, 4, 2, '2024-04-12 09:27:11', '2024-04-13 09:27:11', 54000, 'Đã giao hàng');
 
 --
 -- Triggers `hoadon`
@@ -284,7 +284,7 @@ CREATE TABLE `khachhang` (
   `Password` varchar(100) NOT NULL,
   `Email` varchar(100) NOT NULL,
   `SDT` varchar(30) DEFAULT 'Chưa xác định',
-  `DiaChi` varchar(150) DEFAULT 'Chưa xác định',
+  `DiaChi` varchar(200) DEFAULT 'Chưa xác định',
   `TrangThai` bit(1) DEFAULT b'1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -293,7 +293,8 @@ CREATE TABLE `khachhang` (
 --
 
 INSERT INTO `khachhang` (`MaKH`, `TenKH`, `Username`, `Password`, `Email`, `SDT`, `DiaChi`, `TrangThai`) VALUES
-(1, 'Nguyễn Văn Phú', 'Phu123', 'Phu123456789*', 'nvp@gmail.com', '0839123478', '178E Thanh Thai, Hồ Chí Minh, Quận 10, Phường 6', b'1');
+(1, 'Nguyễn Từ Thành Đạt', 'Dat123', 'Dat123456789*', 'nguyentuthanhdat0801@gmail.com', '0839123478', 'c3/33, Xã Bình Lợi, Huyện Bình Chánh, Hồ Chí Minh',  b'1'),
+(2, 'A Nguyễn Hoàng Phúc', 'Phuc123', 'Phuc123456789*', 'Aphuc1313@gmail.com', '0939623478', '178E Thanh Thai, Phường 6, Quận 10, Hồ Chí Minh',  b'1');
 
 -- --------------------------------------------------------
 
@@ -305,7 +306,7 @@ CREATE TABLE `nhacungcap` (
   `MaNCC` int(11) NOT NULL,
   `TenNCC` varchar(50) NOT NULL,
   `SDT` varchar(30) DEFAULT 'Chưa xác định',
-  `DiaChi` varchar(50) DEFAULT 'Chưa xác định',
+  `DiaChi` varchar(200) DEFAULT 'Chưa xác định',
   `TrangThai` bit(1) DEFAULT b'1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -314,11 +315,11 @@ CREATE TABLE `nhacungcap` (
 --
 
 INSERT INTO `nhacungcap` (`MaNCC`, `TenNCC`, `SDT`, `DiaChi`, `TrangThai`) VALUES
-(1, 'LangFarm', '02633811081', 'TP.Đà Lạt', b'1'),
-(2, 'Nông sản Nguyên Vy', ' 0902350132', 'Long An', b'1'),
-(3, 'SUNRISE INS', '02836208046', 'TP.HCM', b'1'),
-(4, 'Thành Nam', '0971001003', 'Bình Dương', b'1'),
-(5, 'Nam Đô', '0977469999', 'Đà Nẵng', b'1');
+(1, 'LangFarm', '02633811081', '1G Đường Nam Kỳ Khởi Nghĩa, Phường 1, Thành phố Đà Lạt, Lâm Đồng', b'1'),
+(2, 'Nông sản Nguyên Vy', ' 0902350132', 'Đường số 3, cụm công nghiệp Liên Hưng, ấp Bình Tiền 2, Xã Đức Hòa Hạ, Huyện Đức Hòa, Long An', b'1'),
+(3, 'SUNRISE INS', '02836208046', '18A Đường Nguyễn Hữu Thọ, Xã Phước Kiển, Huyện Nhà Bè, Hồ Chí Minh.', b'1'),
+(4, 'Thành Nam', '0971001003', '168/42 Đường DX006, Khu Phố 8, Phú Mỹ, Thành phố Thủ Dầu Một, Bình Dương', b'1'),
+(5, 'Nam Đô', '0977469999', 'Thôn Quyết Thắng, xã Hòa Đông, huyện Krông Pắc, Đắk Lắk', b'1');
 
 -- --------------------------------------------------------
 
@@ -333,7 +334,7 @@ CREATE TABLE `nhanvien` (
   `UserName` varchar(30) NOT NULL,
   `Password` varchar(30) NOT NULL,
   `ChucVu` varchar(50) DEFAULT 'Nhân viên',
-  `DiaChi` varchar(50) DEFAULT 'Chưa xác định',
+  `DiaChi` varchar(200) DEFAULT 'Chưa xác định',
   `TrangThai` bit(1) DEFAULT b'1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -342,10 +343,10 @@ CREATE TABLE `nhanvien` (
 --
 
 INSERT INTO `nhanvien` (`MaNV`, `TenNV`, `SDT`, `UserName`, `Password`, `ChucVu`, `DiaChi`, `TrangThai`) VALUES
-(1, 'Nguyễn Văn Bình', '0897785658', 'admin', 'Admin123*', 'Quản lý', '243 Lạc Long Quân, Hồ Chí Minh, Phường 5, Quận 11', b'1'),
-(2, 'Hồ Văn Cường', '0897785623', 'cuong', 'Cuong123*', 'Nhân viên', '162 Đồng Khởi, Hồ Chí Minh, Phường 2, Quận 1', b'1'),
-(3, 'Trương Thị Tuyết Linh', '0897785612', 'linh', 'Linh123*', 'Nhân viên', '195/58 Hồ Thị Kỷ, Hồ Chí Minh, Phường 6, Quận 10', b'1'),
-(4, 'Võ Văn Minh', '0897785123', 'minh', 'Minh123*', 'Nhân viên', '76/9 Âu Cơ, Hồ Chí Minh, Phường 12, Quận Tân Bình', b'1');
+(1, 'Nguyễn Văn Bình', '0897785658', 'admin', 'Admin123*', 'Quản lý', '243 Lạc Long Quân, Phường 5, Quận 11, Hồ Chí Minh', b'1'),
+(2, 'Hồ Văn Cường', '0897785623', 'cuong', 'Cuong123*', 'Nhân viên', '162 Đồng Khởi, Phường 2, Quận 1, Hồ Chí Minh', b'1'),
+(3, 'Trương Thị Tuyết Linh', '0897785612', 'linh', 'Linh123*', 'Nhân viên', '195/58 Hồ Thị Kỷ, Phường 6, Quận 10, Hồ Chí Minh', b'1'),
+(4, 'Võ Văn Minh', '0897785123', 'minh', 'Minh123*', 'Nhân viên', '76/9 Âu Cơ, Phường 12, Quận Tân Bình, Hồ Chí Minh', b'1');
 
 -- --------------------------------------------------------
 
@@ -516,8 +517,28 @@ ALTER TABLE `phieunhap`
 -- Constraints for table `chitiethoadon`
 --
 ALTER TABLE `chitiethoadon`
-  ADD CONSTRAINT `FK_ChiTietHoaDon_HoaDon` FOREIGN KEY (`MaHD`) REFERENCES `hoadon` (`MaHD`),
-  ADD CONSTRAINT `FK_ChiTietHoaDon_mahang` FOREIGN KEY (`MaHang`) REFERENCES `hanghoa` (`MaHang`);
+  ADD CONSTRAINT `FK_chitiethoadon_HoaDon` FOREIGN KEY (`MaHD`) REFERENCES `hoadon` (`MaHD`),
+  ADD CONSTRAINT `FK_chitiethoadon_mahang` FOREIGN KEY (`MaHang`) REFERENCES `hanghoa` (`MaHang`);
+COMMIT;
+
+ALTER TABLE `hoadon`
+  ADD CONSTRAINT `FK_hoadon_NhanVien` FOREIGN KEY (`MaNV`) REFERENCES `nhanvien` (`MaNV`),
+  ADD CONSTRAINT `FK_hoadon_KhachHang` FOREIGN KEY (`MaKH`) REFERENCES `khachhang` (`MaKH`);
+COMMIT;
+
+ALTER TABLE `hanghoa`
+  ADD CONSTRAINT `FK_HangHoa_NhomHang` FOREIGN KEY (`MaNhomHang`) REFERENCES `nhomhang` (`MaNhomHang`),
+  ADD CONSTRAINT `FK_HangHoa_NhaCungCap` FOREIGN KEY (`MaNCC`) REFERENCES `nhacungcap` (`MaNCC`);
+COMMIT;
+
+ALTER TABLE `chitietphieunhap`
+  ADD CONSTRAINT `FK_chitietphieunhap_PhieuNhap` FOREIGN KEY (`MaPN`) REFERENCES `phieunhap` (`MaPN`),
+  ADD CONSTRAINT `FK_chitietphieunhap_HangHoa` FOREIGN KEY (`MaHang`) REFERENCES `hanghoa` (`MaHang`);
+COMMIT;
+
+ALTER TABLE `phieunhap`
+  ADD CONSTRAINT `FK_phieunhap_NhanVien` FOREIGN KEY (`MaNV`) REFERENCES `nhanvien` (`MaNV`),
+  ADD CONSTRAINT `FK_phieunhap_NhaCungCap` FOREIGN KEY (`MaNCC`) REFERENCES `nhacungcap` (`MaNCC`); 
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

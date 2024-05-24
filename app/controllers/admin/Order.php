@@ -97,7 +97,12 @@ class Order extends AdminController
     public function acceptOrder()
     {
         $id = $_GET["MaHD"];
-        $this->order->acceptOrder($id);
+        $manv = $_SESSION['employee']['MaNV'];
+        $data = [
+            'MaNV' => $manv,
+            'TrangThai' => 'Đang giao hàng'
+        ];
+        $this->order->acceptOrder($id, $data);
         header('Location: ' . _WEB_ROOT . '/admin/order?msg=Chấp nhận đơn hàng thành công');
     }
 
