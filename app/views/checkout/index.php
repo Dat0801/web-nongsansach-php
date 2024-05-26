@@ -76,7 +76,7 @@
                 <button type="submit" name="redirect" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Thanh toán qua Vnpay</button>                
             </div>
             <div class="row g-4 text-center align-items-center justify-content-center pt-4">
-                <button type="submit" name="cash" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Thanh toán khi nhận hàng</button>
+                <button type="submit" name="" class="btn border-secondary py-3 px-4 text-uppercase w-100 text-primary">Thanh toán khi nhận hàng</button>
             </div>
         </div>
 
