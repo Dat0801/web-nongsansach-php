@@ -16,7 +16,9 @@ class Checkout extends Controller
     {
         $this->data['title'] = 'Trang thanh toán';
         $this->data['content'] = 'checkout/index';
-
+        if (!isset($_SESSION['cart_items']) || count($_SESSION['cart_items']) == 0) {
+            header('Location: ' . _WEB_ROOT . '/cart');
+        }
         $request = new Request();
         if ($request->isPost()) {
             $request->rules([
@@ -64,8 +66,8 @@ class Checkout extends Controller
                     $data['Username'] = '';
                     $data['Password'] = '';
                     $data['DiaChi'] = $data['DiaChi'] . ', ' . $data['ward'] . ', ' . $data['district'] . ', ' . $data['province'];
-                    unset($data['province'], $data['district'], $data['ward']);
                     $_SESSION['user'] = $data;
+                    unset($data['province'], $data['district'], $data['ward']);
                     header('Location: ' . _WEB_ROOT . '/checkout/verify');
                 } else {
                     $_SESSION['user']['DiaChi'] = $data['DiaChi'] . ', ' . $data['ward'] . ', ' . $data['district'] . ', ' . $data['province'];
@@ -84,6 +86,7 @@ class Checkout extends Controller
                         ];
                         $this->orderDetail->addOrder($data);
                     }
+                    $_SESSION['verifyCheckout'] = true;
                     header('Location: ' . _WEB_ROOT . '/checkout/success');
                 }
             }
@@ -96,6 +99,9 @@ class Checkout extends Controller
     {
         $this->data['title'] = 'Trang xác thực';
         $this->data['content'] = 'Checkout/verify';
+        if (!isset($_SESSION['code'])) {
+            header('Location: ' . _WEB_ROOT . '/checkout');
+        }
         $request = new Request();
         if ($request->isPost()) {
             $request->rules([
@@ -114,6 +120,7 @@ class Checkout extends Controller
                 $data = $request->getFields();
                 if ($data['code'] == $_SESSION['code']) {
                     unset($_SESSION['code']);
+                    $_SESSION['verifyCheckout'] = true;
                     $customer = $this->customer->getCustomerByEmail($_SESSION['user']['Email']);
                     if ($customer == null) {
                         $this->customer->addCustomer($_SESSION['user']);
@@ -153,20 +160,25 @@ class Checkout extends Controller
     {
         $this->data['title'] = 'Đặt hàng thành công';
         $this->data['content'] = 'checkout/success';
-        $content = 'Dưới đây là danh sách sản phẩm bạn đã đặt:<br>';
-        $total = 0;
-        foreach ($_SESSION['cart_items'] as $cartItem) {
-            $total += $cartItem['total_price'];
-            $cartItem["product_id"];
-            $content .= 'Sản phẩm: ' . $cartItem["product_name"] . ', Đơn vị tính: ' . $cartItem['product_dvt'] . ', Số lượng: ' .
-                $cartItem["qty"] . ', Thành tiền: ' . $cartItem["total_price"] . '<br>';
+        if (!isset($_SESSION['verifyCheckout'])) {
+            header('Location: ' . _WEB_ROOT . '/checkout/verify');
+        } else {
+            $content = 'Dưới đây là danh sách sản phẩm bạn đã đặt:<br>';
+            $total = 0;
+            foreach ($_SESSION['cart_items'] as $cartItem) {
+                $total += $cartItem['total_price'];
+                $cartItem["product_id"];
+                $content .= 'Sản phẩm: ' . $cartItem["product_name"] . ', Đơn vị tính: ' . $cartItem['product_dvt'] . ', Số lượng: ' .
+                    $cartItem["qty"] . ', Thành tiền: ' . $cartItem["total_price"] . '<br>';
+            }
+            $content .= 'Tổng tiền: ' . $total;
+            $mailer = new Mailer();
+            $title = 'Đặt hàng thành công';
+            $mailer->sendMail($title, $content, $_SESSION['user']['Email']);
+            unset($_SESSION['cart_items']);
+            unset($_SESSION['verifyCheckout']);
+            $this->render('layouts/client_layout', $this->data);
         }
-        $content .= 'Tổng tiền: ' . $total;
-        $mailer = new Mailer();
-        $title = 'Đặt hàng thành công';
-        $mailer->sendMail($title, $content, $_SESSION['user']['Email']);
-        unset($_SESSION['cart_items']);
-        $this->render('layouts/client_layout', $this->data);
     }
     public function validatePhoneNumber($value)
     {

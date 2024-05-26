@@ -14,7 +14,9 @@ class Customer extends Controller
 
     public function index()
     {
-        var_dump($_SESSION['user']);
+        if(!isset($_SESSION['user'])){
+            header('Location: ' . _WEB_ROOT . '/account/login');
+        }
         $this->data['title'] = 'Hồ sơ khách hàng';
         $this->data['content'] = 'customer/index';
         if (isset($_SESSION['user'])) {
