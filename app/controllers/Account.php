@@ -58,31 +58,6 @@ class Account extends Controller
         header('Location: ' . _WEB_ROOT . '/account/login');
     }
 
-    function validatePassword($value)
-    {
-
-        if (strlen($value) < 8) {
-            return false;
-        }
-
-        if (!preg_match("/[A-Z]/", $value)) {
-            return false;
-        }
-
-        if (!preg_match("/[a-z]/", $value)) {
-            return false;
-        }
-
-        if (!preg_match("/[0-9]/", $value)) {
-            return false;
-        }
-
-        if (!preg_match("/[!@#$%^&*()\-_=+{};:,<.>]/", $value)) {
-            return false;
-        }
-
-        return true;
-    }
     public function forgotPassword()
     {
         $request = new Request();
