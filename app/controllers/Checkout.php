@@ -67,11 +67,12 @@ class Checkout extends Controller
                     $data['Username'] = '';
                     $data['Password'] = '';
                     $data['DiaChi'] = $data['DiaChi'] . ', ' . $data['ward'] . ', ' . $data['district'] . ', ' . $data['province'];
-                    $_SESSION['user'] = $data;
-                    if (isset($POST['redirect'])) {
-                        $_SESSION['payment'] = true;
-                    }
                     unset($data['province'], $data['district'], $data['ward']);
+                    if (isset($data['redirect'])) {
+                        $_SESSION['payment'] = true;
+                        unset($data['redirect']);
+                    }
+                    $_SESSION['user'] = $data;
                     header('Location: ' . _WEB_ROOT . '/checkout/verify');
                 } else {
                     $_SESSION['user']['DiaChi'] = $data['DiaChi'] . ', ' . $data['ward'] . ', ' . $data['district'] . ', ' . $data['province'];
@@ -81,17 +82,25 @@ class Checkout extends Controller
                     $this->order->addOrder($data);
                     $MaHD = $this->order->lastInsertId();
                     if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['redirect'])) {
+                        $_SESSION['payment'] = true;
                         $payment = new payment;
                         $total = 0;
                         foreach ($_SESSION['cart_items'] as $cartItem) {
+                            $cartItem["product_id"];
+                            $data = [
+                                'MaHang' => $cartItem["product_id"],
+                                'MaHD' => $MaHD,
+                                'SoLuong' => $cartItem["qty"],
+                                'ThanhTien' => $cartItem["total_price"],
+                            ];
+                            $this->orderDetail->addOrder($data);
                             $total += $cartItem['total_price'];
                         }
                         $order_id = $MaHD;
                         $order_price = $total;
-                        $payment->vnpay_payment($order_id, $order_price);
+                        $_SESSION['orderPaid'] = $MaHD;
                         $_SESSION['verifyCheckout'] = true;
-                        header('Location: ' . _WEB_ROOT . '/checkout/success');
-                        exit;
+                        $payment->vnpay_payment($order_id, $order_price);
                     } else {
                         foreach ($_SESSION['cart_items'] as $cartItem) {
                             $cartItem["product_id"];
@@ -158,14 +167,21 @@ class Checkout extends Controller
                             $payment = new payment;
                             $total = 0;
                             foreach ($_SESSION['cart_items'] as $cartItem) {
+                                $cartItem["product_id"];
+                                $data = [
+                                    'MaHang' => $cartItem["product_id"],
+                                    'MaHD' => $MaHD,
+                                    'SoLuong' => $cartItem["qty"],
+                                    'ThanhTien' => $cartItem["total_price"],
+                                ];
+                                $this->orderDetail->addOrder($data);
                                 $total += $cartItem['total_price'];
                             }
                             $order_id = $MaHD;
                             $order_price = $total;
-                            $payment->vnpay_payment($order_id, $order_price);
+                            $_SESSION['orderPaid'] = $MaHD;
                             $_SESSION['verifyCheckout'] = true;
-                            unset($_SESSION['payment']);
-                            header('Location: ' . _WEB_ROOT . '/checkout/success');
+                            $payment->vnpay_payment($order_id, $order_price);
                         } else {
                             foreach ($_SESSION['cart_items'] as $cartItem) {
                                 $cartItem["product_id"];
@@ -194,6 +210,7 @@ class Checkout extends Controller
     {
         $this->data['title'] = 'Đặt hàng thành công';
         $this->data['content'] = 'checkout/success';
+        unset($_SESSION['payment']);
         if (!isset($_SESSION['verifyCheckout'])) {
             header('Location: ' . _WEB_ROOT . '/checkout/verify');
         } else {
@@ -212,7 +229,6 @@ class Checkout extends Controller
             unset($_SESSION['cart_items']);
             unset($_SESSION['verifyCheckout']);
             $this->render('layouts/client_layout', $this->data);
-
         }
     }
     //create payment
@@ -223,7 +239,6 @@ class Checkout extends Controller
         if (!isset($_SESSION['verifyCheckout'])) {
             header('Location: ' . _WEB_ROOT . '/checkout/verify');
         } else {
-
             if ($_SERVER["REQUEST_METHOD"] == "GET") {
                 if ($_GET['vnp_ResponseCode'] == '00') {
                     $content = 'Dưới đây là danh sách sản phẩm bạn đã đặt:<br>';
@@ -244,11 +259,9 @@ class Checkout extends Controller
                 } else {
                     $this->data['sub_content']['error_msg'] = "Giao dịch thất bại";
                 }
-                exit();
             }
-            $this->render('layouts/client_layout', $this->data);
-
         }
+        $this->render('layouts/client_layout', $this->data);
     }
 
     public function validatePhoneNumber($value)

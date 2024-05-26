@@ -47,7 +47,7 @@
                     <small class="me-3"><i class="fas fa-map-marker-alt me-2 text-secondary"></i> <a href="#"
                             class="text-white">140 Lê Trọng Tấn</a></small>
                     <small class="me-3"><i class="fas fa-envelope me-2 text-secondary"></i><a href="#"
-                            class="text-white">nongsansach@gmail.com</a></small>
+                            class="text-white">nongsansach12@gmail.com</a></small>
                 </div>
             </div>
         </div>

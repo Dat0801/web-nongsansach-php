@@ -6,7 +6,7 @@ class payment
 {
     function vnpay_payment ($order_id,$order_price){
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl =  _WEB_ROOT ."/checkout/success";
+        $vnp_Returnurl =  _WEB_ROOT ."/checkout/payment";
         $vnp_TmnCode = "262XSFHX";//Mã website tại VNPAY 
         $vnp_HashSecret = "MMZXWISZNUUUNKGOZQPCPASLLTHYGMTB"; //Chuỗi bí mật
         $vnp_TxnRef = $order_id; //Mã đơn hàng. Trong thực tế Merchant cần insert đơn hàng vào DB và gửi mã này sang VNPAY
@@ -60,7 +60,7 @@ class payment
         $returnData = array('code' => '00'
             , 'message' => 'success'
             , 'data' => $vnp_Url);
-            if (isset($_POST['redirect'])) {
+            if (isset($_SESSION['payment'])) {
                 header('Location: ' . $vnp_Url);
                 die();
             } else {

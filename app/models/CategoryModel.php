@@ -4,7 +4,7 @@ class CategoryModel extends Model
 
     function tableFill()
     {
-        return 'NhomHang';
+        return 'nhomhang';
     }
 
     function fieldFill()
@@ -19,44 +19,44 @@ class CategoryModel extends Model
 
     public function getCategoryList()
     {
-        $data = $this->db->table('NhomHang')->get();
+        $data = $this->db->table('nhomhang')->get();
         return $data;
     }
 
     public function getDetail($MaNhomHang)
     {
-        $data = $this->db->table('NhomHang')->where('MaNhomHang', '=', $MaNhomHang)->first();
+        $data = $this->db->table('nhomhang')->where('MaNhomHang', '=', $MaNhomHang)->first();
         return $data;
     }
 
     public function searchCategory($searchStr)
     {
-        $tableColumns = ['NhomHang' => ['MaNhomHang', 'TenNhomHang']];
-        $data = $this->db->table('NhomHang')->orWhereLikeAllColumns($searchStr, $tableColumns)->get();
+        $tableColumns = ['nhomhang' => ['MaNhomHang', 'TenNhomHang']];
+        $data = $this->db->table('nhomhang')->orWhereLikeAllColumns($searchStr, $tableColumns)->get();
         return $data;
     }
 
     public function addCategory($data)
     {
-        $this->db->table('NhomHang')->insert($data);
+        $this->db->table('nhomhang')->insert($data);
     }
 
     public function deleteCategory($id)
     {
-        $this->db->table('NhomHang')->where('MaNhomHang', '=', $id)->delete();
+        $this->db->table('nhomhang')->where('MaNhomHang', '=', $id)->delete();
     }
 
     public function updateCategory($data, $id)
     {
-        $this->db->table('NhomHang')->where('MaNhomHang', '=', $id)->update($data);
+        $this->db->table('nhomhang')->where('MaNhomHang', '=', $id)->update($data);
     }
     public function getListWithLimit($limit, $offset, $searchStr = null)
     {
-        $tableColumns = ['NhomHang' => ['MaNhomHang', 'TenNhomHang']];
+        $tableColumns = ['nhomhang' => ['MaNhomHang', 'TenNhomHang']];
         if ($searchStr) {
-            return $this->db->table('NhomHang')->orWhereLikeAllColumns($searchStr, $tableColumns)->limit($limit, $offset)->get();
+            return $this->db->table('nhomhang')->orWhereLikeAllColumns($searchStr, $tableColumns)->limit($limit, $offset)->get();
         }
-        return $this->db->table('NhomHang')->limit($limit, $offset)->get();
+        return $this->db->table('nhomhang')->limit($limit, $offset)->get();
     }
 
     public function countProductsInCategory($categoryid)

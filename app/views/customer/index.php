@@ -129,6 +129,7 @@
                                                     $date = new DateTime($item['NgayGiao']);
                                                     $formattedDate = $date->format('d-m-Y');
                                                     $date = "(" . $formattedDate . ')';
+
                                                     if ($item['TrangThai'] == "Đang xử lý" || $item['TrangThai'] == "Đang giao hàng") {
                                                         $color = "#e65c00";
                                                         if ($item['TrangThai'] == "Đang giao hàng") {
@@ -139,7 +140,14 @@
                                                     } else {
                                                         $color = "#cc0000";
                                                     }
-                                                    echo "<h6 style='color:$color;'> " . $item['TrangThai'] . ' ' . $date . "</h6>";
+                                                    if (isset($_SESSION['orderPaid'])) {
+                                                        if ($item['MaHD'] == $_SESSION['orderPaid']) {
+                                                            $colorPaid = "#008000";
+                                                            echo "<h6 style='color:$color;'> " . $item['TrangThai'] . ' ' . $date. "<span style='color:$colorPaid;'> (Đã thanh toán)</span></h6>";
+                                                        }
+                                                    } else {
+                                                        echo "<h6 style='color:$color;'> " . $item['TrangThai'] . ' ' . $date . "</h6>";
+                                                    }
                                                     ?>
                                                 </div>
                                             </div>
