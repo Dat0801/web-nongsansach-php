@@ -143,7 +143,9 @@
                                                     if (isset($_SESSION['orderPaid'])) {
                                                         if ($item['MaHD'] == $_SESSION['orderPaid']) {
                                                             $colorPaid = "#008000";
-                                                            echo "<h6 style='color:$color;'> " . $item['TrangThai'] . ' ' . $date. "<span style='color:$colorPaid;'> (Đã thanh toán)</span></h6>";
+                                                            echo "<h6 style='color:$color;'> " . $item['TrangThai'] . ' ' . $date . "<span style='color:$colorPaid;'> (Đã thanh toán)</span></h6>";
+                                                        } else {
+                                                            echo "<h6 style='color:$color;'> " . $item['TrangThai'] . ' ' . $date . "</h6>";
                                                         }
                                                     } else {
                                                         echo "<h6 style='color:$color;'> " . $item['TrangThai'] . ' ' . $date . "</h6>";
@@ -290,7 +292,7 @@
                                                     </div>
                                                     <div class="align-items-center text-center justify-content-center py-3">
                                                         <input type="submit" class="btn btn-primary" name="btnCreateAccount"
-                                                            value="Đổi mật khẩu" />
+                                                            value="Tạo tài khoản" />
                                                     </div>
                                                 </form>
                                             </div>
