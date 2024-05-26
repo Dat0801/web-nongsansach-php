@@ -171,7 +171,7 @@ class Account extends Controller
                     }
                 } else {
                     $this->data['sub_content']['msg'] = "Mã xác nhận không đúng!";
-                }
+                }   
             }
         }
         $this->render('layouts/client_layout', $this->data);

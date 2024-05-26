@@ -54,7 +54,7 @@
                 <div class="footer-item">
                     <h4 class="text-light mb-3">Liên hệ</h4>
                     <p>Địa chỉ: 140 Lê Trọng Tấn</p>
-                    <p>Email: nongsansach@gmail.com</p>
+                    <p>Email: nongsansach12@gmail.com</p>
                     <p>Số điện thoại: +0123 4567 8910</p>
                     <p>Payment Accepted</p>
                     <img src="img/payment.png" class="img-fluid" alt="">

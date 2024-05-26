@@ -39,7 +39,7 @@
                         <i class="fas fa-envelope fa-2x text-primary me-4"></i>
                         <div>
                             <h4>Email</h4>
-                            <p class="mb-2">nongsansach@email.com</p>
+                            <p class="mb-2">nongsansach12@gmail.com</p>
                         </div>
                     </div>
                     <div class="d-flex p-4 rounded bg-white">
