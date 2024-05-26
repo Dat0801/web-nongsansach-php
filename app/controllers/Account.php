@@ -23,8 +23,8 @@ class Account extends Controller
 
         $request = new Request();
 
-        if($request->isGet()){
-            if(isset($_GET['successmsg'])){
+        if ($request->isGet()) {
+            if (isset($_GET['successmsg'])) {
                 $this->data['sub_content']['successmsg'] = $_GET['successmsg'];
             }
         }
@@ -133,7 +133,9 @@ class Account extends Controller
     {
         $this->data['title'] = 'Trang xác thực';
         $this->data['content'] = 'account/verify';
-
+        if (!isset($_SESSION['code'])) {
+            header('Location: ' . _WEB_ROOT . '/account/forgotPassword');
+        }
         $request = new Request();
         if ($request->isPost()) {
             $request->rules([
@@ -152,6 +154,7 @@ class Account extends Controller
                 $data = $request->getFields();
                 if ($data['code'] == $_SESSION['code']) {
                     unset($_SESSION['code']);
+                    $_SESSION['verify'] = true;
                     if (isset($_SESSION['register'])) {
                         $this->customer->addCustomer($_SESSION['register']);
                         unset($_SESSION['register']);
@@ -159,8 +162,10 @@ class Account extends Controller
                     } else {
                         $customer = $this->customer->getCustomerByEmail($_SESSION['Email']);
                         if ($customer['Username'] == null && $customer['Password'] == null) {
+                            $_SESSION['createAccount'] = true;
                             header('Location: ' . _WEB_ROOT . '/account/createAccount');
                         } else {
+                            $_SESSION['resetPassword'] = true;
                             header('Location: ' . _WEB_ROOT . '/account/resetPassword');
                         }
                     }
@@ -174,6 +179,13 @@ class Account extends Controller
 
     public function resetPassword()
     {
+        if (isset($_SESSION['verify'])) {
+            if (!isset($_SESSION['resetPassword'])) {
+                header('Location: ' . _WEB_ROOT . '/account/createAccount');
+            }
+        } else {
+            header('Location: ' . _WEB_ROOT . '/account/verify');
+        }
         $request = new Request();
         if ($request->isPost()) {
             $request->rules([
@@ -199,6 +211,8 @@ class Account extends Controller
                     $customer = $this->customer->getCustomerByEmail($_SESSION['Email']);
                     $this->customer->updatePassword($customer['MaKH'], $data['Password']);
                     unset($_SESSION['Email']);
+                    unset($_SESSION['verify']);
+                    unset($_SESSION['resetPassword']);
                     header('Location: ' . _WEB_ROOT . '/Account/Login?successmsg=Đặt lại mật khẩu thành công!');
                 }
             }
@@ -210,6 +224,14 @@ class Account extends Controller
 
     public function createAccount()
     {
+        if (isset($_SESSION['verify'])) {
+            if (!isset($_SESSION['createAccount'])) {
+                header('Location: ' . _WEB_ROOT . '/account/resetPassword');
+            }
+        } else {
+            header('Location: ' . _WEB_ROOT . '/account/verify');
+        }
+
         $this->data['title'] = 'Trang tạo tài khoản';
         $this->data['content'] = 'account/createAccount';
         $request = new Request();
@@ -235,10 +257,10 @@ class Account extends Controller
             } else {
                 $data = $request->getFields();
                 $customer = $this->customer->getCustomerByEmail($_SESSION['Email']);
-                if ($customer != null) {
-                    $this->customer->updateCustomer($data, $customer['MaKH']);
-                    unset($_SESSION['Email']);
-                }
+                $this->customer->updateCustomer($data, $customer['MaKH']);
+                unset($_SESSION['Email']);
+                unset($_SESSION['verify']);
+                unset($_SESSION['createAccount']);
                 header('Location: ' . _WEB_ROOT . '/Account/Login?successmsg=Tạo tài khoản thành công!');
             }
         }
