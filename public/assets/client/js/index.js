@@ -50,49 +50,71 @@ function getWardData(districtId) {
 
 function renderProvinceData(provinces) {
   var provinceSelect = document.getElementById('province');
+  var provinceSelected = document.getElementById('provinceSelected');
   provinceSelect.innerHTML = '<option value="" code="">Chọn tỉnh/thành phố</option>';
-
   for (var i = 0; i < provinces.length; i++) {
     var province = provinces[i];
     var option = document.createElement('option');
 
     option.value = province.ProvinceName;
+    if (provinceSelected && provinceSelected.value !== '') {
+      if (province.ProvinceName == provinceSelected.value) {
+        option.selected = true;
+      }
+    }
+
     option.setAttribute('code', province.ProvinceID);
     option.textContent = province.ProvinceName;
     provinceSelect.appendChild(option);
   }
 
-  
+
 }
 
 function renderDistrictData(districts) {
   var districtSelect = document.getElementById('district');
+  var districtSelected = document.getElementById('districtSelected');
   districtSelect.innerHTML = '<option value="" code="">Chọn quận/huyện</option>';
   for (var i = 0; i < districts.length; i++) {
     var district = districts[i];
     var option = document.createElement('option');
     option.value = district.DistrictName;
+
+    if (districtSelected && districtSelected.value == '' && i == 0) {
+      if (district.DistrictName == districtSelected.value) {
+        option.selected = true;
+      }
+    }
+
     option.setAttribute('code', district.DistrictID);
     option.textContent = district.DistrictName;
     districtSelect.appendChild(option);
   }
 
-  
+
 }
 
 function renderWardData(wards) {
   var wardSelect = document.getElementById('ward');
+  var wardSelected = document.getElementById('wardSelected');
   wardSelect.innerHTML = '<option value="" code="">Chọn phường/xã</option>';
   for (var i = 0; i < wards.length; i++) {
     var ward = wards[i];
     var option = document.createElement('option');
     option.value = ward.WardName;
+
+    if (wardSelected && wardSelected.value == '' && i == 0) {
+      if (ward.WardName == wardSelected.value) {
+        option.selected = true;
+      }
+    }
+
     option.setAttribute('code', ward.wardID);
     option.textContent = ward.WardName;
     wardSelect.appendChild(option);
   }
 
-  
+
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -101,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
   var provinceSelect = document.getElementById('province');
   provinceSelect.addEventListener('change', function () {
     var selectedOption = this.selectedOptions[0];
-    var selectedProvinceId = selectedOption.getAttribute('code');    
+    var selectedProvinceId = selectedOption.getAttribute('code');
     getDistrictData(selectedProvinceId);
   });
 

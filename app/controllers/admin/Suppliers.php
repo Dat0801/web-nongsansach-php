@@ -88,7 +88,7 @@ class Suppliers extends AdminController
     public function AddSuppliers()
     {
         $this->data['content'] = '/admin/suppliers/Addsuppliers';
-        $this->data['title'] = 'Trang thêm thoong tin nhà cung cấp';
+        $this->data['title'] = 'Trang thêm thông tin nhà cung cấp';
         $request = new Request();
 
         if ($request->isPost()) {
@@ -125,5 +125,3 @@ class Suppliers extends AdminController
         $this->render('layouts/admin_layout', $this->data);
     }
 }
-
-?>

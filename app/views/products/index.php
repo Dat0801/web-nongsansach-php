@@ -12,14 +12,15 @@ $products = $product_model->getListWithLimit($display, $position, $categoryid, $
     <h1 class="text-center text-white display-6"><?php echo $name ?></h1>
 </div>
 <!-- Single Page Header End -->
-<div class="toast bg-primary text-white" role="alert" aria-live="assertive" aria-atomic="true" style="position: fixed; top: 100px; right:10px; z-index: 9999;">
-  <div class="toast-header">
-    <strong class="me-auto">Thông báo</strong>
-    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-  </div>
-  <div class="toast-body">
-    Thêm sản phẩm vào giỏ hàng thành công!
-  </div>
+<div class="toast bg-primary text-white" role="alert" aria-live="assertive" aria-atomic="true"
+    style="position: fixed; top: 100px; right:10px; z-index: 9999;">
+    <div class="toast-header">
+        <strong class="me-auto">Thông báo</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        Thêm sản phẩm vào giỏ hàng thành công!
+    </div>
 </div>
 <!-- Fruits Shop Start-->
 <div class="container-fluid fruite py-5">
@@ -121,20 +122,27 @@ $products = $product_model->getListWithLimit($display, $position, $categoryid, $
                                 <div class="p-4 border border-primary border-top-0 rounded-bottom">
                                     <h4 class="product-name mb-4"><?php echo $product["TenHang"] ?></h4>
                                     <div class="d-flex justify-content-between flex-lg-wrap">
-                                        <p class="text-dark fs-5 fw-bold mb-0">
+                                        <p class="text-dark fs-5 fw-bold mb-4">
                                             <?php echo number_format($product["GiaBan"]) . "<sup><small>đ</small></sup><sub>/<small>" . $product["DVT"] . " "
                                                 . $product["TrongLuong"] . $product["DonViTrongLuong"] . "</small></sub>"; ?>
                                         </p>
-                                        <button class="add-cart btn border border-secondary rounded-pill px-3 text-primary"
-                                            data-url-base="<?php echo _WEB_ROOT ?>"
-                                            data-product-id="<?php echo $product['MaHang'] ?>" data-product-qty="1"
-                                            data-product-dvt = "<?php echo $product['DVT'] ?>"
-                                            data-product-price="<?php echo $product['GiaBan'] ?>"
-                                            data-product-name="<?php echo $product['TenHang'] ?>"
-                                            data-product-img="<?php echo $product['HinhAnh'] ?>"
-                                            data-product-quantity="<?php echo $product['SoLuongTon'] ?>">
-                                            <i class="fa fa-shopping-bag me-2 text-primary"></i> Mua
-                                        </button>
+                                        <?php if ($product["SoLuongTon"] > 0): ?>
+                                            <button class="add-cart btn border border-secondary rounded-pill px-3 text-primary"
+                                                data-url-base="<?php echo _WEB_ROOT ?>"
+                                                data-product-id="<?php echo $product['MaHang'] ?>" data-product-qty="1"
+                                                data-product-dvt="<?php echo $product['DVT'] ?>"
+                                                data-product-price="<?php echo $product['GiaBan'] ?>"
+                                                data-product-name="<?php echo $product['TenHang'] ?>"
+                                                data-product-img="<?php echo $product['HinhAnh'] ?>"
+                                                data-product-quantity="<?php echo $product['SoLuongTon'] ?>">
+                                                <i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng
+                                            </button>
+                                        <?php else: ?>
+                                            <button class="btn border border-secondary rounded-pill px-3 text-primary">
+                                                <a href="<?php echo _WEB_ROOT ?>/contact"><i
+                                                        class="fa fa-shopping-bag me-2 text-primary"></i>Liên hệ shop</a>
+                                            </button>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>

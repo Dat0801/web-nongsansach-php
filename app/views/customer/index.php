@@ -38,6 +38,14 @@
                                         id="nav-changepassword-tab" data-bs-toggle="tab"
                                         data-bs-target="#nav-changepassword" aria-controls="nav-changepassword"
                                         aria-selected="false">Đổi mật khẩu</button>
+                                    <?php
+                                    if ($_SESSION['user']['Username'] == '' && $_SESSION['user']['Password'] == '') {
+                                        ?>
+                                        <button class="nav-link border-white border-bottom-0" type="button" role="tab"
+                                            id="nav-createaccount-tab" data-bs-toggle="tab"
+                                            data-bs-target="#nav-createaccount" aria-controls="nav-createaccount"
+                                            aria-selected="false">Tạo tài khoản</button>
+                                    <?php } ?>
                                 </div>
                             </nav>
                             <div class="tab-content mb-5">
@@ -45,7 +53,7 @@
                                     aria-labelledby="nav-about-tab">
                                     <div class="px-2">
                                         <div class="row g-4">
-                                            <form class="col-6" action="" method="post">
+                                            <form class="col-11" action="" method="post">
                                                 <div
                                                     class="row align-items-center text-center justify-content-center py-2">
                                                     <div class="col-4">
@@ -67,17 +75,6 @@
                                                 <div
                                                     class="row text-center align-items-center justify-content-center py-2">
                                                     <div class="col-4">
-                                                        <p class="mb-0">Tên tài khoản:</p>
-                                                    </div>
-                                                    <div class="col-8">
-                                                        <input type="text"
-                                                            value="<?php echo $_SESSION['user']['Username'] ?>"
-                                                            class="form-control mb-0" disabled>
-                                                    </div>
-                                                </div>
-                                                <div
-                                                    class="row text-center align-items-center justify-content-center py-2">
-                                                    <div class="col-4">
                                                         <p class="mb-0">Email:</p>
                                                     </div>
                                                     <div class="col-8">
@@ -91,14 +88,14 @@
                                                     <div class="col-4">
                                                         <p class="mb-0">Địa chỉ:</p>
                                                     </div>
-                                                    <div class="col-8">
-                                                        <input type="text"
-                                                            value="<?php echo $_SESSION['user']['DiaChi'] ?>"
-                                                            class="form-control mb-0" disabled>
+
+                                                    <div class="form-group col-8">
+                                                        <input class="form-control" disabled
+                                                            value="<?php echo $_SESSION['user']['DiaChi'] ?>"></input>
                                                     </div>
                                                 </div>
                                                 <div class="align-items-center text-center justify-content-center py-3">
-                                                    <input type="submit" class="btn btn-primary" name="btnchangedata"
+                                                    <input type="submit" class="btn btn-primary" name="btnUpdateProfile"
                                                         value="Chỉnh sửa hồ sơ" />
                                                 </div>
                                             </form>
@@ -118,13 +115,34 @@
                                                 <tr>
                                                     <th scope="col">Sản phẩm</th>
                                                     <th scope="col">Giá</th>
-                                                    <th scope="col">Số lượng</th>
                                                     <th scope="col">Đơn vị tính</th>
+                                                    <th scope="col">Số lượng</th>
                                                     <th scope="col">Tổng</th>
                                                 </tr>
                                             </thead>
-                                            <tbody></tbody>
-                                            <h5>Hóa đơn <?php echo ($key + 1) ?></h5>
+                                            <div class="row">
+                                                <div class="col-md-9">
+                                                    <h5>Hóa đơn
+                                                        <?php echo ($key + 1) ?>
+                                                    </h5>
+                                                    <?php
+                                                    $date = new DateTime($item['NgayGiao']);
+                                                    $formattedDate = $date->format('d-m-Y');
+                                                    $date = "(" . $formattedDate . ')';
+                                                    if ($item['TrangThai'] == "Đang xử lý" || $item['TrangThai'] == "Đang giao hàng") {
+                                                        $color = "#e65c00";
+                                                        if ($item['TrangThai'] == "Đang giao hàng") {
+                                                            $date = "(Ngày giao dự kiến: " . $formattedDate . ')';
+                                                        }
+                                                    } else if ($item['TrangThai'] == "Đã giao hàng") {
+                                                        $color = "#008000";
+                                                    } else {
+                                                        $color = "#cc0000";
+                                                    }
+                                                    echo "<h6 style='color:$color;'> " . $item['TrangThai'] . ' ' . $date . "</h6>";
+                                                    ?>
+                                                </div>
+                                            </div>
                                             <?php
                                             foreach ($purchasing_history[$key]['detail'] as $detailKey => $detailValue) {
                                                 $total = $detailValue['product']['GiaBan'] * $detailValue['SoLuong'];
@@ -214,6 +232,7 @@
                                                     <div class="col-8">
                                                         <input type="password" class="form-control mb-0"
                                                             name="newpassword">
+                                                        <?php echo (!empty($errors) && array_key_exists('newpassword', $errors)) ? '<span class="text-danger">' . $errors["newpassword"] . '</span>' : false; ?>
                                                     </div>
                                                 </div>
                                                 <div
@@ -234,6 +253,42 @@
                                         </div>
                                     </div>
                                 </div>
+                                <?php
+                                if ($_SESSION['user']['Username'] == '' && $_SESSION['user']['Password'] == '') {
+                                    ?>
+                                    <div class="tab-pane" id="nav-createaccount" role="tabpanel"
+                                        aria-labelledby="nav-createaccount-tab">
+                                        <div class="px-2">
+                                            <div class="row g-4">
+                                                <form class="col-6" action="" method="post">
+                                                    <div
+                                                        class="row align-items-center text-center justify-content-center py-2">
+                                                        <div class="col-4">
+                                                            <p class="mb-0">Nhập tên đăng nhập</p>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <input type="text" class="form-control mb-0" name="username">
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        class="row text-center align-items-center justify-content-center py-2">
+                                                        <div class="col-4">
+                                                            <p class="mb-0">Mật khẩu:</p>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            <input type="password" class="form-control mb-0"
+                                                                name="password">
+                                                        </div>
+                                                    </div>
+                                                    <div class="align-items-center text-center justify-content-center py-3">
+                                                        <input type="submit" class="btn btn-primary" name="btnCreateAccount"
+                                                            value="Đổi mật khẩu" />
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>

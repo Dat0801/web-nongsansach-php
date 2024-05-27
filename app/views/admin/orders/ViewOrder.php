@@ -1,17 +1,16 @@
 <?php
 include_once "app/views/admin/pagination/pagination.php";
-if(isset($_GET['searchStr'])){
+if (isset($_GET['searchStr'])) {
     $searchStr = trim($_GET['searchStr']);
-}
-else{
+} else {
     $searchStr = null;
 }
 $list_order = $order_model->getListWithLimitSearch($display, $position, $searchStr);
 ?>
-<?php if(!empty($msg)): ?>
-<div class="alert alert-success" role="alert">
-    <?php echo $msg; ?>
-</div>
+<?php if (!empty($msg)): ?>
+    <div class="alert alert-success" role="alert">
+        <?php echo $msg; ?>
+    </div>
 <?php endif; ?>
 <form class="d-flex" action="<?php echo _WEB_ROOT ?>/admin/order/index" method="get">
     <div style="margin: 0 auto">
@@ -68,7 +67,7 @@ $list_order = $order_model->getListWithLimitSearch($display, $position, $searchS
                         echo "<a href=\"" . _WEB_ROOT . "/admin/order/completeOrder?MaHD=" . $order["MaHD"] . "\" class=\"btn btn-sm btn-success material-symbols-outlined\"\">check_circle</a>";
                     }
                     echo "<a class=\"btn-delete btn btn-sm btn-danger material-symbols-outlined\" style='margin-left:10px;' data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-orderid=\"" . $order['MaHD'] . "\" data-orderstatus=\"" . $order['TrangThai'] . "\">cancel</a>";
-                }   
+                }
                 echo "</td>";
             }
             ?>
@@ -83,7 +82,8 @@ $list_order = $order_model->getListWithLimitSearch($display, $position, $searchS
                     $first_page = 1;
                     ?>
                     <li class="page-item" style="margin-right: 10px;">
-                        <a class="page-link" href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$first_page" .  (!empty($searchStr) ? "&searchStr=$searchStr" : "") ?>"
+                        <a class="page-link"
+                            href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$first_page" . (!empty($searchStr) ? "&searchStr=$searchStr" : "") ?>"
                             aria-label="Previous">
                             <span aria-hidden="true">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -95,7 +95,8 @@ $list_order = $order_model->getListWithLimitSearch($display, $position, $searchS
                         </a>
                     </li>
                     <li class="page-item">
-                        <a class="page-link" href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$prev_page" . (!empty($searchStr) ? "&searchStr=$searchStr" : "") ?>"
+                        <a class="page-link"
+                            href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$prev_page" . (!empty($searchStr) ? "&searchStr=$searchStr" : "") ?>"
                             aria-label="Previous">
                             <span aria-hidden="true">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -112,7 +113,8 @@ $list_order = $order_model->getListWithLimitSearch($display, $position, $searchS
                     $isActive = ($curr_page == $page_item) ? 'active' : '';
                     ?>
                     <li class="page-item <?php echo $isActive; ?>">
-                        <a class="page-link" href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$page_item"  . (!empty($searchStr) ? "&searchStr=$searchStr" : "") ?>">
+                        <a class="page-link"
+                            href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$page_item" . (!empty($searchStr) ? "&searchStr=$searchStr" : "") ?>">
                             <?php echo $page_item ?>
                         </a>
                     </li>
@@ -123,7 +125,8 @@ $list_order = $order_model->getListWithLimitSearch($display, $position, $searchS
                     $last_page = $total_pages;
                     ?>
                     <li class="page-item">
-                        <a class="page-link" href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$next_page" . (!empty($searchStr) ? "&searchStr=$searchStr" : "") ?>"
+                        <a class="page-link"
+                            href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$next_page" . (!empty($searchStr) ? "&searchStr=$searchStr" : "") ?>"
                             aria-label="Next">
                             <span aria-hidden="true">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -135,7 +138,8 @@ $list_order = $order_model->getListWithLimitSearch($display, $position, $searchS
                         </a>
                     </li>
                     <li class="page-item" style="margin-left: 10px;">
-                        <a class="page-link" href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$last_page" . (!empty($searchStr) ? "&searchStr=$searchStr" : "") ?>"
+                        <a class="page-link"
+                            href="<?php echo htmlspecialchars($_SERVER['PHP_SELF']) . "?page=$last_page" . (!empty($searchStr) ? "&searchStr=$searchStr" : "") ?>"
                             aria-label="Next">
                             <span aria-hidden="true">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -173,8 +177,8 @@ $list_order = $order_model->getListWithLimitSearch($display, $position, $searchS
                 </table>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                 <a href="" id="btn-xoa" class="btn btn-danger">Hủy</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
             </div>
         </div>
     </div>

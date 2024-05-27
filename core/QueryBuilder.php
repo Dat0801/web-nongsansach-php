@@ -192,4 +192,10 @@ trait QueryBuilder
         $this->orderBy = '';
         $this->innerJoin = '';
     }
+
+    public function lastInsertId()
+    {
+        return $this->conn->lastInsertId();
+    }
+
 }

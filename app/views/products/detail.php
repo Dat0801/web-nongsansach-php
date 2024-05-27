@@ -139,7 +139,7 @@
                                         class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;"
                                         alt="">
                                     <div class="">
-                                        <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
+                                        <p class="mb-2" style="font-size: 14px;">25, 05, 2024</p>
                                         <div class="d-flex justify-content-between">
                                             <h5>Hoàng Phúc</h5>
                                             <div class="d-flex mb-3">
@@ -150,9 +150,7 @@
                                                 <i class="fa fa-star"></i>
                                             </div>
                                         </div>
-                                        <p>The generated Lorem Ipsum is therefore always free from repetition injected
-                                            humour, or non-characteristic
-                                            words etc. Susp endisse ultricies nisi vel quam suscipit </p>
+                                        <p>Sản phẩm chất lượng!</p>
                                     </div>
                                 </div>
                                 <div class="d-flex">
@@ -160,7 +158,7 @@
                                         class="img-fluid rounded-circle p-3" style="width: 100px; height: 100px;"
                                         alt="">
                                     <div class="">
-                                        <p class="mb-2" style="font-size: 14px;">April 12, 2024</p>
+                                        <p class="mb-2" style="font-size: 14px;">24, 05, 2024</p>
                                         <div class="d-flex justify-content-between">
                                             <h5>Thuận Quang</h5>
                                             <div class="d-flex mb-3">
@@ -171,18 +169,9 @@
                                                 <i class="fa fa-star"></i>
                                             </div>
                                         </div>
-                                        <p class="text-dark">The generated Lorem Ipsum is therefore always free from
-                                            repetition injected humour, or non-characteristic
-                                            words etc. Susp endisse ultricies nisi vel quam suscipit </p>
+                                        <p class="text-dark">Sản phẩm rất tươi ngon!</p>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="tab-pane" id="nav-vision" role="tabpanel">
-                                <p class="text-dark">Tempor erat elitr rebum at clita. Diam dolor diam ipsum et tempor
-                                    sit. Aliqu diam
-                                    amet diam et eos labore. 3</p>
-                                <p class="mb-0">Diam dolor diam ipsum et tempor sit. Aliqu diam amet diam et eos labore.
-                                    Clita erat ipsum et lorem et sit</p>
                             </div>
                         </div>
                     </div>
