@@ -48,11 +48,10 @@
                 echo "<td>" . $customer['TrangThai'] . "</td>";
                 echo "<td>
                 <a href=\"" . _WEB_ROOT . "/admin/customer/editCustomer?MaKH=" . $customer["MaKH"] . "\" class=\"btn btn-sm btn-success material-symbols-outlined\"\">edit</a>
-                <a class=\"btn-delete btn btn-sm btn-danger material-symbols-outlined\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-customerid=\"" . $customer['MaKH'] . "\" data-customername=\"" . $customer['TenKH'] . "\">Delete</a>
                 </td>";
                 echo '</tr>';
             }
-
+               // <a class=\"btn-delete btn btn-sm btn-danger material-symbols-outlined\" data-bs-toggle=\"modal\" data-bs-target=\"#exampleModal\" data-customerid=\"" . $customer['MaKH'] . "\" data-customername=\"" . $customer['TenKH'] . "\">Delete</a>
             ?>
     </table>
     <?php if ($total_pages > 1): ?>
