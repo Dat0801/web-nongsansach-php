@@ -47,7 +47,7 @@ class Customer extends AdminController{
 
             $request->rules([
                 'TenKH' => 'required|min:5|max:60',
-                'Username' => 'required|min:5|max:60|unique:khachhang:Username:MaKH=' . $id . '',                
+                'Username' => 'required|min:5|max:60|unique:khachhang:Username:MaKH=' . $id,                
                 'Password' => 'required|callback_validatePassword',
                 'Email' => 'required|email',
                 'SDT' => 'required|callback_validatePhoneNumber',                                
