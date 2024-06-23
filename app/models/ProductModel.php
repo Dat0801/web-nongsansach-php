@@ -17,6 +17,12 @@ class ProductModel extends Model
         return 'MaHang';
     }
 
+    public function getProduct($id)
+    {
+        $data = $this->db->table('hanghoa')->where('MaHang', '=', $id)->first();
+        return $data;
+    }
+
     public function getProductList()
     {
         $data = $this->db->table('hanghoa')->get();
@@ -55,7 +61,7 @@ class ProductModel extends Model
 
     public function addProduct($data)
     {
-        $this->db->table('hanghoa')->insert($data);
+        return $this->db->table('hanghoa')->insert($data);
     }
 
     public function deleteProduct($id)
@@ -65,7 +71,7 @@ class ProductModel extends Model
 
     public function updateProduct($data, $id)
     {
-        $this->db->table('hanghoa')->where('MaHang', '=', $id)->update($data);
+        return $this->db->table('hanghoa')->where('MaHang', '=', $id)->update($data);
     }
     public function getListWithLimit($limit, $offset, $categoryid = null, $searchStr = null)
     {
