@@ -263,42 +263,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <?php
-                                if ($_SESSION['user']['Username'] == '' && $_SESSION['user']['Password'] == '') {
-                                    ?>
-                                    <div class="tab-pane" id="nav-createaccount" role="tabpanel"
-                                        aria-labelledby="nav-createaccount-tab">
-                                        <div class="px-2">
-                                            <div class="row g-4">
-                                                <form class="col-6" action="" method="post">
-                                                    <div
-                                                        class="row align-items-center text-center justify-content-center py-2">
-                                                        <div class="col-4">
-                                                            <p class="mb-0">Nhập tên đăng nhập</p>
-                                                        </div>
-                                                        <div class="col-8">
-                                                            <input type="text" class="form-control mb-0" name="username">
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        class="row text-center align-items-center justify-content-center py-2">
-                                                        <div class="col-4">
-                                                            <p class="mb-0">Mật khẩu:</p>
-                                                        </div>
-                                                        <div class="col-8">
-                                                            <input type="password" class="form-control mb-0"
-                                                                name="password">
-                                                        </div>
-                                                    </div>
-                                                    <div class="align-items-center text-center justify-content-center py-3">
-                                                        <input type="submit" class="btn btn-primary" name="btnCreateAccount"
-                                                            value="Tạo tài khoản" />
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                <?php } ?>
                             </div>
                         </div>
                     </div>

@@ -52,7 +52,8 @@ class Product extends Controller
         $this->data['content'] = 'products/detail';
         $this->data['title'] = 'Chi tiết sản phẩm';
         $request = new Request();
-        if ($request->getFields()['productid']) {
+        $fields = $request->getFields();
+        if (isset($fields['productid'])) {
             $productID = $request->getFields()['productid'];
         } else {
             $productID = intval($request->getFields()['MaHang']);

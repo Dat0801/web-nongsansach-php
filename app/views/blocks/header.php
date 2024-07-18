@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="en">
 
 <head>
     <!-- Google Web Fonts -->
@@ -66,19 +65,15 @@
                         <a href="<?php echo _WEB_ROOT ?>/product" class="nav-item nav-link text-uppercase">Sản phẩm</a>
                         <a href="<?php echo _WEB_ROOT ?>/contact" class="nav-item nav-link text-uppercase">Liên hệ</a>
                         <?php
-                        if(isset($_SESSION['user'])) {
-                            echo '<a href="' . _WEB_ROOT . '/customer" class="nav-item nav-link text-uppercase">Hồ sơ khách hàng</a>';
+                        if (isset($_SESSION['user']['Username']) && isset($_SESSION['user']['Password'])) {
+                            echo '<a href="' . _WEB_ROOT . '/profile" class="nav-item nav-link text-uppercase">Hồ sơ khách hàng</a>';
                         } else {
                             echo '<a href="' . _WEB_ROOT . '/account/login" class="nav-item nav-link text-uppercase">Đăng nhập</a>';
                             echo '<a href="' . _WEB_ROOT . '/account/register" class="nav-item nav-link text-uppercase">Đăng ký</a>';
-                        }       
+                        }
                         ?>
                     </div>
                     <div class="d-flex m-3 me-0">
-                        <!-- <button
-                            class="btn-search btn border border-secondary btn-md-square rounded-circle bg-white me-4"
-                            data-bs-toggle="modal" data-bs-target="#searchModal"><i
-                                class="fas fa-search text-primary"></i></button> -->
                         <a href="<?php echo _WEB_ROOT ?>/cart" class="position-relative me-4 my-auto">
                             <i class="fa fa-shopping-bag fa-2x"></i>
                             <span id="cart-quantity"
@@ -99,23 +94,13 @@
         </div>
     </div>
     <!-- Navbar End -->
-
-    <!-- Modal Search Start -->
-    <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-fullscreen">
-            <div class="modal-content rounded-0">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Tìm kiếm bằng từ khóa</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body d-flex align-items-center">
-                    <div class="input-group w-75 mx-auto d-flex">
-                        <input type="search" class="form-control p-3" placeholder="Từ khóa"
-                            aria-describedby="search-icon-1">
-                        <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
-                    </div>
-                </div>
-            </div>
+    <div class="toast bg-primary text-white" role="alert" aria-live="assertive" aria-atomic="true"
+        style="position: fixed; top: 100px; right:10px; z-index: 1000;">
+        <div class="toast-header">
+            <strong class="me-auto">Thông báo</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body">
+            Thêm sản phẩm vào giỏ hàng thành công!
         </div>
     </div>
-    <!-- Modal Search End -->

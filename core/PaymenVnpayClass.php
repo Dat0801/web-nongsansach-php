@@ -14,7 +14,7 @@ class payment
         $vnp_OrderType = '250000';
         $vnp_Amount = $order_price * 100;
         $vnp_Locale = 'vn';
-        $vnp_BankCode = '';
+        $vnp_BankCode = 'NCB';
         $vnp_IpAddr = $_SERVER['REMOTE_ADDR'];
         $inputData = array(
             "vnp_Version" => "2.1.0",

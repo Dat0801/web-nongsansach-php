@@ -5,11 +5,11 @@
                 <h4 class="mb-3 text-secondary">100% Nông sản sạch</h4>
                 <h1 class="mb-5 display-3 text-primary">Nông sản hữu cơ</h1>
                 <form class="position-relative mx-auto" action="<?php echo _WEB_ROOT ?>/product" method="get">
-                    <input class="form-control border-2 border-secondary w-75 py-3 px-4 rounded-pill" type="search"
+                    <input class="form-control border-2 border-secondary w-100 py-3 px-4 rounded-pill" type="search"
                         placeholder="Từ khóa" name="searchStr">
                     <button type="submit"
                         class="btn btn-primary border-2 border-secondary py-3 px-4 position-absolute rounded-pill text-white h-100"
-                        style="top: 0; right: 25%;">Tìm kiếm</button>
+                        style="top: 0; right: 0;">Tìm kiếm</button>
                 </form>
             </div>
             <div class="col-md-12 col-lg-5">
@@ -39,16 +39,6 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<div class="toast bg-primary text-white" role="alert" aria-live="assertive" aria-atomic="true"
-    style="position: fixed; top: 100px; right:10px; z-index: 9999;">
-    <div class="toast-header">
-        <strong class="me-auto">Thông báo</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-    </div>
-    <div class="toast-body">
-        Thêm sản phẩm vào giỏ hàng thành công!
     </div>
 </div>
 <!-- Featurs Section Start -->
@@ -139,7 +129,8 @@
                                 data-product-name="<?php echo $product['TenHang'] ?>"
                                 data-product-img="<?php echo $product['HinhAnh'] ?>"
                                 data-product-quantity="<?php echo $product['SoLuongTon'] ?>">
-                                <i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng
+                                <i class="fa fa-shopping-bag text-primary"></i>
+                                <span class="d-none d-sm-inline ms-2">Thêm vào giỏ hàng</span>
                             </button>
                         </div>
                     </div>
@@ -198,7 +189,9 @@
                                         data-product-name="<?php echo $product['TenHang'] ?>"
                                         data-product-img="<?php echo $product['HinhAnh'] ?>"
                                         data-product-quantity="<?php echo $product['SoLuongTon'] ?>">
-                                        <i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ
+                                        <i class="fa fa-shopping-bag text-primary"></i>
+                                        <span class="d-none d-sm-inline ms-2">Thêm vào giỏ</span>
+
                                     </button>
                                 <?php else: ?>
                                     <button class="btn border border-secondary rounded-pill px-3 text-primary">
@@ -220,7 +213,7 @@
 <div class="container-fluid testimonial py-5">
     <div class="container py-5">
         <div class="testimonial-header text-center">
-            <h1 class="display-5 mb-5 text-dark">Đánh Giá Của Khách Hàng</h1>
+            <h1 class="display-5 text-dark" style="margin-bottom: 4.5rem">Đánh Giá Của Khách Hàng</h1>
         </div>
         <div class="owl-carousel testimonial-carousel">
             <div class="testimonial-item img-border-radius bg-light rounded p-4">
