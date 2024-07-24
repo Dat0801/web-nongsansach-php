@@ -1,10 +1,7 @@
 <?php
 include_once "app/views/admin/pagination/pagination.php";
-if (isset($_GET['searchStr'])) {
-    $searchStr = trim($_GET['searchStr']);
-} else {
-    $searchStr = null;
-}
+$searchStr = $_GET['searchStr'] ?? null;
+$categoryid = $_GET['categoryid'] ?? null;
 $products = $product_model->getListWithLimit($display, $position, $categoryid, $searchStr);
 ?>
 <!-- Single Page Header start -->
@@ -12,7 +9,7 @@ $products = $product_model->getListWithLimit($display, $position, $categoryid, $
     <h1 class="text-center text-white display-6"><?php echo $name ?></h1>
 </div>
 <!-- Single Page Header End -->
-<div class="toast bg-primary text-white" role="alert" aria-live="assertive" aria-atomic="true"
+<!-- <div class="toast bg-primary text-white" role="alert" aria-live="assertive" aria-atomic="true"
     style="position: fixed; top: 100px; right:10px; z-index: 9999;">
     <div class="toast-header">
         <strong class="me-auto">Thông báo</strong>
@@ -21,7 +18,7 @@ $products = $product_model->getListWithLimit($display, $position, $categoryid, $
     <div class="toast-body">
         Thêm sản phẩm vào giỏ hàng thành công!
     </div>
-</div>
+</div> -->
 <!-- Fruits Shop Start-->
 <div class="container-fluid fruite py-5">
     <div class="container py-5">
@@ -135,7 +132,8 @@ $products = $product_model->getListWithLimit($display, $position, $categoryid, $
                                                 data-product-name="<?php echo $product['TenHang'] ?>"
                                                 data-product-img="<?php echo $product['HinhAnh'] ?>"
                                                 data-product-quantity="<?php echo $product['SoLuongTon'] ?>">
-                                                <i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng
+                                                <i class="fa fa-shopping-bag text-primary"></i>
+                                                <span class="d-none d-sm-inline ms-2">Thêm vào giỏ hàng</span>
                                             </button>
                                         <?php else: ?>
                                             <button class="btn border border-secondary rounded-pill px-3 text-primary">

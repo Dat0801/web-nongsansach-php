@@ -16,6 +16,12 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 </head>
+<?php
+if (isset($_SESSION['user'])) {
+    $address = explode(',', $_SESSION['user']['DiaChi']);
+    $address = array_map('trim', $address);
+}
+?>
 
 <body>
 
@@ -48,8 +54,13 @@
                                         <div class="form-group row mb-4">
                                             <div class="col-sm-12 mb-3 mb-sm-0">
                                                 <input type="text" name="TenKH" class="form-control form-control-user"
-                                                    id="TenKH" placeholder="Nhập họ tên của bạn"
-                                                    value="<?php echo !empty($old["TenKH"]) ? $old["TenKH"] : false; ?>">
+                                                    id="TenKH" placeholder="Nhập họ tên của bạn" value="<?php
+                                                    if (isset($_SESSION['user'])) {
+                                                        echo $_SESSION['user']['TenKH'] ?? '';
+                                                    } else {
+                                                        echo !empty($old["TenKH"]) ? $old["TenKH"] : false;
+                                                    }
+                                                    ?>">
                                                 <?php echo (!empty($errors) && array_key_exists('TenKH', $errors)) ? '<span class="text-danger">' . $errors["TenKH"] . '</span>' : false; ?>
                                             </div>
                                         </div>
@@ -66,16 +77,26 @@
                                         <div class="form-group row mb-4">
                                             <div class="col-sm-12 mb-3 mb-sm-0">
                                                 <input type="email" name="Email" class="form-control form-control-user"
-                                                    id="exampleInputEmail" placeholder="Địa chỉ Email"
-                                                    value="<?php echo !empty($old["Email"]) ? $old["Email"] : false; ?>">
+                                                    id="exampleInputEmail" placeholder="Địa chỉ Email" value="<?php
+                                                    if (isset($_SESSION['user'])) {
+                                                        echo $_SESSION['user']['Email'] ?? '';
+                                                    } else {
+                                                        echo !empty($old["Email"]) ? $old["Email"] : false;
+                                                    }
+                                                    ?>">
                                                 <?php echo (!empty($errors) && array_key_exists('Email', $errors)) ? '<span class="text-danger">' . $errors["Email"] . '</span>' : false; ?>
                                             </div>
                                         </div>
                                         <div class="form-group row mb-4">
                                             <div class="col-sm-12">
                                                 <input type="text" name="SDT" class="form-control form-control-user"
-                                                    id="SDT" placeholder="Nhập số điện thoại"
-                                                    value="<?php echo !empty($old["SDT"]) ? $old["SDT"] : false; ?>">
+                                                    id="SDT" placeholder="Nhập số điện thoại" value="<?php
+                                                    if (isset($_SESSION['user'])) {
+                                                        echo $_SESSION['user']['SDT'] ?? '';
+                                                    } else {
+                                                        echo !empty($old["SDT"]) ? $old["SDT"] : false;
+                                                    }
+                                                    ?>">
                                                 <?php echo (!empty($errors) && array_key_exists('SDT', $errors)) ? '<span class="text-danger">' . $errors["SDT"] . '</span>' : false; ?>
                                             </div>
                                         </div>
@@ -83,10 +104,12 @@
                                             <select id="province" name="province" class="form-select">
                                                 <option value="">Chọn tỉnh thành</option>
                                                 <?php
-                                                if (!empty($old["province"])) {
-                                                    echo '<option value="' . $old["province"] . '" selected id="provinceSelected">' . $old["province"] . '</option>';
+                                                if (isset($_SESSION['user'])) {
+                                                    echo '<option value="' . $address[3] . '" id="provinceSelected">' . $address[3] . '</option>';
                                                 } else {
-                                                    echo '<option value="" id="provinceSelected"></option>';
+                                                    if (!empty($old["province"])) {
+                                                        echo '<option value="' . $old["province"] . '" selected id="provinceSelected">' . $old["province"] . '</option>';
+                                                    }
                                                 }
                                                 ?>
                                             </select>
@@ -98,10 +121,10 @@
                                                     class="form-select form-control-user">
                                                     <option value="">Chọn quận/huyện</option>
                                                     <?php
-                                                    if (!empty($old["district"])) {
-                                                        echo '<option value="' . $old["district"] . '" selected id="districtSelected">' . $old["district"] . '</option>';
+                                                    if (isset($_SESSION['user'])) {
+                                                        echo '<option value="' . $address[2] . '" selected id="districtSelected">' . $address[2] . '</option>';
                                                     } else {
-                                                        echo '<option value="" id="districtSelected"></option>';
+                                                        echo '<option value="' . $old["district"] . '" selected id="districtSelected">' . $old["district"] . '</option>';
                                                     }
                                                     ?>
                                                 </select>
@@ -112,10 +135,12 @@
                                                     style="background-color: #fff;">
                                                     <option value="">Chọn phường/xã</option>
                                                     <?php
-                                                    if (!empty($old["ward"])) {
-                                                        echo '<option value="' . $old["ward"] . '" selected id="wardSelected">' . $old["ward"] . '</option>';
+                                                    if (isset($_SESSION['user'])) {
+                                                        echo '<option value="' . $address[1] . '" selected id="wardSelected">' . $address[1] . '</option>';
                                                     } else {
-                                                        echo '<option value="" id="wardSelected"></option>';
+                                                        if (!empty($old["ward"])) {
+                                                            echo '<option value="' . $old["ward"] . '" selected id="wardSelected">' . $old["ward"] . '</option>';
+                                                        }
                                                     }
                                                     ?>
                                                 </select>
@@ -124,8 +149,13 @@
                                         </div>
                                         <div class="form-group mb-4">
                                             <input type="text" name="DiaChi" class="form-control form-control-user"
-                                                id="DiaChi" placeholder="Địa chỉ nhận hàng"
-                                                value="<?php echo !empty($old["DiaChi"]) ? $old["DiaChi"] : false; ?>">
+                                                id="DiaChi" placeholder="Địa chỉ nhận hàng" value="<?php
+                                                if (isset($_SESSION['user'])) {
+                                                    echo $address[0];
+                                                } else {
+                                                    echo !empty($old["DiaChi"]) ? $old["DiaChi"] : false;
+                                                }
+                                                ?>">
                                             <?php echo (!empty($errors) && array_key_exists('DiaChi', $errors)) ? '<span class="text-danger">' . $errors["DiaChi"] . '</span>' : false; ?>
                                         </div>
                                         <div class="form-group row mb-4">

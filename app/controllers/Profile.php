@@ -1,9 +1,11 @@
 <?php
-class Customer extends Controller
+class Profile extends Controller
 {
 
     public $data = [];
+
     public $product, $order, $orderDetail, $customer;
+    
     public function __construct()
     {
         $this->product = $this->model('ProductModel');
@@ -18,7 +20,7 @@ class Customer extends Controller
             header('Location: ' . _WEB_ROOT . '/account/login');
         }
         $this->data['title'] = 'Hồ sơ khách hàng';
-        $this->data['content'] = 'customer/index';
+        $this->data['content'] = 'profile/index';
         if (isset($_SESSION['user'])) {
             $listOrder = $this->order->getOrderListByCustomer($_SESSION['user']['MaKH']);
             foreach ($listOrder as $key => $value) {
@@ -66,17 +68,6 @@ class Customer extends Controller
                         }
                     }
                 }
-            }
-
-            if (isset($field["btnCreateAccount"])) {
-                $data = $request->getFields();
-                $customer = $this->customer->getCustomerByEmail($_SESSION['user']['Email']);
-                if ($data['username'] != '') {
-                    $_SESSION['user']['Username'] = $data['username'];
-                    $_SESSION['user']['Password'] = $data['password'];
-                }
-                $this->customer->updateCustomer($_SESSION['user'], $customer['MaKH']);
-                $this->data['sub_content']['successmsg'] = 'Tạo tài khoản thành công';
             }
 
             if (isset($field["btnUpdateProfile"])) {

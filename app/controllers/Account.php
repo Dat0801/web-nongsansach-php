@@ -6,15 +6,17 @@ class Account extends Controller
 
     public $data = [];
 
-    public $customer, $province, $district, $wards, $employee;
+    public $customer, $province, $district, $wards;
 
     public function __construct()
     {
+        if(isset($_SESSION['user']) && isset($_SESSION['user']['Username'])) {
+            header('Location: ' . _WEB_ROOT . '/profile');
+        }
         $this->province = $this->model('ProvinceModel');
         $this->district = $this->model('DistrictModel');
         $this->wards = $this->model('WardsModel');
         $this->customer = $this->model('CustomerModel');
-        $this->employee = $this->model('EmployeeModel');
     }
     public function login()
     {
@@ -50,7 +52,7 @@ class Account extends Controller
                 $customer = $this->customer->checkLogin($data['Username'], $data['Password']);
                 if ($customer != null) {
                     $_SESSION['user'] = $customer;
-                    header('Location: ' . _WEB_ROOT . '/customer');
+                    header('Location: ' . _WEB_ROOT . '/profile');
                 } else {
                     $this->data['sub_content']['errmsg'] = "Tên tài khoản hoặc mật khẩu không đúng!";
                 }
@@ -269,17 +271,20 @@ class Account extends Controller
     public function register()
     {
         $this->data['title'] = 'Trang đăng ký';
-        $this->data['content'] = 'account/Register';
+        $this->data['content'] = 'account/register';
 
         $request = new Request();
-
+        $validateEmail = 'required|email';
+        if(!isset($_SESSION['user'])) {
+            $validateEmail .= '|unique:khachhang:Email';
+        }
         if ($request->isPost()) {
             $request->rules([
                 'TenKH' => 'required|min:5|max:60',
                 'Username' => 'required|min:5|max:60|unique:khachhang:Username',
                 'Password' => 'required|callback_validatePassword',
                 'RepeatPassword' => 'required|same:Password',
-                'Email' => 'required|email|unique:khachhang:Email',
+                'Email' => $validateEmail,
                 'SDT' => 'required|callback_validatePhoneNumber',
                 'province' => 'required',
                 'district' => 'required',
@@ -332,8 +337,7 @@ class Account extends Controller
                 header('Location: ' . _WEB_ROOT . '/account/verify');
 
             }
-        }
-
+        } 
         $this->render('layouts/client_layout', $this->data);
     }
 
@@ -345,5 +349,4 @@ class Account extends Controller
         }
         return true;
     }
-
 }

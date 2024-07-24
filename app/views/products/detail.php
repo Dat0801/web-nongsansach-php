@@ -90,7 +90,7 @@
                             <div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
                                 <div class="px-2">
                                     <div class="row g-4">
-                                        <div class="col-6">
+                                        <div class="col-sm-12 col-lg-6">
                                             <div
                                                 class="row bg-light align-items-center text-center justify-content-center py-2">
                                                 <div class="col-6">
@@ -252,7 +252,8 @@
                                         data-product-name="<?php echo $product['TenHang'] ?>"
                                         data-product-img="<?php echo $product['HinhAnh'] ?>"
                                         data-product-quantity="<?php echo $product['SoLuongTon'] ?>">
-                                        <i class="fa fa-shopping-bag me-2 text-primary"></i> Thêm vào giỏ hàng
+                                        <i class="fa fa-shopping-bag text-primary"></i>
+                                        <span class="d-none d-sm-inline ms-2">Thêm vào giỏ hàng</span>
                                     </button>
                                 </div>
                             </div>

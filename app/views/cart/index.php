@@ -19,15 +19,15 @@
                 </table>
             <?php } ?>
             <?php if (isset($_SESSION['cart_items']) && count($_SESSION['cart_items']) > 0) { ?>
-                <table class="table">
+                <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th scope="col">Sản phẩm</th>
-                            <th scope="col">Giá</th>
-                            <th scope="col">Đơn vị tính</th>
-                            <th scope="col">Số lượng</th>
-                            <th scope="col">Tổng</th>
-                            <th scope="col">Thao tác</th>
+                            <th>Sản&nbsp;phẩm</th>
+                            <th>Giá</th>
+                            <th>Đơn&nbsp;vị&nbsp;tính</th>
+                            <th>Số&nbsp;lượng</th>
+                            <th>Tổng</th>
+                            <th>Thao&nbsp;tác</th>
                         </tr>
                     </thead>
                     <tbody id="order">
@@ -40,12 +40,12 @@
                             $itemCounter += $item['qty'];
                             ?>
                             <tr>
-                                <th scope="row">
-                                    <div class="d-flex align-items-center">
+                                <th>
+                                    <div class="d-lg-flex align-items-center">
                                         <img src="<?php echo _WEB_ROOT ?>/public/assets/client/img/<?php echo $item["product_img"] ?>"
                                             class="img-fluid rounded-circle"
                                             style="width: 80px; height: 80px; object-fit: contain;" alt="">
-                                        <p class="mb-0"><?php echo $item['product_name']; ?></p>
+                                        <p class="mb-0 ms-2"><?php echo str_replace(' ', '&nbsp;', $item['product_name']); ?></p>
                                     </div>
 
                                 </th>
@@ -83,7 +83,7 @@
                             <th scope="row">
                                 <div class="d-flex align-items-center">
                                     <button class="mt-2 btn btn-danger btn-sm" id="emptyCart"
-                                        data-url-base="<?php echo _WEB_ROOT ?>">Xóa giỏ hàng</button>
+                                        data-url-base="<?php echo _WEB_ROOT ?>">Xóa&nbsp;giỏ&nbsp;hàng</button>
                                 </div>
                             </th>
                             <td></td>
@@ -92,7 +92,7 @@
                                 <p class="mb-0 mt-2">
                                     <strong>
                                         <?php
-                                        echo $itemCounter . ' Sản Phẩm' ?>
+                                        echo $itemCounter . '&nbsp;Sản&nbsp;Phẩm' ?>
                                     </strong>
                                 </p>
 

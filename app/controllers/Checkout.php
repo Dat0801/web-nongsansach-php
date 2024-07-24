@@ -127,7 +127,7 @@ class Checkout extends Controller
     public function verify()
     {
         $this->data['title'] = 'Trang xác thực';
-        $this->data['content'] = 'Checkout/verify';
+        $this->data['content'] = 'checkout/verify';
         if (!isset($_SESSION['code'])) {
             header('Location: ' . _WEB_ROOT . '/checkout');
         }
